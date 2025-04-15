@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from './pages/Home.jsx';
+import Users from './pages/Users.jsx'
 import Header from './components/Header.jsx';
 import Footer from './components/Footer.jsx';
 import './assets/css/styles.css';
@@ -10,6 +11,7 @@ export default function App() {
       <Header />
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/users" element={<Users />} />
       </Routes>
       <Footer />
     </Router>

@@ -1,8 +1,11 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap');
+
 body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-  }
+  font-family: "DM Sans", sans-serif !important;
+  font-weight: 500 !important;
+  margin: 0 auto;
+  margin: 16px 32px !important;
+}
 
 main {
-  margin: 32px;
 }

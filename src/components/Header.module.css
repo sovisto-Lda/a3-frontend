@@ -1,6 +1,118 @@
 .header {
-  background-color: #757575;
   color: white;
-  padding: 1rem;
   text-align: center;
+  margin: 0 -16px !important;
+  z-index: 500;
+}
+
+
+.inputField {
+  background-color: #ECECEC !important;
+  border: 0px !important;
+  border-radius: 4px;
+}
+
+.inputField:focus {
+  box-shadow: none !important;
+} 
+
+.inputField::placeholder {
+  color:#B2B2B2 !important;
+  font-style: normal !important;
+  font-size: 16px !important;
+}
+
+
+.headerButton {
+  background-color: white;
+  color: black;
+  font-weight: 500;
+  padding: 0px 0px !important;
+  border: none;
+  border-radius: 0.375rem;
+  font-size: 1rem;
+  cursor: pointer;
+  position: relative;
+  z-index: 500;
+}
+
+.headerButtonProdutos {
+  padding: 8px 16px !important;
+
+}
+
+/* Wrap the hover button and the dialog */
+.hoverWrapper {
+  position: relative;
+  overflow: visible;
+}
+
+.hoverDialogOverhead {
+  width: 100vw;
+  height: 20px;
+  background-color: white;
+
+}
+.hoverDialog {
+  visibility: hidden;
+  opacity: 0;
+  display: block;
+  position: fixed;
+  top: 100px;
+  left: 0;
+  width: 100vw;
+  background-color: #ECECEC;
+  z-index: 100;
+  transform: translateY(10px);
+  transition: transform 0.8s ease, opacity 0.3s ease;
+}
+
+.hoverDialogContent {
+  padding: 1rem 2rem;
+}
+
+/* Show when hovering the wrapper */
+.hoverWrapper:hover .hoverDialog {
+  visibility: visible;
+  transform: translateY(0px);
+  opacity: 1;
+}
+
+button {
+  color: black;
+  font-weight: 500;
+}
+
+.hoverWrapper button {
+  background-color: white;
+}
+
+.hoverWrapper:hover button {
+  background-color: #ECECEC;
+}
+
+.prodNavGroup {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  margin-right: 52px;
+}
+
+.prodNavGroup h2 {
+  color: black;
+  font-weight: 600;
+}
+
+.prodNavAnchor {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  padding-left: 8px;
+  gap: 4px;
+}
+
+.prodNavAnchor a {
+  text-decoration: none;
+  color: black;
+  font-size: 16px;
 }

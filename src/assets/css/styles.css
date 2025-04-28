@@ -1,49 +1,166 @@
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap');
 
-/* Define the CSS variable --primaria for global use */
+/* ========================
+   Variáveis Globais
+======================== */
 :root {
   --primaria: #1D1D1D;
   --preto: #000;
   --branco: #fff;
   --cinzento-muito-claro: #ECECEC;
-  /* Primary color */
+  --cinzento-claro: #B2B2B2;
+  --cinzento: #959292;
+
+  --alerta: #FFCC01;
+  --alerta-hover: #E1B400;
+  --alerta-pressed: #FFE479;
+
+  --perigo: #CC1501;
+  --perigo-hover: #AD1100;
+  --perigo-pressed: #D44D3D;
+
+  --sucesso: #06B300;
+  --sucesso-hover: #059200;
+  --sucesso-pressed: #7EBE7C;
+
+  --info: #179BD7;
+  --info-hover: #136B93;
+  --info-pressed: #73CFF8;
 }
 
+/* ========================
+   Tipografia
+======================== */
 body {
   font-family: "DM Sans", sans-serif !important;
   font-weight: 500 !important;
-  margin: 0 auto;
   margin: 16px 32px !important;
 }
 
-/* Updated the primary button to remove the border but keep the border-radius */
+h2 {
+  font-family: "DM Sans", sans-serif !important;
+  font-size: 1.5rem !important;
+  font-style: normal !important;
+  font-weight: 600 !important;
+  line-height: normal !important;
+}
+
+.h3 {
+  color: var(--preto) !important;
+  font-size: 1.5rem !important;
+  font-style: normal !important;
+  font-weight: 300 !important;
+  line-height: normal !important;
+}
+
+/* ========================
+   Links
+======================== */
+a {
+  color: var(--info-hover) !important;
+  text-decoration: none !important;
+}
+
+/* ========================
+   Botões
+======================== */
 .primary-button {
   display: flex;
   padding: 0.5rem 1rem;
   justify-content: center;
   align-items: center;
   gap: 0.625rem;
-  border: none;
-  /* Removed the border */
-  border-radius: 0.25rem;
   background: var(--primaria);
-  color: white
-}
-.primary-button:hover {
+  color: white;
+  border: none;
   border-radius: 0.25rem;
+}
+
+.primary-button:hover {
   background: var(--preto);
 }
 
-.primary-button:active{
-  border-radius: 0.25rem;
+.primary-button:active {
   background: var(--cinzento-muito-claro);
 }
-.icon-button {
-  border:none;
-  background:none;
 
+.icon-button {
+  display: flex;
+  align-items: center;
+  background: none;
+  gap: 0.25rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  padding: 0;
+}
+
+/* ========================
+   Inputs
+======================== */
+.inputField {
+  background-color: var(--cinzento-muito-claro) !important;
+  border: 0 !important;
+  border-radius: 4px;
+}
+
+.inputField:focus {
+  box-shadow: none !important;
+}
+
+.inputField::placeholder {
+  color: var(--cinzento-claro) !important;
+  font-size: 16px !important;
+  font-style: normal !important;
 }
 
 
+.inputGroup { 
+  display: flex !important; 
+  flex-direction: column !important;
+  align-items: flex-start !important;
+  gap: 8px !important;
+}
 
-main {}
+
+/* ========================
+   Login Layout
+======================== */
+.login {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  padding: 16px;
+  overflow: hidden;
+}
+
+.login::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('../assets/images/Esquilo.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0.8;
+  /* Adjust the opacity value here */
+  z-index: -1;
+}
+
+/* ========================
+   Checkbox Customizado
+======================== */
+.custom-checkbox:checked {
+  background-color: var(--primaria) !important;
+  border-color: var(--primaria) !important;
+}
+
+.custom-checkbox:focus {
+  outline: none !important;
+  box-shadow: 0 0 0 3px rgba(29, 30, 31, 0.25) !important;
+}

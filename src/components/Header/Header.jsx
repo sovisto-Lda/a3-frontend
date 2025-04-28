@@ -38,7 +38,12 @@ export default function Header() {
             <img src={shopping_cart_icon} alt="Ícone de carrinho de compras" />
           </button>
 
-          <button className={`col-auto primary-button`}>Login</button>
+          <button
+            className={`col-auto primary-button`}
+            onClick={() => navigate('/login')}
+          >
+            Login
+          </button>
 
         </div>
       </div>

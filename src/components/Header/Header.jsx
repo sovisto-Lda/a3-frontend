@@ -39,12 +39,17 @@ export default function Header() {
         className={`col-auto ${styles.headerButton} ${location === '/' ? `${styles.selectedButton}` : ''}`}
         onClick={() => navigate('/')}
       >
-        
           Página Inicial
         </button>
 
         <div className={`col-auto ${styles.hoverWrapper}`}>
-          <button className={`${styles.headerButton} ${styles.headerButtonProdutos}`}>Produtos</button>
+          <button 
+            className={`${styles.headerButton} ${styles.headerButtonProdutos}`}
+            onClick={() => navigate('/products')}
+          >
+            
+            Produtos
+          </button>
           <div className={styles.hoverDialog}>
             <div className={styles.hoverDialogOverhead}></div>
             <div className={styles.hoverDialogContent}>

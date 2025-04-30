@@ -39,7 +39,7 @@ const UsersPage = () => {
             ) : (
                 users.map((user) => (
                     <div key={user._id}>
-                        <p>{user.name}</p>
+                        <p>{user.name} - {user.telefone} </p>
                     </div>
                 ))
             )

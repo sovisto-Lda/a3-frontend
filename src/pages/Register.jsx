@@ -19,7 +19,7 @@ export default function Register() {
         e.preventDefault(); // Evita o comportamento padrão de recarregar a página
 
         // Validação dos campos de nome, email e senha
-        if (!name || !email || !password) {
+        if (!name || !email || !password || !telefone) {
             setErrorMessage('Por favor, preencha todos os campos!');
             return;
         }

@@ -9,17 +9,23 @@ const ProductsPage = () => {
     const [totalPages, setTotalPages] = useState(1);
 
     const [filters, setFilters] = useState({
-        categories: [],
-        stock: undefined,
-        color: undefined,
-        priceMin: undefined,
-        priceMax: undefined,
+        filter: {
+          categories: [],
+          stock: undefined,
+          color: undefined,
+          priceMin: undefined,
+          priceMax: undefined,
+        },
+        sort: {
+
+        }
+
     });
 
     const fetchProducts = async (filtersToUse = null) => {
         setLoading(true);
 
-        const endpoint = filtersToUse ? `http://localhost:5000/products/filtered/${page}/2` : "http://localhost:5000/products";
+        const endpoint = filtersToUse ? `http://localhost:5000/products/filtered/${page}` : "http://localhost:5000/products";
         const options = filtersToUse
             ? {
                 method: "POST",
@@ -55,6 +61,7 @@ const ProductsPage = () => {
 
     useEffect(() => {
         if (filters) {
+          console.log(filters)
           fetchProducts(filters);
         }
     }, [filters, page]);
@@ -66,9 +73,9 @@ const ProductsPage = () => {
         if (id.startsWith("category")) {
             setFilters((prev) => {
                 const newCategories = checked
-                    ? [...prev.categories, value]
-                    : prev.categories.filter((c) => c !== value);
-                return { ...prev, categories: newCategories };
+                    ? [...prev.filter.categories, value]
+                    : prev.filter.categories.filter((c) => c !== value);
+                return { ...prev, filter: {...prev.filter, categories: newCategories }};
             });
         }
 
@@ -124,7 +131,8 @@ const ProductsPage = () => {
             Array.isArray(products) && products.length > 0 ? (
                 products.map((product) => (
                     <div key={product._id} className="border p-2 mb-2">
-                      <p>{product.description}</p>
+                      <p>{product.name}</p>
+                      <p>{product.category}</p>
                     </div>
                   ))
             ) : (

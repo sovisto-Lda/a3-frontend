@@ -48,22 +48,24 @@ export default function Header() {
         </div>
       </div>
 
-
-
-      <div className='d-flex justify-content-start gap-5 ps-3 pt-2 pb-4'>
-        <button
-          className={`col-auto ${header_styles.headerButton} ${location === '/' ? `${header_styles.selectedButton}` : ''}`}
-          onClick={() => navigate('/')}
-        >
-
+    <div className='d-flex justify-content-start gap-5 ps-3 pt-2 pb-4'>
+      <button 
+        className={`col-auto ${styles.headerButton} ${location === '/' ? `${styles.selectedButton}` : ''}`}
+        onClick={() => navigate('/')}
+      >
           Página Inicial
         </button>
 
-        <div className={`col-auto ${header_styles.hoverWrapper}`}>
-          <button className={`${header_styles.headerButton} ${header_styles.headerButtonProdutos}`}>Produtos</button>
-          <div className={header_styles.hoverDialog}>
-            <div className={header_styles.hoverDialogOverhead}></div>
-            <div className={header_styles.hoverDialogContent}>
+        <div className={`col-auto ${styles.hoverWrapper}`}>
+          <button 
+            className={`${styles.headerButton} ${styles.headerButtonProdutos}`}
+            onClick={() => navigate('/products')}
+          >
+            Produtos
+          </button>
+          <div className={styles.hoverDialog}>
+            <div className={styles.hoverDialogOverhead}></div>
+            <div className={styles.hoverDialogContent}>
               <div className='row'>
                 <NavBarGroup
                   title="Animais"

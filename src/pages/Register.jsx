@@ -1,6 +1,6 @@
 import voltar from '../assets/images/voltar.svg';
 import { useNavigate } from 'react-router-dom';
-import logo from '../assets/images/a3_logo_horizontal.svg';
+import logo from '../assets/images/A3Logo.png';
 import { useState } from 'react';  // Importando useState para lidar com o estado dos campos
 
 export default function Register() {
@@ -19,7 +19,7 @@ export default function Register() {
         e.preventDefault(); // Evita o comportamento padrão de recarregar a página
 
         // Validação dos campos de nome, email e senha
-        if (!name || !email || !password || !telefone) {
+        if (!name.trim() || !email.trim() || !password.trim() || !telefone.trim()) {
             setErrorMessage('Por favor, preencha todos os campos!');
             return;
         }
@@ -63,12 +63,12 @@ export default function Register() {
     };
 
     return (
-        <section className="login">
+        <section className="login-register">
             {/* Top Bar */}
             <div className='row mb-3 align-items-center'>
                 <div className='col'>
                     <a href="/">
-                        <img src={logo} alt="a3 logo horizontal" />
+                        <img src={logo} alt="a3 logo horizontal" className='logo' />
                     </a>
                 </div>
                 <div className="col-auto">
@@ -91,7 +91,7 @@ export default function Register() {
             {/* Register Card */}
             <div className="row">
                 <div className="col-lg-7 col-md-9 col-sm-10 mx-auto">
-                    <div className="card text-center p-4">
+                    <div className="card text-center p-2">
                         <div className="card-body">
                             <h2 className="card-title mb-3">Criar Conta</h2>
                             <p className="h5 mb-4">Registe-se para começar a comprar!</p>
@@ -132,7 +132,7 @@ export default function Register() {
                             <div className="inputGroup mb-3">
                                 <label htmlFor="telefone">Nº Telefone</label>
                                 <input
-                                id='senha'
+                                id='telefone'
                                     className="form-control form-control-md inputField"
                                     type="tel"
                                     placeholder="Telefone"
@@ -155,13 +155,16 @@ export default function Register() {
                             </div>
 
                             {/* Register Button */}
-                            <div className="d-grid mb-3">
+                            <div className="d-grid mb-4">
                                 <button className="primary-button" onClick={handleSubmit} disabled={isLoading}>
                                     {isLoading ? 'Carregando...' : 'Registar'}
                                 </button>
                             </div>
+                            
+                            <div className="d-grid">
+                                <p>Já tem uma conta? <a href="/login">Faça login aqui</a></p>
+                            </div>
 
-                            <p>Já tem uma conta? <a href="/login">Faça login aqui</a></p>
                         </div>
                     </div>
                 </div>

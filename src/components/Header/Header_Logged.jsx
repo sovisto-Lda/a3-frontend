@@ -2,12 +2,14 @@ import header_styles from './Header.module.css';
 import logo from '/images/A3Logo.png';
 import search_icon from '/images/search_icon.svg';
 import shopping_cart_icon from '/images/shopping_cart_icon.svg';
+import favourites from '/images/favourites_icon.svg';
+import account_icon from '/images/account_circle_icon.svg';
 import NavBarGroup from './NavBarGroup.jsx'
 import { useLocation, useNavigate } from 'react-router-dom';
 
 
 
-export default function Header() {
+export default function Header_Logged() {
   const location = useLocation().pathname
   const navigate = useNavigate()
 
@@ -38,11 +40,12 @@ export default function Header() {
             <img src={shopping_cart_icon} alt="Ícone de carrinho de compras" />
           </button>
 
-          <button
-            className={`col-auto primary-button`}
-            onClick={() => navigate('/login')}
-          >
-            Login
+          <button className={`col-auto icon-button`}>
+            <img src={favourites} alt="Ícone de favoritos" />
+          </button>
+
+          <button className={`col-auto icon-button`} onClick={()=> navigate('/account')}>
+            <img src={account_icon} alt="Ícone de conta" />
           </button>
 
         </div>
@@ -60,12 +63,7 @@ export default function Header() {
         </button>
 
         <div className={`col-auto ${header_styles.hoverWrapper}`}>
-          <button 
-            className={`${header_styles.headerButton} ${header_styles.headerButtonProdutos}`}
-            onClick={() => navigate('/products')}
-          >
-            Produtos
-          </button>
+          <button className={`${header_styles.headerButton} ${header_styles.headerButtonProdutos}`}>Produtos</button>
           <div className={header_styles.hoverDialog}>
             <div className={header_styles.hoverDialogOverhead}></div>
             <div className={header_styles.hoverDialogContent}>

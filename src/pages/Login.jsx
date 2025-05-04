@@ -1,6 +1,6 @@
-import voltar from '../assets/images/voltar.svg';
+import voltar from '/images/voltar.svg';
 import { useNavigate } from 'react-router-dom';
-import logo from '../assets/images/a3_logo_horizontal.svg';
+import logo from '/images/A3Logo.png';
 import { useState } from 'react';  // Importando useState para lidar com o estado dos campos
 
 export default function Login() {
@@ -43,9 +43,9 @@ export default function Login() {
             setIsLoading(false); // Finaliza o carregamento
 
             if (response.ok) {
-                // Lógica após login bem-sucedido
-                console.log('Login bem-sucedido:', data);
-                navigate('/'); // Navegar para a página principal
+                localStorage.setItem('token', data.token);
+
+                navigate('/account'); // Redirect to homepage
             } else {
                 // Lógica para erro de login
                 console.error('Erro ao fazer login:', data);
@@ -59,12 +59,12 @@ export default function Login() {
     };
 
     return (
-        <section className="login">
+        <section className="login-register">
             {/* Top Bar */}
             <div className='row mb-3 align-items-center'>
                 <div className='col'>
                     <a href="/">
-                        <img src={logo} alt="a3 logo horizontal" />
+                        <img src={logo} alt="a3 logo horizontal" className='logo' />
                     </a>
                 </div>
                 <div className="col-auto">

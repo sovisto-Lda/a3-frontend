@@ -1,6 +1,6 @@
 import voltar from '../assets/images/voltar.svg';
 import { useNavigate } from 'react-router-dom';
-import logo from '../assets/images/a3_logo_horizontal.svg';
+import logo from '../assets/images/A3Logo.png';
 import { useState } from 'react';  // Importando useState para lidar com o estado dos campos
 
 export default function Login() {
@@ -64,7 +64,7 @@ export default function Login() {
             <div className='row mb-3 align-items-center'>
                 <div className='col'>
                     <a href="/">
-                        <img src={logo} alt="a3 logo horizontal" />
+                        <img src={logo} alt="a3 logo horizontal" className='logo' />
                     </a>
                 </div>
                 <div className="col-auto">

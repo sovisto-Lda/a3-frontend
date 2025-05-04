@@ -152,6 +152,10 @@ a {
   z-index: -1;
 }
 
+img.logo {
+  width: 180px;
+}
+
 /* ========================
    Checkbox Customizado
 ======================== */

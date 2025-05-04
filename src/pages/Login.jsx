@@ -59,7 +59,7 @@ export default function Login() {
     };
 
     return (
-        <section className="login">
+        <section className="login-register">
             {/* Top Bar */}
             <div className='row mb-3 align-items-center'>
                 <div className='col'>

@@ -126,35 +126,32 @@ a {
 /* ========================
    Login Layout
 ======================== */
-.login {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  padding: 16px;
-  overflow: hidden;
+.login-register {
+  position: relative;
+  z-index: 0;
 }
 
-.login::before {
+/* Fullscreen background layer */
+.login-register::before {
   content: '';
-  position: absolute;
+  position: fixed; /* key: fixed ignores scroll and margin */
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 100vh;
   background-image: url('http://localhost:5000/images/squirrel_bg.png');
+  background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
-  background-repeat: no-repeat;
-  opacity: 0.8;
-  /* Adjust the opacity value here */
-  z-index: -1;
+  z-index: -1; /* put behind content */
+  pointer-events: none; /* ensures it doesn't interfere with interaction */
 }
+
 
 img.logo {
   width: 180px;
 }
+
 
 /* ========================
    Checkbox Customizado

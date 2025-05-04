@@ -63,7 +63,7 @@ export default function Register() {
     };
 
     return (
-        <section className="login">
+        <section className="login-register">
             {/* Top Bar */}
             <div className='row mb-3 align-items-center'>
                 <div className='col'>
@@ -91,7 +91,7 @@ export default function Register() {
             {/* Register Card */}
             <div className="row">
                 <div className="col-lg-7 col-md-9 col-sm-10 mx-auto">
-                    <div className="card text-center p-4">
+                    <div className="card text-center p-2">
                         <div className="card-body">
                             <h2 className="card-title mb-3">Criar Conta</h2>
                             <p className="h5 mb-4">Registe-se para começar a comprar!</p>
@@ -155,13 +155,16 @@ export default function Register() {
                             </div>
 
                             {/* Register Button */}
-                            <div className="d-grid mb-3">
+                            <div className="d-grid mb-4">
                                 <button className="primary-button" onClick={handleSubmit} disabled={isLoading}>
                                     {isLoading ? 'Carregando...' : 'Registar'}
                                 </button>
                             </div>
+                            
+                            <div className="d-grid">
+                                <p>Já tem uma conta? <a href="/login">Faça login aqui</a></p>
+                            </div>
 
-                            <p>Já tem uma conta? <a href="/login">Faça login aqui</a></p>
                         </div>
                     </div>
                 </div>

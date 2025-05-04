@@ -19,7 +19,7 @@ export default function Register() {
         e.preventDefault(); // Evita o comportamento padrão de recarregar a página
 
         // Validação dos campos de nome, email e senha
-        if (!name || !email || !password || !telefone) {
+        if (!name.trim() || !email.trim() || !password.trim() || !telefone.trim()) {
             setErrorMessage('Por favor, preencha todos os campos!');
             return;
         }
@@ -132,7 +132,7 @@ export default function Register() {
                             <div className="inputGroup mb-3">
                                 <label htmlFor="telefone">Nº Telefone</label>
                                 <input
-                                id='senha'
+                                id='telefone'
                                     className="form-control form-control-md inputField"
                                     type="tel"
                                     placeholder="Telefone"

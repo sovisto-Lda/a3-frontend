@@ -1,0 +1,15 @@
+services:
+  frontend:
+    build: .
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
+      - ./build:/usr/share/nginx/html:ro
+    restart: unless-stopped
+    networks:
+      - a3-network
+
+networks:
+  a3-network:
+    driver: bridge

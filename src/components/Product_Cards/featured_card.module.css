@@ -1,0 +1,27 @@
+.featured_card_wrapper {
+    background-color: rgb(120, 120, 120);
+    aspect-ratio: 1.68;
+    width: 100%;
+    /* max-width: 300px; */
+    border-radius: 4px;
+    padding: 12px 16px 12px 16px;
+}
+
+.h2{
+    color: white !important;
+    text-shadow: 0px 2px 8.5px rgba(0, 0, 0, 0.50);
+    /* backdrop-filter: blur(20.649999618530273px); */
+}
+
+.primary_button {
+    background-color: white !important;
+    color: black !important;
+}
+  
+.primary_button:hover {
+    background: var(--preto);
+}
+
+.primary_button:active {
+    background: var(--cinzento-muito-claro);
+}

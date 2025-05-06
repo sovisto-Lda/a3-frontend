@@ -1,0 +1,14 @@
+.home_slogan { 
+    font-family: "Tektur", sans-serif;
+    font-weight: 700;
+    letter-spacing: 7.68px;
+    color: var(--branco) !important;
+  }
+  
+.img {
+    display: block;
+    position: absolute;
+    width: 100%;
+    left: 0;
+    z-index: -1;
+}

@@ -1,7 +1,7 @@
 import header_styles from './Header.module.css';
-import logo from '/images/A3Logo.png';
-import search_icon from '/images/search_icon.svg';
-import shopping_cart_icon from '/images/shopping_cart_icon.svg';
+import logo from '../../assets/images/a3_logo_horizontal.svg';
+import search_icon from '../../assets/images/search_icon.svg';
+import shopping_cart_icon from '../../assets/images/shopping_cart_icon.svg';
 import NavBarGroup from './NavBarGroup.jsx'
 import { useLocation, useNavigate } from 'react-router-dom';
 
@@ -16,7 +16,7 @@ export default function Header() {
       <div className='row align-items-center'>
         <div className='col-auto'>
           <a href="">
-            <img src={logo} alt="a3 logo horizontal" className={header_styles.logo} />
+            <img src={logo} alt="a3 logo horizontal" />
           </a>
         </div>
 
@@ -48,14 +48,11 @@ export default function Header() {
         </div>
       </div>
 
-
-
-      <div className='d-flex justify-content-start gap-5 pt-2 pb-4'>
-        <button
-          className={`col-auto ${header_styles.headerButton} ${location === '/' ? `${header_styles.selectedButton}` : ''}`}
-          onClick={() => navigate('/')}
-        >
-
+    <div className='d-flex justify-content-start gap-5 ps-3 pt-2 pb-1'>
+      <button 
+        className={`col-auto ${header_styles.headerButton} ${location === '/' ? `${header_styles.selectedButton}` : ''}`}
+        onClick={() => navigate('/')}
+      >
           Página Inicial
         </button>
 

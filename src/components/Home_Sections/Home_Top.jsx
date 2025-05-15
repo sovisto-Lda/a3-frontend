@@ -1,15 +1,18 @@
 import styles from './Home_Top.module.css';
 import FeaturedCard from '../Product_Cards/featured_card';
-import { useEffect, useRef, useState } from 'react';
+import { use, useEffect, useRef, useState } from 'react';
 
 export default function Home_Top() {
 
     const imgRef = useRef(null);
     const sloganRef = useRef(null);
     const featuredWrapperRef = useRef(null);
+
     const [offsetY, setOffsetY] = useState(0);
     const [imageLoaded, setImageLoaded] = useState(false);
+    const [featuredProducts, setFeaturedProducts] = useState([]);
 
+    const slogan_cards_spacing = 48;
 
     // resolve y offset for the slogan and cards for right positioning relative to the top image
     // rerun on window resize
@@ -20,7 +23,7 @@ export default function Home_Top() {
             const sloganOffset = sloganRef.current?.clientHeight ?? 0;
             const cardsOffset = featuredWrapperRef.current?.clientHeight ?? 0;
             
-            setOffsetY(height - sloganOffset - 32 - (cardsOffset / 4)); // 32 is the space between the slogan and the cards
+            setOffsetY(height - sloganOffset - slogan_cards_spacing - (cardsOffset / 4));
           }
         };
 
@@ -46,7 +49,7 @@ export default function Home_Top() {
         return () => {
           window.removeEventListener('resize', updateOffset);
         };
-    }, [imageLoaded]);
+    }, [imageLoaded, featuredProducts]); // update when top image is loaded and when featured products are loaded
 
 
     // set slogan font size to be as large as possible while being only one line
@@ -77,6 +80,37 @@ export default function Home_Top() {
     }, []);
 
 
+    // fetch featured products
+    const fetchFeaturedProducts = async () => {
+        //setLoading(true);
+        const endpoint = `http://localhost:5000/products/featured`;
+
+        await fetch(endpoint)
+        .then(response => {
+            if (!response.ok) {
+            throw new Error('Erro ao carregar os dados');
+            }
+            return response.json();
+        })
+        .then(data =>  {
+            console.log('Data fetched:')
+            console.log(data);
+            setFeaturedProducts(data);
+        })
+        .finally (() => {
+          //setLoading(false);
+        })
+        .catch(error => {
+            console.error('Ocorreu um erro:', error);
+        });
+    };
+
+
+    useEffect(() => {
+          fetchFeaturedProducts();
+    }, []);
+
+
     return (
         <div> 
             <img ref={imgRef}
@@ -94,11 +128,13 @@ export default function Home_Top() {
                     className={styles.home_slogan}
                     style={{
                         // backgroundColor: "green",
-                        marginBottom: '32px',      
+                        marginBottom: `${slogan_cards_spacing}px`,      
                     }}
                 >A sua Visão, as nossas Soluções 3D</p>
 
-                {imageLoaded && ( // display the featured cards only after top image is loaded, to avoid flicker
+                {imageLoaded && 
+                featuredProducts.length === 3 && // display the featured cards only after getting the featured products
+                ( // display the featured cards only after top image is loaded, to avoid flicker
                     <div ref={featuredWrapperRef}
                         className="d-flex flex-column flex-sm-row justify-content-between px-5" 
                         style={{ 
@@ -106,9 +142,9 @@ export default function Home_Top() {
                             // backgroundColor: 'cyan',
                         }}
                     >
-                        <FeaturedCard product_id={'8bdeeee4'} y_offset={offsetY} />
-                        <FeaturedCard product_id={'8bdeeee4'} y_offset={offsetY} />
-                        <FeaturedCard product_id={'8bdeeee4'} y_offset={offsetY} />
+                        <FeaturedCard fullProduct={featuredProducts.at(0)} product_id={'8bdeeee4'} y_offset={offsetY} />
+                        <FeaturedCard fullProduct={featuredProducts.at(1)} product_id={'8bdeeee4'} y_offset={offsetY} />
+                        <FeaturedCard fullProduct={featuredProducts.at(2)} product_id={'8bdeeee4'} y_offset={offsetY} />
                     </div>
                 )}
                 

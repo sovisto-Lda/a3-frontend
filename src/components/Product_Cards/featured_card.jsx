@@ -2,40 +2,10 @@ import styles from './featured_card.module.css';
 import React, { useEffect, useState, useRef } from "react";
 
 
-export default function FeaturedCard({ product_id, y_offset }) {
-    const [product, setProduct] = useState({});
+export default function FeaturedCard({ fullProduct, product_id, y_offset }) {
+    const [product, setProduct] = useState(fullProduct);
     const [loading, setLoading] = useState(1);
     const cardRef = useRef(null);
-
-
-    const fetchProduct = async () => {
-        setLoading(true);
-
-        const endpoint = `http://localhost:5000/products/one/${product_id}`
-
-        await fetch(endpoint)
-        .then(response => {
-            if (!response.ok) {
-            throw new Error('Erro ao carregar os dados');
-            }
-            return response.json();
-            
-        })
-        .then(data => {
-            // console.log(data);
-            setProduct(data)
-        })        
-        .finally (() => {
-            setLoading(false)
-        })
-        .catch(error => {
-            console.error('Ocorreu um erro:', error);
-        });
-    };
-
-    useEffect(() => {
-        fetchProduct()
-    }, []);
 
     return (
         <div 
@@ -44,7 +14,7 @@ export default function FeaturedCard({ product_id, y_offset }) {
             style={{
                 //marginTop: offset_y,
                 marginTop: 0,
-                backgroundImage: `url("http://localhost:5000/images/placeholder.gif")`,
+                backgroundImage: `url(${product.images.at(0)})` || `url("http://localhost:5000/images/placeholder.gif")`,
                 backgroundSize: 'cover',
                 backgroundPosition: 'center',
                 backgroundRepeat: 'no-repeat'

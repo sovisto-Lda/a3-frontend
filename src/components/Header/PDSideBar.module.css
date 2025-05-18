@@ -1,0 +1,55 @@
+button.content {
+    font-weight: bold;
+    color: #1D1D1D;
+    display:flex;
+    width: 249px;
+    padding:  4px 16px;
+    align-items: center;
+    gap: 8px;
+    
+    
+}
+
+button.content:hover {
+    color: #959292;
+    
+}
+
+button.selected{
+    background-color: #ECECEC;
+    border-radius: 4px;
+    color: #959292;
+    
+}
+
+img.logo {
+    width: 180px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.brand{
+    display: flex;
+    padding: 0px 21px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+}
+
+
+.menu{
+    display: flex;
+    flex-direction: column;
+    gap:32px;
+}
+
+aside{
+    display: inline-flex;
+    width: 285px;
+    padding: 24px 16px 64px 16px;
+    flex-direction: column;
+    align-items: flex-start;
+    flex-shrink: 0;
+    border-right: 0.5px solid #B2B2B2;
+}

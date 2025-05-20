@@ -10,10 +10,11 @@ import { useRef, useEffect } from 'react';
 
 
 
-export default function Header() {
+export default function Header(userState) {
   const location = useLocation().pathname
   const navigate = useNavigate()
 
+  const isUserLogged = userState.userLogged
 
   const popupRef = useRef(null);
   const productsButtonRef = useRef(null);
@@ -94,12 +95,30 @@ export default function Header() {
               <img src={shopping_cart_icon} alt="Ícone de carrinho de compras" />
             </button>
 
-          <button
-            className={`col-auto primary-button`}
-            onClick={() => navigate('/login')}
-          >
-            Login
-          </button>
+            <button className={`col-auto icon-button`}>
+              <img src={favourites} alt="Ícone de favoritos" />
+            </button>
+
+            <button className={`col-auto icon-button`} onClick={()=> navigate('/account')}>
+              <img src={account_icon} alt="Ícone de conta" />
+            </button>
+          </div>
+        )
+        : (
+          <div className='col-auto ms-auto d-flex align-items-center gap-3'>
+            <button className={`col-auto icon-button`}>
+              <img src={shopping_cart_icon} alt="Ícone de carrinho de compras" />
+            </button>
+
+            <button
+              className={`col-auto primary-button`}
+              onClick={() => navigate('/login')}
+            >
+              Login
+            </button>
+
+          </div>
+        )}
 
       </div>
 

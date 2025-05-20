@@ -3,7 +3,6 @@ import Home from './pages/Home.jsx';
 import Users from './pages/Users.jsx'
 import Products from './pages/Products.jsx'
 import Header from './components/Header/Header.jsx';
-import Header_Logged from './components/Header/Header_Logged.jsx';
 import Register from './pages/Register.jsx';
 import Footer from './components/Footer/Footer.jsx';
 import Login from './pages/Login.jsx';
@@ -40,7 +39,7 @@ function AppContent() {
   return (
     <>
       {location.pathname !== '/login' && location.pathname !== '/register' && (
-        user ? <Header_Logged /> : <Header />
+        <Header userLogged={user}/>
       )}
       <Routes>
         <Route path="/" element={<Home />} />

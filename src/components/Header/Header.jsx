@@ -1,5 +1,6 @@
 import header_styles from './Header.module.css';
-import logo from '../../assets/images/a3_logo_horizontal.svg';
+import SearchBar from './SearchBar.jsx';
+import logo from '../../assets/images/A3Projects_logo_new_vertical.svg';
 import search_icon from '../../assets/images/search_icon.svg';
 import shopping_cart_icon from '../../assets/images/shopping_cart_icon.svg';
 import favourites from '../../assets/images/favourites_icon.svg';
@@ -37,7 +38,7 @@ export default function Header(userState) {
         onMouseEnter={handleHoverIn} onMouseLeave={handleHoverOut}>
             <div className={header_styles.hoverDialogOverhead}></div>
             <div className={header_styles.hoverDialogContent}>
-              <div className='row'>
+              <div className='row d-flex gap-4'>
                 <NavBarGroup
                   title="Animais"
                   items={[
@@ -68,29 +69,20 @@ export default function Header(userState) {
               </div>
             </div>
           </div>
-      <div className='row align-items-center'>
-        <div className='col-auto'>
-          <a href="">
-            <img src={logo} alt="a3 logo horizontal" />
+      <div className={`row align-items-center m-0 gap-3`}>
+        <div className={`d-flex align-items-center ${header_styles.logo_container}`}>
+          <a href="/">
+            <img src={logo} alt="a3 logo horizontal" className='' />
           </a>
         </div>
 
-        <div className='col-4'>
-          <div className="input-group">
-            <input
-              className={`form-control form-control-md ${header_styles.inputField}`}
-              type="text"
-              placeholder="Pesquisar produtos..."
-            />
-            <span className={`input-group-text ${header_styles.inputField}`}>
-              <img src={search_icon} alt="" />
-            </span>
-          </div>
+        <div className='col-4 d-none d-sm-block'>
+          <SearchBar />
         </div>
 
         {isUserLogged === true
         ? (
-          <div className='col-auto ms-auto d-flex align-items-center gap-3'>
+          <div className='col-auto ms-auto d-flex align-items-center gap-3 p-0'>
             <button className={`col-auto icon-button`}>
               <img src={shopping_cart_icon} alt="Ícone de carrinho de compras" />
             </button>
@@ -105,7 +97,7 @@ export default function Header(userState) {
           </div>
         )
         : (
-          <div className='col-auto ms-auto d-flex align-items-center gap-3'>
+          <div className='col-auto ms-auto d-flex align-items-center gap-3 p-0'>
             <button className={`col-auto icon-button`}>
               <img src={shopping_cart_icon} alt="Ícone de carrinho de compras" />
             </button>
@@ -122,7 +114,11 @@ export default function Header(userState) {
 
       </div>
 
-    <div className='d-flex justify-content-start gap-5 ps-3 pt-2 pb-1'>
+      <div className='col-auto d-block d-sm-none mt-3'>
+        <SearchBar></SearchBar>
+      </div>
+
+    <div className={`col-auto col-sm-3 d-flex justify-content-between pt-2 pb-1 gap-3`}>
       <button 
         className={`col-auto ${header_styles.headerButton} ${location === '/' ? `${header_styles.selectedButton}` : ''}`}
         onClick={() => navigate('/')}

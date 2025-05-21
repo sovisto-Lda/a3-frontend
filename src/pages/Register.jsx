@@ -10,7 +10,7 @@ export default function Register() {
     const [name, setName] = useState('');  // Novo estado para o nome
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [telefone, setTelefone] = useState('');
+    const [phone_number, setPhoneNumber] = useState('');
     const [isLoading, setIsLoading] = useState(false); // Estado de carregamento
     const [errorMessage, setErrorMessage] = useState(''); // Estado para erro de registo
 
@@ -19,7 +19,7 @@ export default function Register() {
         e.preventDefault(); // Evita o comportamento padrão de recarregar a página
 
         // Validação dos campos de nome, email e senha
-        if (!name.trim() || !email.trim() || !password.trim() || !telefone.trim()) {
+        if (!name.trim() || !email.trim() || !password.trim() || !phone_number.trim()) {
             setErrorMessage('Por favor, preencha todos os campos!');
             return;
         }
@@ -37,8 +37,8 @@ export default function Register() {
                     name,
                     email,
                     password,
-                    telefone,
-                    tipo: "user"
+                    phone_number,
+                    type: "user"
                 })
             });
 
@@ -130,14 +130,14 @@ export default function Register() {
                             </div>
 
                             <div className="inputGroup mb-3">
-                                <label htmlFor="telefone">Nº Telefone</label>
+                                <label htmlFor="phone_number">Telefone</label>
                                 <input
-                                id='telefone'
+                                id='phone_number'
                                     className="form-control form-control-md inputField"
                                     type="tel"
                                     placeholder="Telefone"
-                                    value={telefone}
-                                    onChange={(e) => setTelefone(e.target.value)}
+                                    value={phone_number}
+                                    onChange={(e) => setPhoneNumber(e.target.value)}
                                 />
                             </div>
 

@@ -21,15 +21,8 @@ export default function Hero() {
         if (imgRef.current) {
           const height = imgRef.current?.clientHeight ?? 0;
           const sloganOffset = sloganRef.current?.clientHeight ?? 0;
-          const cardsOffset = featuredWrapperRef.current?.clientHeight ?? 120;
+          const cardsOffset = featuredWrapperRef.current?.clientHeight ?? 220;
 
-          console.log("---")
-          console.log(height);
-          console.log(sloganOffset)
-          console.log(cardsOffset)
-          console.log("---")
-
-          
           setOffsetY(height - sloganOffset - slogan_cards_spacing - (cardsOffset / 4));
         }
       };
@@ -125,11 +118,14 @@ export default function Hero() {
 
     return (
         <div> 
+          <div className={styles.imgDiv}>
             <img ref={imgRef}
                 src="http://localhost:5000/images/squirrel_bg.png" 
                 alt="" 
-                className={styles.img}
+                className={`${styles.img}`}
             />
+          </div>
+            
 
             <div 
                 style={{
@@ -148,7 +144,7 @@ export default function Hero() {
                 featuredProducts.length === 3 && // display the featured cards only after getting the featured products
                 ( // display the featured cards only after top image is loaded, to avoid flicker
                     <div ref={featuredWrapperRef}
-                        className="d-flex flex-column flex-sm-row justify-content-between px-sm-5 px-2"
+                        className="d-flex flex-column flex-sm-row justify-content-between px-sm-5 px-4"
                         style={{ 
                             gap: '32px', //gap between cards
                             // backgroundColor: 'cyan',

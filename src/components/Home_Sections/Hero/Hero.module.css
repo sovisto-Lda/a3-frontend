@@ -1,8 +1,8 @@
 .home_slogan { 
     font-family: "Tektur", sans-serif;
     font-weight: 700;
-    letter-spacing: 7.68px;
     color: var(--branco) !important;
+    text-align: center;
   }
   
 .img {

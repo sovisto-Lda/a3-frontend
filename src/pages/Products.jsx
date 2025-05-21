@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import Category_Card from '../components/Products/Category_Card';
 
 const ProductsPage = () => {
     const [products, setProducts] = useState([]);
@@ -66,7 +67,6 @@ const ProductsPage = () => {
         }
     }, [filters, page]);
 
-
     const handleCheckboxChange = (e) => {
         const { id, checked, value } = e.target;
 
@@ -93,6 +93,16 @@ const ProductsPage = () => {
 
   return (
     <main>
+      <h1>Categorias</h1>
+      <div className="container-fluid">
+        <div className="row">
+          <Category_Card />
+          <Category_Card />
+          <Category_Card />
+          <Category_Card />
+          <Category_Card />
+        </div>
+      </div>
       <div className="d-flex">
         <aside className="bg-light p-3">
           <h5 className="mb-3">Filters</h5>

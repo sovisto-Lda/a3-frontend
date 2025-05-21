@@ -1,0 +1,30 @@
+.home_slogan { 
+    font-family: "Tektur", sans-serif;
+    font-weight: 700;
+    color: var(--branco) !important;
+    text-align: center;
+  }
+
+.imgDiv {
+  position: absolute;
+  left: 0;
+  right: 0;
+  /* background-color: cyan; */
+  overflow: hidden;
+  z-index: -1;
+
+}
+
+.img {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+@media (max-width: 576px) {
+  .img {
+    width: 150%;
+  }
+}

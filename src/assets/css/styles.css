@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Tektur:wght@400..900&display=swap');
 
 /* ========================
    Variáveis Globais
@@ -35,6 +36,15 @@ body {
   font-family: "DM Sans", sans-serif !important;
   font-weight: 500 !important;
   margin: 16px 32px !important;
+}
+
+h1 {
+  font-family: "DM Sans";
+  font-size: 32px !important;
+  font-style: normal !important;
+  font-weight: 600 !important;
+  line-height: normal !important;
+  margin-bottom: 0px !important;
 }
 
 h2 {
@@ -74,6 +84,7 @@ a {
   color: white;
   border: none;
   border-radius: 0.25rem;
+  cursor: pointer;
 }
 
 .primary-button:hover {

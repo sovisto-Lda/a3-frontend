@@ -1,0 +1,115 @@
+@import url('https://fonts.googleapis.com/css2?family=Tektur:wght@400..900&display=swap');
+
+
+.productName {
+    color: var(--primaria, #1D1D1D) !important;
+    font-family: "Tektur" !important;
+    font-size: 56px !important;
+    font-weight: 700;
+    letter-spacing: 7px;
+    margin: 0px !important;
+    padding: 0px !important;
+    /* background-color: burlywood; */
+
+}
+
+.productCategory {
+    color: var(--cinzento-claro, #B2B2B2);
+    font-family: "DM Sans" !important;
+    font-size: 18px !important;
+    font-weight: 600 !important;
+    margin: 0;
+}
+
+.productCode {
+    color: var(--cinzento-claro, #B2B2B2);
+    font-size: 32px;
+    font-weight: 600;
+    margin: 0px !important;
+    padding: 0px !important;
+    /* background-color: blue; */
+
+}
+
+.starsDiv{
+    background-color: var(--cinzento-muito-claro);
+    width: 125px;
+    height: 25px;
+    mask-image: url('../../assets/images/stars.svg');
+    mask-size: contain;
+    mask-repeat: no-repeat;
+
+}
+
+.stars1 {
+    height: 100%;
+    background-color: var(--alerta);
+}
+
+.price_qnt_titles{
+    color: var(--cinzento-claro, #B2B2B2);
+    font-size: 24px;
+    font-weight: 600;
+    margin: 0;
+    /* background-color: rgb(114, 114, 255); */
+}
+
+.price_text {
+    color: var(--primaria, #1D1D1D);
+    font-size: 32px;
+    font-weight: 600;
+    margin: 0px;
+    padding: 0px;
+    /* background-color: coral; */
+}
+
+.qnt_button {
+    width: 32px;
+}
+
+.qnt_button:hover {
+    cursor: pointer;
+}
+
+.qnt_text {
+    color: var(--primaria, #1D1D1D);
+    font-size: 24px;
+    font-weight: 600;
+    margin: 0;
+}
+
+.remaining_text {
+    color: var(--cinzento-claro, #B2B2B2);
+    font-family: "DM Sans";
+    font-size: 16px;
+    font-weight: 500;
+    margin: 0;
+    line-height: 100%;
+}
+
+.description_details_text {
+    font-size: 14px;
+    font-weight: 500;
+    margin: 0;
+}
+
+.buy_button_text {
+    margin: 0;
+    font-size: 24px;
+}
+
+@media (max-width: 576px) {
+  .buy_button_text {
+    font-size: 21px !important;
+  }
+}
+
+.color_circle {
+    width: 18px;
+    height: 18px;
+    border-radius: 100px;
+}
+
+.carouselItem {
+  height: 100% !important;
+}

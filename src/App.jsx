@@ -10,6 +10,8 @@ import './assets/css/styles.css';
 import Account from './pages/Account.jsx';
 import { jwtDecode } from 'jwt-decode';
 import PDHome from './pages/PDHome.jsx';
+import ShoppingCart from './pages/ShoppingCart.jsx';
+import ProtectedRoute from './components/ProtectedRoute.jsx';
 
 export default function App() {
   return (
@@ -50,6 +52,10 @@ function AppContent() {
         <Route path="/register" element={<Register />} />
         <Route path="/account" element={<Account />} />
         <Route path="/partnerdashboard" element={<PDHome />} />
+
+        <Route path='/cart' element={<ProtectedRoute> <ShoppingCart /> </ProtectedRoute>} />
+
+        
       </Routes>
     </>
   );

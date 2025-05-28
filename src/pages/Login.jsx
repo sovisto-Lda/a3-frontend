@@ -2,6 +2,7 @@ import voltar from '/images/voltar.svg';
 import { useNavigate } from 'react-router-dom';
 import logo from '/images/A3Logo.png';
 import { useState } from 'react';  // Importando useState para lidar com o estado dos campos
+import InputGroup from '../components/Inputs/InputGroup';
 
 export default function Login() {
     const navigate = useNavigate();
@@ -98,30 +99,26 @@ export default function Login() {
                                     {errorMessage}
                                 </div>
                             )}
-                            <div className="inputGroup mb-3">
-                                <label htmlFor="email">Email</label>
-                                <input
-                                    id='email'
-                                    className="form-control form-control-md inputField"
-                                    type="email"
-                                    placeholder="Email"
-                                    value={email}
-                                    onChange={(e) => setEmail(e.target.value)}
-                                />
-                            </div>
+                            <InputGroup
+                                id="email"
+                                label="Email"
+                                type="email"
+                                placeholder="Email"
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                            />
 
                             {/* Password Field */}
-                            <div className="inputGroup mb-4">
-                                <label htmlFor="password">Palavra-chave</label>
-                                <input
-                                    id="password"
-                                    className="form-control form-control-md inputField"
-                                    type="password"
-                                    placeholder="Senha"
-                                    value={password}
-                                    onChange={(e) => setPassword(e.target.value)}
-                                />
-                            </div>
+                            <InputGroup
+                                id="password"
+                                label="Palavra-passe"
+                                type="password"
+                                placeholder="Senha"
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
+                                margin={4}
+                            />
+                            
 
                             {/* Remember Me and Forgot Password */}
                             <div className="d-flex justify-content-between align-items-center mb-4">

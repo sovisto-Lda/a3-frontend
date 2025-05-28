@@ -95,6 +95,117 @@ a {
   background: var(--cinzento-muito-claro);
 }
 
+.success-button {
+  display: flex;
+  padding: 0.5rem 1rem;
+  justify-content: center;
+  align-items: center;
+  gap: 0.625rem;
+  background: var(--sucesso);
+  color: white;
+  border: none;
+  border-radius: 0.25rem;
+  cursor: pointer;
+}
+
+.success-button:hover {
+  background: var(--sucesso-hover);
+}
+
+.success-button:active {
+  background: var(--sucesso-pressed);
+}
+
+.danger-button {
+  display: flex;
+  padding: 0.5rem 1rem;
+  justify-content: center;
+  align-items: center;
+  gap: 0.625rem;
+  background: var(--perigo);
+  color: white;
+  border: none;
+  border-radius: 0.25rem;
+  cursor: pointer;
+}
+
+.danger-button:hover {
+  background: var(--perigo-hover);
+}
+
+.danger-button:active {
+  background: var(--perigo-pressed);
+}
+
+.alert-button {
+  display: flex;
+  padding: 0.5rem 1rem;
+  justify-content: center;
+  align-items: center;
+  gap: 0.625rem;
+  background: var(--alerta);
+  color: white;
+  border: none;
+  border-radius: 0.25rem;
+  cursor: pointer;
+}
+
+.alert-button:hover {
+  background: var(--alerta-hover);
+}
+
+.alert-button:active {
+  background: var(--alerta-pressed);
+}
+
+.secondary-button {
+  display: flex;
+  padding: 0.5rem 1rem;
+  justify-content: center;
+  align-items: center;
+  gap: 0.625rem;
+  background: var(--cinzento-muito-claro);
+  color: var(--preto);
+  border: none;
+  border-radius: 0.25rem;
+  cursor: pointer;
+}
+
+.secondary-button:hover {
+  background: var(--cinzento-claro);
+}
+
+.secondary-button:active {
+  background: var(--cinzento);
+}
+
+.secondary-button:disabled {
+  background: var(--cinzento-muito-claro);
+  color: var(--cinzento-claro);
+  cursor: not-allowed;
+}
+
+.info-button {
+  display: flex;
+  padding: 0.5rem 1rem;
+  justify-content: center;
+  align-items: center;
+  gap: 0.625rem;
+  background: var(--info);
+  color: white;
+  border: none;
+  border-radius: 0.25rem;
+  cursor: pointer;
+}
+
+.info-button:hover {
+  background: var(--info-hover);
+}
+
+.info-button:active {
+  background: var(--info-pressed);
+}
+
 .icon-button {
   display: flex;
   align-items: center;
@@ -176,3 +287,15 @@ img.logo {
   outline: none !important;
   box-shadow: 0 0 0 3px rgba(29, 30, 31, 0.25) !important;
 }
+
+
+/* ========================
+   Address Card
+======================== */
+
+.address-card {
+  background-color: var(--cinzento-muito-claro, #ECECEC);
+  border: none !important;
+  border-radius: 0.25rem !important;
+}
+

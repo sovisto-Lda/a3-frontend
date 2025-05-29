@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-route
 import Home from './pages/Home.jsx';
 import Users from './pages/Users.jsx'
 import Products from './pages/Products.jsx'
+import ProductPage from './pages/Product.jsx'
 import Header from './components/Header/Header.jsx';
 import Register from './pages/Register.jsx';
 import Footer from './components/Footer/Footer.jsx';
@@ -46,6 +47,7 @@ function AppContent() {
         <Route path="/" element={<Home />} />
         <Route path="/users" element={<Users />} />
         <Route path="/products" element={<Products />} />
+        <Route path="/product/:code" element={<ProductPage />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/account" element={<Account />} />

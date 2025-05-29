@@ -4,11 +4,12 @@ import Summary from "./Summary";
 
 
 export default function ShoppingCartMain() {
+
     return (
         <div>
-            <h1 className="my-3">Carrinho de Compras</h1>
+            <h1 className="my-3 my-sm-4">Carrinho de Compras</h1>
             {/* conteudo do carrinho */}
-            <div className="d-flex gap-5">
+            <div className="d-flex gap-5 flex-column flex-md-row">
 
                 {/* lado esquerdo: carrinho */}
                <ProductsList />
@@ -16,8 +17,9 @@ export default function ShoppingCartMain() {
                 {/* lado direito: sumário */}
                 <Summary />
 
-               </div>
-                
+
             </div>
+                
+        </div>
     )
 }

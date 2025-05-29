@@ -1,21 +1,64 @@
 import DividerLine from "../Divider_Line";
-import ProductCard from "./Product_Card";
+import FeaturedCard from '../../Product_Cards/featured_card';
+import { use, useEffect, useRef, useState } from 'react';
+import ProductCard from "./Product_Card/Product_Card";
 
 export default function ProductsList() { 
+
+    const [featuredProducts, setFeaturedProducts] = useState(null);
+
+    // fetch featured products
+    const fetchFeaturedProducts = async () => {
+        //setLoading(true);
+        const endpoint = `http://localhost:5000/products/featured`;
+
+        await fetch(endpoint)
+        .then(response => {
+            if (!response.ok) {
+            throw new Error('Erro ao carregar os dados');
+            }
+            return response.json();
+        })
+        .then(data =>  {
+            console.log('Data fetched:')
+            console.log(data);
+            setFeaturedProducts(data);
+        })
+        .finally (() => {
+            //setLoading(false);
+        })
+        .catch(error => {
+            console.error('Ocorreu um erro:', error);
+        });
+    };
+
+
+    useEffect(() => {
+            fetchFeaturedProducts();
+    }, []);
+   
     return (
         <div className="w-100">
             {/* linha cabeçalho */}
-            <div className="d-flex w-100" style={{backgroundColor: 'red'}}>
-                <h2 className="flex-grow-1" style={{backgroundColor: 'green'}}>Produto</h2>
-                <h2 className="col-4 text-center" style={{backgroundColor: 'green'}}>Quantidade</h2>
-                <h2 className="col-2 text-center" style={{backgroundColor: 'green'}}>Total</h2>
-                <h2 className="col-2 text-end" style={{backgroundColor: 'green'}}>Ação</h2>
+            <div className="d-flex w-100">
+                <h2 className="col-5">Produto</h2>
+                <h2 className="col-3 text-center">Quantidade</h2>
+                <h2 className="col-2 text-center">Total</h2>
+                <h2 className="col-2 text-end">Ação</h2>
 
             </div>
 
             <DividerLine />
 
-            <ProductCard />
+            {featuredProducts && 
+                <div className="d-flex flex-column gap-3">
+                    {(featuredProducts.map((item, index) => (
+                                <ProductCard product={item} key={index} />     
+                            ))             
+                    ) }
+                </div>
+            
+            }
 
             <DividerLine />
         </div>

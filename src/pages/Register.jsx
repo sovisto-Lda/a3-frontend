@@ -2,6 +2,7 @@ import voltar from '../assets/images/voltar.svg';
 import { useNavigate } from 'react-router-dom';
 import logo from '../assets/images/A3Logo.png';
 import { useState } from 'react';  // Importando useState para lidar com o estado dos campos
+import InputGroup from '../components/Inputs/InputGroup';
 
 export default function Register() {
     const navigate = useNavigate();
@@ -104,55 +105,49 @@ export default function Register() {
                             )}
 
                             {/* Name Field */}
-                            <div className="inputGroup mb-3">
-                            <label htmlFor="name">Nome</label>
-                                <input
-                                    id='name'
-                                    className="form-control form-control-md inputField"
-                                    type="text"
-                                    placeholder="Nome"
-                                    value={name}
-                                    onChange={(e) => setName(e.target.value)}
-                                />
-                            </div>
+                            <InputGroup
+                                id='name'
+                                label='Nome'
+                                type='text'
+                                placeholder='Nome'
+                                value={name}
+                                onChange={(e) => setName(e.target.value)}
+                            />
+        
+                
 
                             {/* Email Field */}
-                            <div className="inputGroup mb-3">
-                                <label htmlFor="email">Email</label>
-                                <input
-                                    id='email'
-                                    className="form-control form-control-md inputField"
-                                    type="email"
-                                    placeholder="Email"
-                                    value={email}
-                                    onChange={(e) => setEmail(e.target.value)}
-                                />
-                            </div>
+                            <InputGroup
+                                id='email'
+                                label='Email'
+                                type='email'
+                                placeholder='Email'
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                            />
 
-                            <div className="inputGroup mb-3">
-                                <label htmlFor="phone_number">Telefone</label>
-                                <input
+                            {/* Phone Number Field */}
+                            <InputGroup
                                 id='phone_number'
-                                    className="form-control form-control-md inputField"
-                                    type="tel"
-                                    placeholder="Telefone"
-                                    value={phone_number}
-                                    onChange={(e) => setPhoneNumber(e.target.value)}
-                                />
-                            </div>
+                                label='Telefone'
+                                type='tel'
+                                placeholder='Telefone'
+                                value={phone_number}
+                                onChange={(e) => setPhoneNumber(e.target.value)}
+                            />
+
 
                             {/* Password Field */}
-                            <div className="inputGroup mb-4">
-                                <label htmlFor="senha">Palavra-Passe</label>
-                                <input
-                                id='senha'
-                                    className="form-control form-control-md inputField"
-                                    type="password"
-                                    placeholder="Palavra-Passe"
-                                    value={password}
-                                    onChange={(e) => setPassword(e.target.value)}
-                                />
-                            </div>
+                            <InputGroup
+                                id='password'
+                                label='Palavra-Passe'
+                                type='password'
+                                placeholder='Palavra-Passe'
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
+                                margin={5}
+                            />
+                           
 
                             {/* Register Button */}
                             <div className="d-grid mb-4">

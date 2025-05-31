@@ -1,0 +1,15 @@
+.selected {
+    color: white;
+    background-color: var(--primaria);
+    cursor: pointer;
+}
+
+.unselected {
+    color: black;
+    background-color: none;
+    cursor: pointer;
+}
+
+.option_card_wrapper_unselected:hover {
+    background-color: var(--cinzento-muito-claro);
+}

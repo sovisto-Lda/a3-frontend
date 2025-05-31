@@ -76,14 +76,14 @@ export default function Header(userState) {
           </a>
         </div>
 
-        <div className='col-4 d-none d-sm-block'>
+        <div className='col-5 d-none d-sm-block'>
           <SearchBar />
         </div>
 
         {isUserLogged === true
         ? (
           <div className='col-auto ms-auto d-flex align-items-center gap-3 p-0'>
-            <button className={`col-auto icon-button`}>
+            <button className={`col-auto icon-button`} onClick={()=> navigate('/cart')}>
               <img src={shopping_cart_icon} alt="Ícone de carrinho de compras" />
             </button>
 
@@ -98,7 +98,7 @@ export default function Header(userState) {
         )
         : (
           <div className='col-auto ms-auto d-flex align-items-center gap-3 p-0'>
-            <button className={`col-auto icon-button`}>
+            <button className={`col-auto icon-button`} onClick={()=> navigate('/cart')}>
               <img src={shopping_cart_icon} alt="Ícone de carrinho de compras" />
             </button>
 

@@ -1,7 +1,8 @@
-import DividerLine from "../Divider_Line";
+import DividerLine from '../../misc/Divider_Line';
 import FeaturedCard from '../../Product_Cards/featured_card';
 import { use, useEffect, useRef, useState } from 'react';
 import ProductCard from "./Product_Card/Product_Card";
+import styles from "./Shopping_Card.module.css"
 
 export default function ProductsList() { 
 
@@ -41,10 +42,10 @@ export default function ProductsList() {
         <div className="w-100">
             {/* linha cabeçalho */}
             <div className="d-flex w-100">
-                <h2 className="col-5">Produto</h2>
-                <h2 className="col-3 text-center">Quantidade</h2>
-                <h2 className="col-2 text-center">Total</h2>
-                <h2 className="col-2 text-end">Ação</h2>
+                <h2 className={`col-5 ${styles.h2}`}>Produto</h2>
+                <h2 className={`col-3 text-center ${styles.h2}`} style={{color: 'var(--cinzento'}}>Quantidade</h2>
+                <h2 className={`col-2 text-center ${styles.h2}`} style={{color: 'var(--cinzento'}}>Total</h2>
+                <h2 className={`col-2 text-end ${styles.h2}`} style={{color: 'var(--cinzento'}}>Ação</h2>
 
             </div>
 

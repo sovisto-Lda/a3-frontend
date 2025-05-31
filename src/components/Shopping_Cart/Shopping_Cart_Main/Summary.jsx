@@ -1,8 +1,12 @@
-import DividerLine from "../Divider_Line";
+import DividerLine from "../../misc/Divider_Line";
 import styles from './Shopping_Card.module.css';
+import { useNavigate } from "react-router-dom";
+
 
 
 export default function Summary() { 
+    const navigate = useNavigate()
+
     return (
         <div className={`${styles.summary_wrapper}`}>
             {/* linha cabeçalho */}
@@ -58,7 +62,8 @@ export default function Summary() {
                 <button
                     className={`success-button w-100 mt-2`}
                     type="button"
-                    style={{ height: '38px' }} // Match default .form-control-md height
+                    style={{ height: '38px' }}
+                    onClick={()=> navigate('/checkout')}
                 >
                     <p className={styles.continue_button_text}>Prosseguir com a compra</p>
                 </button>

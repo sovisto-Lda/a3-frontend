@@ -13,6 +13,7 @@ import { jwtDecode } from 'jwt-decode';
 import PDHome from './pages/PDHome.jsx';
 import ShoppingCart from './pages/ShoppingCart.jsx';
 import ProtectedRoute from './components/ProtectedRoute.jsx';
+import Checkout from './pages/Checkout.jsx';
 
 export default function App() {
   return (
@@ -56,6 +57,7 @@ function AppContent() {
         <Route path="/partnerdashboard" element={<PDHome />} />
 
         <Route path='/cart' element={<ProtectedRoute> <ShoppingCart /> </ProtectedRoute>} />
+        <Route path='/checkout' element={<ProtectedRoute> <Checkout /> </ProtectedRoute>} />
 
         
       </Routes>

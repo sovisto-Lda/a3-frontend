@@ -21,7 +21,7 @@
     object-fit: cover;
 }
 
-h2 {
+.h2 {
     font-size: 24px !important;
 }
 
@@ -43,7 +43,7 @@ h2 {
 
 
 @media (max-width: 576px) {
-    h2 {
+    .h2 {
         font-size: 14px !important;
     }
 

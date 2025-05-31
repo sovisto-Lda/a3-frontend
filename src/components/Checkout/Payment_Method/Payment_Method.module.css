@@ -1,0 +1,29 @@
+.payment_card_wrapper {
+    width: 100%;
+    aspect-ratio: 1;
+    align-content: center;
+    padding: 16px;
+    overflow: hidden;
+    border: 1px solid var(--cinzento-claro);
+    border-radius: 4px;
+    cursor: pointer
+}
+
+.payment_card_image {
+    object-fit: cover;
+    width: 100%;
+}
+
+.payment_card_wrapper:hover {
+    background-color: var(--cinzento-muito-claro);
+}
+
+.payment_card_active {
+    background-color: var(--cinzento-claro);
+}
+
+@media (max-width: 576px) {
+    .payment_card_wrapper {
+        width: 50%;
+    }
+}

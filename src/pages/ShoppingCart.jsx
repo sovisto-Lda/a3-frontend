@@ -13,6 +13,8 @@ export default function ShoppingCart() {
         <div>
             <Return_Button />
 
+            <h1 className="my-3 my-sm-4">Carrinho de Compras</h1>
+
             <ShoppingCartMain />
             
         </div>

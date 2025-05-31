@@ -136,7 +136,7 @@ export default function Hero() {
                     className={styles.home_slogan}
                     style={{
                         // backgroundColor: "green",
-                        marginBottom: `${slogan_cards_spacing}px`,      
+                        '--slogan-margin-bottom': `${slogan_cards_spacing}px`,
                     }}
                 >A sua Visão, as nossas Soluções 3D</p>
 

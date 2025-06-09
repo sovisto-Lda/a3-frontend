@@ -23,7 +23,7 @@ export default function Account() {
             .then(data => setUserData(data))
             .catch(err => console.error("Fetch error", err));
     }, [token]);
-
+    console.log(token)
     if (!userData) return <p>Loading...</p>;
 
     // Função para remover endereço de faturação pelo índice, enviando um DELETE ao backend com o _id
@@ -99,7 +99,7 @@ export default function Account() {
                             label="Telefone"
                             type="tel"
                             placeholder="Nº Telefone"
-                            value={userData.telefone}
+                            value={userData.phone_number}
                             onChange={() => {}}
                             editable={false}
                         />
@@ -124,6 +124,7 @@ export default function Account() {
                     </div>
                 </div>
             </section>
+
             <section className="enderecos_faturacao">
                 <div className="row mb-2">
                     <div className="col">
@@ -162,6 +163,7 @@ export default function Account() {
                 </div>
                 
             </section>
+
             <section className="shipping_addresses">
                 <div className="row mb-2">
                     <div className="col">
@@ -190,7 +192,7 @@ export default function Account() {
                         )}                       
                     </div>
                 </div>
-                {showAddressForm && <AddShippingAddress />}
+                {showAddressForm && <AddShippingAddress/>}
                 <div className="row">
                     <div className="col d-flex justify-content-end">
                         <button className="primary-button" onClick={() => setShowAddressForm(!showAddressForm)}>
@@ -199,10 +201,13 @@ export default function Account() {
                     </div>
                 </div>
             </section>
+
             <button className="primary-button" onClick={() => {
                 localStorage.removeItem('token');
                 navigate('/login');
-            }}>Sair</button>
+            }}>Sair
+            </button>
+
         </div>
     );
 }

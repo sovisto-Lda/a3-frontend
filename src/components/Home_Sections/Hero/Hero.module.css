@@ -3,6 +3,7 @@
     font-weight: 700;
     color: var(--branco) !important;
     text-align: center;
+    margin-bottom: var(--slogan-margin-bottom, 20px) !important;
   }
 
 .imgDiv {

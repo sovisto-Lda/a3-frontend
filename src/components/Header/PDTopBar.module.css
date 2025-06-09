@@ -1,0 +1,36 @@
+.header{
+    position: sticky;
+    padding: 16px 18px 16px 28px;
+    width: 1159px;
+    border-bottom: 0.5px solid  #B2B2B2;
+}
+
+.icon{
+    width: 32px;
+    height: 32px;
+    aspect-ratio: 1/1;
+}
+
+.input{
+   border-radius: 4px;
+   background-color: #ECECEC !important;
+   border: 0px !important;
+   flex-shrink: 0;
+   
+}
+
+.input:focus{
+    box-shadow: none !important;
+}
+
+.input::placeholder{
+    color: #B2B2B2 !important;
+    font-style: normal !important;
+    font-size:  16px !important;
+}
+
+.search{
+    background-color: #ECECEC !important;
+    margin: 0px 0px 0px -1px;
+}
+

@@ -40,7 +40,8 @@ function AppContent() {
 
   return (
     <>
-      {location.pathname !== '/login' && location.pathname !== '/register' && (
+      {location.pathname !== '/login' && location.pathname !== '/register' &&
+      location.pathname !== '/partnerdashboard' && (
         user ? <Header_Logged /> : <Header />
       )}
       <Routes>

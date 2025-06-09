@@ -42,9 +42,11 @@ img.logo {
     display: flex;
     flex-direction: column;
     gap:32px;
+    
 }
 
 aside{
+    background-color: beige;
     display: inline-flex;
     width: 285px;
     padding: 24px 16px 64px 16px;
@@ -52,4 +54,5 @@ aside{
     align-items: flex-start;
     flex-shrink: 0;
     border-right: 0.5px solid #B2B2B2;
+    
 }

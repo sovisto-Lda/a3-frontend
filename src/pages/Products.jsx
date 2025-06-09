@@ -133,7 +133,7 @@ const ProductsPage = () => {
         </aside>
 
         {/* Main Content */}
-        <div className="p-3 flex-grow-1">
+        <div className="p-3 col-5">
           <h1>Products in the database:</h1>
           {loading ? (
             <div className="spinner-border text-primary" role="status" />

@@ -87,7 +87,7 @@ export default function Header(userState) {
               <img src={shopping_cart_icon} alt="Ícone de carrinho de compras" />
             </button>
 
-            <button className={`col-auto icon-button`}>
+            <button className={`col-auto icon-button`} onClick={()=> navigate('/account/favorites')}>
               <img src={favourites} alt="Ícone de favoritos" />
             </button>
 

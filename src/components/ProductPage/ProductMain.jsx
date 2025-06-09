@@ -1,5 +1,5 @@
 import styles from './ProductMain.module.css';
-import Stars from './Starts';
+import Stars from './Stars';
 import DetailsAndDescription from './DetailsAndDescription';
 import QuantitySelector from './QuantitySelector';
 import ImagesCarousel from './Carousel';

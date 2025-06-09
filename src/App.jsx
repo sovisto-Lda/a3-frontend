@@ -12,6 +12,7 @@ import Account from './pages/Account.jsx';
 import { jwtDecode } from 'jwt-decode';
 import PDHome from './pages/PDHome.jsx';
 import Favorites from './pages/Favorites.jsx';
+import Settings from './pages/Settings.jsx';
 
 export default function App() {
   return (
@@ -53,6 +54,7 @@ function AppContent() {
         <Route path="/register" element={<Register />} />
         <Route path="/account" element={<Account />} />
         <Route path="/account/favorites" element={<Favorites />} />
+        <Route path="/account/settings" element={<Settings />} />
         <Route path="/partnerdashboard" element={<PDHome />} />
       </Routes>
     </>

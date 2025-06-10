@@ -1,4 +1,4 @@
-import Stars from '../../ProductPage/Starts'
+import Stars from '../../ProductPage/Stars'
 import style from './client.module.css'
 
 export default function ClientReviewCard() {

@@ -1,4 +1,48 @@
-export default function InfoClient({onNext}) {
+import { useState } from "react";
+import { useParams } from "react-router-dom";
+import { useAuth } from "../../../hooks/useAuth";
+
+export default function InfoClient({ onNext, setClientInfo }) {
+    const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
+    const [phone_number, setPhone] = useState('');
+    const [fatura, setFatura] = useState(false);
+
+    const { orderId } = useParams();
+    const { token } = useAuth();
+    console.log("Order ID:", orderId);
+
+    const handleContinue = async () => {
+        if (!token) {
+            alert("Token not available. Please log in again.");
+            return;
+        }
+
+        const personalInfo = { name, email, phone_number, fatura };
+        setClientInfo(personalInfo);
+
+        try {
+            const res = await fetch(`http://localhost:5000/orders/${orderId}/personal-info`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify(personalInfo)
+            });
+            if (!res.ok) {
+                const data = await res.json();
+                alert(data.error || "Error saving personal information");
+                return;
+            }
+        } catch (err) {
+            alert("Error connecting to the server");
+            return;
+        }
+
+        onNext();
+    };
+
     return (
         <div className="d-flex flex-column gap-3 col-md-6 col-10">
             <h2>Dados Pessoais</h2>
@@ -11,34 +55,34 @@ export default function InfoClient({onNext}) {
                         className="form-control form-control-md inputField"
                         type="name"
                         placeholder="Nome"
-                        //value={email}
-                        //onChange={(e) => setEmail(e.target.value)}
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
                     />
                 </div>
 
                 <div className="inputGroup mb-4">
-                    <label htmlFor="emauk">Email</label>
+                    <label htmlFor="email">Email</label>
                     <input
                         id="email"
                         className="form-control form-control-md inputField"
                         type="email"
                         placeholder="Email"
-                        // value={password}
-                        // onChange={(e) => setPassword(e.target.value)}
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
                     />
-                </div>     
+                </div>
 
                 <div className="inputGroup mb-4">
-                    <label htmlFor="emauk">Telefone</label>
+                    <label htmlFor="phone_number">Telefone</label>
                     <input
-                        id="phone"
+                        id="phone_number"
                         className="form-control form-control-md inputField"
-                        type="phone"
+                        type="phone_number"
                         placeholder="Telefone"
-                        // value={password}
-                        // onChange={(e) => setPassword(e.target.value)}
+                        value={phone_number}
+                        onChange={(e) => setPhone(e.target.value)}
                     />
-                </div>            
+                </div>
             </div>
 
             <div>
@@ -52,8 +96,8 @@ export default function InfoClient({onNext}) {
                         }}
                         type="checkbox"
                         id="fatura"
-                        // checked={lembrarMe}
-                        // onChange={() => setLembrarMe(!lembrarMe)}
+                        checked={fatura}
+                        onChange={() => setFatura(!fatura)}
                     />
                     <label className="form-check-label m-0" htmlFor="fatura">
                         Deseja fatura?
@@ -62,7 +106,7 @@ export default function InfoClient({onNext}) {
             </div>
 
             <div className="d-flex justify-content-end mt-3">
-                <div className={`primary-button`} onClick={onNext}><p>Continuar</p></div>
+                <div className={`primary-button`} onClick={handleContinue}><p>Continuar</p></div>
             </div>
         </div>
     )

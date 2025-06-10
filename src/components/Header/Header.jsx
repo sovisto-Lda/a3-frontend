@@ -139,7 +139,10 @@ export default function Header(userState) {
 
         </div>
 
-        <button className={`col-auto ${header_styles.headerButton}`}>Sobre Nós</button>
+        <button 
+          className={`col-auto ${header_styles.headerButton}`}  
+          onClick={() => navigate('/about-us')}
+        >Sobre Nós</button>
       </div>
 
     </header>

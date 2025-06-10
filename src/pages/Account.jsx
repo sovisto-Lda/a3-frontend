@@ -203,7 +203,7 @@ export default function Account() {
                 localStorage.removeItem('token');
                 navigate('/login');
             }}>Sair</button>
-            <Outlet />
+            
         </div>
     );
 }

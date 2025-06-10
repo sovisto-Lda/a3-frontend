@@ -17,6 +17,7 @@ import Settings from './pages/Settings.jsx';
 import ShoppingCart from './pages/ShoppingCart.jsx';
 import ProtectedRoute from './components/ProtectedRoute.jsx';
 import Checkout from './pages/Checkout.jsx';
+import Order from './pages/Order.jsx';
 
 export default function App() {
   return (
@@ -65,6 +66,7 @@ function AppContent() {
         <Route path='/cart' element={<ProtectedRoute> <ShoppingCart /> </ProtectedRoute>} />
         <Route path='/checkout/:orderId' element={<ProtectedRoute> <Checkout /> </ProtectedRoute>} />
 
+        <Route path='/orders/:id' element={<ProtectedRoute> <Order /> </ProtectedRoute>} />
 
       </Routes>
       {location.pathname !== '/login' && location.pathname !== '/register' && (

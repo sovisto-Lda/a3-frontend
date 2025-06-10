@@ -3,7 +3,7 @@ import general from '../general.module.css'
 
 export default function AboutUsIntro() {
     return (
-        <div className={`${general.wrapper} d-flex flex-column flex-sm-row gap-5 my-5 py-3 align-items-center`}>
+        <div className={`${general.wrapper} d-flex flex-column flex-sm-row gap-4 gap-sm-5 my-4 my-sm-5 py-3 align-items-center`}>
             
             <div className="col-auto me-5 d-flex gap-3">
                 <div className={styles.verticalLine}></div>

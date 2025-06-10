@@ -139,3 +139,12 @@ button {
   width: 100%;
   /* background-color: burlywood; */
 }
+
+.profile_dropdown {
+  color: black !important;
+}
+
+.profile_dropdown:focus,
+.profile_dropdown:active{
+  background-color: #ECECEC !important;
+}

@@ -11,7 +11,7 @@ import Review from "../components/Checkout/Review/Review";
 export default function Checkout() {
     const [stage, setStage] = useState(1);
     const navigate = useNavigate();
-    
+
     return (
         <div>
             <Return_Button 
@@ -23,7 +23,7 @@ export default function Checkout() {
 
             <h1 className="my-3 my-sm-4">Checkout</h1>
 
-            <ProgressBar stage={stage}/>
+            <ProgressBar stage={stage} setStage={setStage}/>
 
             <div className="w-100 d-flex justify-content-center mt-5">
                 {stage === 1 && <InfoClient onNext={() => setStage(2)} />}

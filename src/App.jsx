@@ -12,6 +12,8 @@ import './assets/css/styles.css';
 import Account from './pages/Account.jsx';
 import { jwtDecode } from 'jwt-decode';
 import PDHome from './pages/PDHome.jsx';
+import Favorites from './pages/Favorites.jsx';
+import Settings from './pages/Settings.jsx';
 import ShoppingCart from './pages/ShoppingCart.jsx';
 import ProtectedRoute from './components/ProtectedRoute.jsx';
 import Checkout from './pages/Checkout.jsx';
@@ -56,6 +58,8 @@ function AppContent() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/account" element={<Account />} />
+        <Route path="/account/favorites" element={<Favorites />} />
+        <Route path="/account/settings" element={<Settings />} />
         <Route path="/partnerdashboard" element={<PDHome />} />
 
         <Route path='/cart' element={<ProtectedRoute> <ShoppingCart /> </ProtectedRoute>} />

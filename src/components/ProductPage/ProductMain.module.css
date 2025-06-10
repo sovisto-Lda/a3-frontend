@@ -33,8 +33,6 @@
 
 .starsDiv{
     background-color: var(--cinzento-muito-claro);
-    width: 125px;
-    height: 25px;
     mask-image: url('../../assets/images/stars.svg');
     mask-size: contain;
     mask-repeat: no-repeat;

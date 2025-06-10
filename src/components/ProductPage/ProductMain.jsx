@@ -76,7 +76,10 @@ export default function ProductMain({productCode}) {
                         </div>
 
                         {/* stars */}
-                        <Stars perc={(product.avg_rating * 20)} num_ratings={product.ratings.length}/>
+                        <div className="mb-2">
+                            <Stars perc={(product.avg_rating * 20)} num_ratings={product.ratings.length}/>
+                        </div>
+                        
 
 
                         {/* colors */}

@@ -5,10 +5,10 @@ export default function Category_Card({ src, title }) {
         <div className="col">
             <img 
                 src={src}
-                className="img-thumbnail" 
-                alt={'Imagem da categoria ${title}'}>
+                className="img-fluid" 
+                alt={`Imagem da categoria ${title}`}>
             </img>
-            <h6>Categoria Linda</h6>
+            <h4>{title}</h4>
         </div>
     )
 }

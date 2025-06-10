@@ -1,3 +1,5 @@
+import { useEffect, useState } from "react";
+import { useAuth } from "../../../hooks/useAuth";
 import DividerLine from "../../misc/Divider_Line";
 import styles from './Shopping_Card.module.css';
 import { useNavigate } from "react-router-dom";
@@ -6,6 +8,51 @@ import { useNavigate } from "react-router-dom";
 
 export default function Summary() { 
     const navigate = useNavigate()
+    const [shoppingCartProducts, setShoppingCartProducts] = useState(null);
+    const { token, decodedUser } = useAuth();
+    
+    const fetchShoppingCart = async () => {
+        const endpoint = `http://localhost:5000/shopping-cart`;
+        
+        await fetch(endpoint, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}` 
+            }
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Erro ao carregar os dados');
+            }
+            return response.json();
+        })
+        .then(data => {
+            setShoppingCartProducts(data);
+        })
+        .catch(error => {
+            console.error('Ocorreu um erro:', error);
+        });
+    }
+    useEffect(() => {
+        if (token) {
+            fetchShoppingCart();
+        }
+    }, [token]);
+    
+    const subtotal = Number(
+        (shoppingCartProducts?.reduce((acc, item) => {
+            if (!item.total_price || isNaN(item.total_price)) {
+                return acc;
+            }
+            return acc + Number(item.total_price);
+        }, 0) || 0).toFixed(2)
+    );
+
+    const discount = 0; // Assuming no discount for now
+
+    const total = subtotal - discount;
+
 
     return (
         <div className={`${styles.summary_wrapper}`}>
@@ -21,9 +68,9 @@ export default function Summary() {
                 {/* cupon */}
                 <div className="inputGroup d-flex flex-row align-items-end mb-3 gap-4">
                     <div className="flex-grow-1">
-                        <label htmlFor="cupon">Código Cupão</label>
+                        <label htmlFor="coupon">Código Cupão</label>
                         <input
-                            id="cupon"
+                            id="coupon"
                             className="form-control form-control-md inputField"
                             type="text"
                             placeholder="Ex.: 123453"
@@ -43,7 +90,8 @@ export default function Summary() {
                     {/* subtotal */}
                     <div className="d-flex w-100 justify-content-between">
                         <p style={{color: 'var(--cinzento)'}}>Subtotal</p>
-                        <p>17.98€</p>
+
+                        <p>{subtotal}€</p>
                     </div>
 
                     {/* desconto */}
@@ -55,7 +103,7 @@ export default function Summary() {
                     {/* total */}
                     <div className="d-flex w-100 justify-content-between">
                         <h2>TOTAL</h2>
-                        <h2>17.98€</h2>
+                        <h2>{total}€</h2>
                     </div>
                 </div>
 

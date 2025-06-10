@@ -1,16 +1,18 @@
 import { useState } from "react";
 import { useParams } from "react-router-dom";
 import { useAuth } from "../../../hooks/useAuth";
+import AddressCard from "../../Cards/AddressCard";
 
 export default function InfoClient({ onNext, setClientInfo }) {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [phone_number, setPhone] = useState('');
     const [fatura, setFatura] = useState(false);
+    const [sellectedBillingAddress, setSellectedBillingAddress] = useState(null);
 
     const { orderId } = useParams();
-    const { token } = useAuth();
-    console.log("Order ID:", orderId);
+    const { token, user } = useAuth();
+    console.log("User:", user);
 
     const handleContinue = async () => {
         if (!token) {
@@ -20,6 +22,14 @@ export default function InfoClient({ onNext, setClientInfo }) {
 
         const personalInfo = { name, email, phone_number, fatura };
         setClientInfo(personalInfo);
+        if (!name || !email || !phone_number) {
+            alert("Por favor, preencha todos os campos obrigatórios.");
+            return;
+        }
+        if (fatura && !sellectedBillingAddress) {
+            alert("Por favor, selecione um endereço de faturação.");
+            return;
+        }
 
         try {
             const res = await fetch(`http://localhost:5000/orders/${orderId}/personal-info`, {
@@ -36,6 +46,27 @@ export default function InfoClient({ onNext, setClientInfo }) {
                 return;
             }
         } catch (err) {
+            alert("Error connecting to the server");
+            return;
+        }
+        try {
+            const res = await fetch(`http://localhost:5000/orders/${orderId}/billing-address`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify({
+                    billing_address: sellectedBillingAddress
+                })
+            });
+            if (!res.ok) {
+                const data = await res.json();
+                alert(data.error || "Error saving billing address");
+                return;
+            }
+        }
+        catch (err) {
             alert("Error connecting to the server");
             return;
         }
@@ -105,26 +136,32 @@ export default function InfoClient({ onNext, setClientInfo }) {
                 </div>
             </div>
 
-            {isFatura && (
-                <div> {User.user && User.user.billing_address.map((address, index) => (
-                    <AddressCard
-                        key={index}
-                        type="billing"
-                        street_line={address.street_line}
-                        nome={address.name}
-                        floor={address.floor}
-                        city={address.city}
-                        postal_code={address.postal_code}
-                        country={address.country}
-                        phone_number={address.phone_number}
-                        NIF={address.NIF}
-                        onDelete={() => {}}
-                        allowEdit={false}
-                        allowSelect={true}
-                    />
-                ))} </div>
-
-
+            {fatura && user && Array.isArray(user.billing_address) && user.billing_address.length > 0 ? (
+                <div>
+                    {user.billing_address.map((address, index) => (
+                        <AddressCard
+                            key={index}
+                            type="billing"
+                            street_line={address.street_line}
+                            nome={address.name}
+                            floor={address.floor}
+                            city={address.city}
+                            postal_code={address.postal_code}
+                            country={address.country}
+                            phone_number={address.phone_number}
+                            NIF={address.NIF}
+                            onDelete={() => {}}
+                            allowEdit={false}
+                            allowSelect={true}
+                            checked={sellectedBillingAddress === address}
+                            onChange={() => setSellectedBillingAddress(address)}
+                        />
+                    ))}
+                </div>
+            ) : fatura && (
+                <div>
+                    <p className="text-muted">Não existem endereços de faturação.</p>
+                </div>
             )}
 
             <div className="d-flex justify-content-end mt-3">

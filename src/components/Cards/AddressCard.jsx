@@ -2,27 +2,28 @@ import React from "react";
 import editIcon from '../../assets/images/edit_icon.svg';
 import deleteIcon from '../../assets/images/delete_icon.svg';
 
-const AddressCard = ({type, street_line, nome, floor, city, postal_code, country, phone_number, NIF, onDelete, allowEdit=true, allowSelect=false}) => (
-    <>
-        <div className="address-card mb-5 p-4 shadow-sm d-flex align-items-center gap-4 w-100">
+const AddressCard = ({
+    type, street_line, nome, floor, city, postal_code, country, phone_number, NIF,
+    onDelete, allowEdit = true, allowSelect = false, checked = false, onChange
+}) => (
+    <div className="address-card mb-5 p-4 shadow-sm d-flex align-items-center gap-4 w-100">
 
-            {allowSelect && (
-                <input
-                    className="form-check-input custom-checkbox"
-                    style={{
-                        width: '32px',
-                        height: '32px',
-                        border: '3px solid black'
-                    }}
-                    type="checkbox"
-                    id="fatura"
-                    // checked={lembrarMe}
-                    onChange={() => setIsFatura(!isFatura)}
-                />
-            )}
+        {allowSelect && (
+            <input
+                className="form-check-input custom-checkbox"
+                style={{
+                    width: '32px',
+                    height: '32px',
+                    border: '3px solid black'
+                }}
+                type="checkbox"
+                checked={checked}
+                onChange={onChange}
+            />
+        )}
 
-            <div className="d-flex w-100 justify-content-between">
-                <div className="">
+        <div className="d-flex w-100 justify-content-between">
+            <div className="">
 
                 <h2>
                     {nome}
@@ -72,7 +73,8 @@ const AddressCard = ({type, street_line, nome, floor, city, postal_code, country
             
             
         </div>
-    </>
+
 );
+
 
 export default AddressCard;

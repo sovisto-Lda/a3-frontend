@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useAuth } from "../../../hooks/useAuth";
 import AddressCard from "../../Cards/AddressCard";
+import AddBillingAddress from "../../Inputs/AddBillingAdress";
 
 export default function InfoClient({ onNext, setClientInfo }) {
     const [name, setName] = useState('');
@@ -9,6 +10,8 @@ export default function InfoClient({ onNext, setClientInfo }) {
     const [phone_number, setPhone] = useState('');
     const [fatura, setFatura] = useState(false);
     const [sellectedBillingAddress, setSellectedBillingAddress] = useState(null);
+    const [newAddress, setNewAddress] = useState(false);
+    const [reloadAddresses, setReloadAddresses] = useState(false);
 
     const { orderId } = useParams();
     const { token, user } = useAuth();
@@ -73,6 +76,45 @@ export default function InfoClient({ onNext, setClientInfo }) {
 
         onNext();
     };
+
+    // Function to handle the addition of a new address
+    const handleAddressAdded = () => {
+        setNewAddress(false);
+        setReloadAddresses(prev => !prev);
+    };
+
+    // useEffect to fetch addresses and update user/billing_address
+    useEffect(() => {
+        const fetchAddresses = async () => {
+            if (!token) return;
+
+            try {
+                const response = await fetch('http://localhost:5000/account/billing-address', {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+
+                if (!response.ok) {
+                    throw new Error("Failed to fetch billing addresses");
+                }
+
+                const data = await response.json();
+                if (Array.isArray(data)) {
+                    setSellectedBillingAddress(data[0] || null);
+                    if (user) {
+                        user.billing_address = data;
+                    }
+                } else {
+                    console.error("Unexpected data format:", data);
+                }
+            } catch (error) {
+                console.error("Error fetching billing addresses:", error);
+            }
+        };
+
+        fetchAddresses();
+    }, [reloadAddresses]);
 
     return (
         <div className="d-flex flex-column gap-3 col-md-6 col-10">
@@ -157,16 +199,60 @@ export default function InfoClient({ onNext, setClientInfo }) {
                             onChange={() => setSellectedBillingAddress(address)}
                         />
                     ))}
+                    
+                    <div>
+                        {!newAddress ? (
+                            <button className="primary-button" onClick={() => setNewAddress(true)}>
+                                Adicionar Endereço de Faturação
+                            </button>
+                        ) : (
+                            <div>
+                               
+                                <div className="mt-3">
+                                    <AddBillingAddress onClose={handleAddressAdded} />
+                                </div>
+                                <div className="d-flex justify-content-end">
+                                  <button className="primary-button" onClick={() => setNewAddress(false)}>
+                                    Cancelar
+                                  </button>
+                                </div>
+                            </div>
+                        )}
+                    </div>
+                    
                 </div>
+
             ) : fatura && (
                 <div>
                     <p className="text-muted">Não existem endereços de faturação.</p>
+                    {!newAddress ? (
+                        <button className="primary-button" onClick={() => setNewAddress(true)}>
+                            Adicionar Endereço de Faturação
+                        </button>
+                    ) : (
+                        <div>
+                            <div className="mt-3">
+                                <AddBillingAddress onClose={handleAddressAdded} />
+                                <div className="d-flex justify-content-end">
+                                    <button className="primary-button" onClick={() => setNewAddress(false)}>
+                                        Cancelar
+                                    </button>
+                                </div>
+                                </div>
+                            </div>
+                            
+                    )}
                 </div>
             )}
+                
+                <div className="d-flex justify-content-end mt-3">
+                    <div className={`primary-button`} onClick={handleContinue}>
+                        <p>Continuar</p>
+                    </div>
+                </div>
+            
 
-            <div className="d-flex justify-content-end mt-3">
-                <div className={`primary-button`} onClick={handleContinue}><p>Continuar</p></div>
-            </div>
+            
         </div>
     )
 }

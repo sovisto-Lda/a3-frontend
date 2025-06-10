@@ -108,7 +108,7 @@ export default function Checkout() {
                     <Review
                         order_data={orderData}
                         onNext={() => {
-                            console.log('DONE');
+                            navigate(`/orders/${orderId}`);
                         }}
                     />
                 )}

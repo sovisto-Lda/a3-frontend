@@ -47,7 +47,7 @@ function AppContent() {
   return (
     <>
       {location.pathname !== '/login' && location.pathname !== '/register' && (
-        <Header userLogged={user}/>
+        <Header userLogged={user} />
       )}
       <Routes>
         <Route path="/" element={<Home />} />
@@ -63,9 +63,9 @@ function AppContent() {
         <Route path="/partnerdashboard" element={<PDHome />} />
 
         <Route path='/cart' element={<ProtectedRoute> <ShoppingCart /> </ProtectedRoute>} />
-        <Route path='/checkout' element={<ProtectedRoute> <Checkout /> </ProtectedRoute>} />
+        <Route path='/checkout/:orderId' element={<ProtectedRoute> <Checkout /> </ProtectedRoute>} />
 
-        
+
       </Routes>
       {location.pathname !== '/login' && location.pathname !== '/register' && (
         <Footer />

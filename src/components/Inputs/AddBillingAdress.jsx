@@ -2,7 +2,7 @@ import React from 'react';
 import InputGroup from './InputGroup';
 import { useAuth } from '../../hooks/useAuth';
 
-const AddBillingAddress = () => {
+const AddBillingAddress = ({ onClose }) => {
     const { token } = useAuth();
 
     const [formData, setFormData] = React.useState({
@@ -35,6 +35,7 @@ const AddBillingAddress = () => {
             const data = await res.json();
             if (res.ok) {
                 alert('Billing address successfully added!');
+                if (typeof onClose === 'function') onClose();
             } else {
                 alert(data.error || 'Error adding address.');
             }
@@ -47,7 +48,7 @@ const AddBillingAddress = () => {
     return (
         <div>
             <div className="row mb-2 flex-wrap">
-                <div className="col-md-3">
+                <div className="col-xl-3">
                     <InputGroup
                         id="name"
                         label="Nome"
@@ -57,7 +58,7 @@ const AddBillingAddress = () => {
                         onChange={handleChange}
                     />
                 </div>
-                <div className="col-md-3">
+                <div className="col-xl-3">
                     <InputGroup
                         id="NIF"
                         label="NIF"
@@ -67,7 +68,7 @@ const AddBillingAddress = () => {
                         onChange={handleChange}
                     />
                 </div>
-                <div className="col-md-3">
+                <div className="col-xl-3">
                     <InputGroup
                         id="phone_number"
                         label="Telefone"
@@ -77,7 +78,7 @@ const AddBillingAddress = () => {
                         onChange={handleChange}
                     />
                 </div>
-                <div className="col-md-6">
+                <div className="col-xl-6">
                     <InputGroup
                         id="street_line"
                         label="Morada"
@@ -87,17 +88,17 @@ const AddBillingAddress = () => {
                         onChange={handleChange}
                     />
                 </div>
-                <div className="col-md-3">
+                <div className="col-xl-3">
                     <InputGroup
                         id="floor"
-                        label="Andar (Opcional)"
+                        label="Andar"
                         type="text"
                         placeholder="Andar"
                         value={formData.floor}
                         onChange={handleChange}
                     />
                 </div>
-                <div className="col-md-3">
+                <div className="col-xl-3">
                     <InputGroup
                         id="postal_code"
                         label="Código Postal"
@@ -107,7 +108,7 @@ const AddBillingAddress = () => {
                         onChange={handleChange}
                     />
                 </div>
-                <div className="col-md-3">
+                <div className="col-xl-3">
                     <InputGroup
                         id="city"
                         label="Cidade"
@@ -117,7 +118,7 @@ const AddBillingAddress = () => {
                         onChange={handleChange}
                     />
                 </div>
-                <div className="col-md-3">
+                <div className="col-xl-3">
                     <InputGroup
                         id="country"
                         label="País"

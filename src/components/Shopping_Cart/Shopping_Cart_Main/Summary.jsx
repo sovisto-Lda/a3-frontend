@@ -6,40 +6,41 @@ import { useNavigate } from "react-router-dom";
 
 
 
-export default function Summary() { 
+
+export default function Summary() {
     const navigate = useNavigate()
     const [shoppingCartProducts, setShoppingCartProducts] = useState(null);
     const { token, decodedUser } = useAuth();
-    
+
     const fetchShoppingCart = async () => {
         const endpoint = `http://localhost:5000/shopping-cart`;
-        
+
         await fetch(endpoint, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}` 
+                'Authorization': `Bearer ${token}`
             }
         })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Erro ao carregar os dados');
-            }
-            return response.json();
-        })
-        .then(data => {
-            setShoppingCartProducts(data);
-        })
-        .catch(error => {
-            console.error('Ocorreu um erro:', error);
-        });
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Erro ao carregar os dados');
+                }
+                return response.json();
+            })
+            .then(data => {
+                setShoppingCartProducts(data);
+            })
+            .catch(error => {
+                console.error('Ocorreu um erro:', error);
+            });
     }
     useEffect(() => {
         if (token) {
             fetchShoppingCart();
         }
     }, [token]);
-    
+
     const subtotal = Number(
         (shoppingCartProducts?.reduce((acc, item) => {
             if (!item.total_price || isNaN(item.total_price)) {
@@ -53,6 +54,42 @@ export default function Summary() {
 
     const total = subtotal - discount;
 
+
+    const handleCreateOrder = async () => {
+        if (!shoppingCartProducts || shoppingCartProducts.length === 0) {
+            alert("O carrinho está vazio!");
+            return;
+        }
+
+        try {
+            const res = await fetch('http://localhost:5000/orders', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify({
+                    products: shoppingCartProducts.map(item => ({
+                        product: item.product,
+                        quantity: item.quantity
+                    })),
+                    coupon_code: null, // Assuming no coupon code for now
+                    total_price: total
+                })
+            });
+
+            if (!res.ok) {
+                const data = await res.json();
+                throw new Error(data.error || "Error trying to create order");
+            }
+
+            const order = await res.json();
+            // Redireciona para checkout ou página de sucesso
+            navigate(`/checkout/${order._id}`);
+        } catch (error) {
+            alert(error.message);
+        }
+    };
 
     return (
         <div className={`${styles.summary_wrapper}`}>
@@ -89,14 +126,14 @@ export default function Summary() {
                 <div className="d-flex flex-column gap-3">
                     {/* subtotal */}
                     <div className="d-flex w-100 justify-content-between">
-                        <p style={{color: 'var(--cinzento)'}}>Subtotal</p>
+                        <p style={{ color: 'var(--cinzento)' }}>Subtotal</p>
 
                         <p>{subtotal}€</p>
                     </div>
 
                     {/* desconto */}
                     <div className="d-flex w-100 justify-content-between">
-                        <p style={{color: 'var(--cinzento)'}}>Desconto</p>
+                        <p style={{ color: 'var(--cinzento)' }}>Desconto</p>
                         <p>-0.00€</p>
                     </div>
 
@@ -111,7 +148,7 @@ export default function Summary() {
                     className={`success-button w-100 mt-2`}
                     type="button"
                     style={{ height: '38px' }}
-                    onClick={()=> navigate('/checkout')}
+                    onClick={handleCreateOrder}
                 >
                     <p className={styles.continue_button_text}>Prosseguir com a compra</p>
                 </button>
@@ -119,6 +156,6 @@ export default function Summary() {
 
 
 
-        </div> 
+        </div>
     )
 }

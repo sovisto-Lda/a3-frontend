@@ -8,11 +8,13 @@ export default function StoreDeliveryOptions() {
             <h2>Escolha uma Loja</h2>
             
             <div>
-                <SearchBar />
+                {/* <SearchBar /> */}
                 <div className="d-flex flex-column gap-3 mt-4">
+                    {/* <StoreCard />
                     <StoreCard />
-                    <StoreCard />
-                    <StoreCard />
+                    <StoreCard /> */}
+
+                    <h3>Em breve...</h3>
                 </div>
 
             </div>

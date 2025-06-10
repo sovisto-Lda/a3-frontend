@@ -8,11 +8,12 @@ export default function PickupDeliveryOptions() {
             <h2>Escolha um Ponto de Recolha</h2>
             
             <div>
-                <SearchBar />
+                {/* <SearchBar /> */}
                 <div className="d-flex flex-column gap-3 mt-4">
+                    {/* <StoreCard />
                     <StoreCard />
-                    <StoreCard />
-                    <StoreCard />
+                    <StoreCard /> */}
+                    <h3>Em breve...</h3>
                 </div>
 
             </div>

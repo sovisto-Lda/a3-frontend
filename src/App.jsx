@@ -12,9 +12,12 @@ import './assets/css/styles.css';
 import Account from './pages/Account.jsx';
 import { jwtDecode } from 'jwt-decode';
 import PDHome from './pages/PDHome.jsx';
+import Favorites from './pages/Favorites.jsx';
+import Settings from './pages/Settings.jsx';
 import ShoppingCart from './pages/ShoppingCart.jsx';
 import ProtectedRoute from './components/ProtectedRoute.jsx';
 import Checkout from './pages/Checkout.jsx';
+import Order from './pages/Order.jsx';
 
 export default function App() {
   return (
@@ -45,7 +48,7 @@ function AppContent() {
   return (
     <>
       {location.pathname !== '/login' && location.pathname !== '/register' && (
-        <Header userLogged={user}/>
+        <Header userLogged={user} />
       )}
       <Routes>
         <Route path="/" element={<Home />} />
@@ -56,13 +59,20 @@ function AppContent() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/account" element={<Account />} />
+        <Route path="/account/favorites" element={<Favorites />} />
+        <Route path="/account/settings" element={<Settings />} />
         <Route path="/partnerdashboard" element={<PDHome />} />
 
         <Route path='/cart' element={<ProtectedRoute> <ShoppingCart /> </ProtectedRoute>} />
-        <Route path='/checkout' element={<ProtectedRoute> <Checkout /> </ProtectedRoute>} />
+        <Route path='/checkout/:orderId' element={<ProtectedRoute> <Checkout /> </ProtectedRoute>} />
 
-        
+        <Route path='/orders/:id' element={<ProtectedRoute> <Order /> </ProtectedRoute>} />
+
       </Routes>
+      {location.pathname !== '/login' && location.pathname !== '/register' && (
+        <Footer />
+      )}
     </>
+
   );
 }

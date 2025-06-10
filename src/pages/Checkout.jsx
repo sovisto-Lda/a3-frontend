@@ -10,9 +10,16 @@ import Review from "../components/Checkout/Review/Review";
 
 export default function Checkout() {
     const [stage, setStage] = useState(1);
+    const navigate = useNavigate();
+    
     return (
         <div>
-            <Return_Button />
+            <Return_Button 
+                returnAction={() => {
+                    if (stage !== 1) {setStage(stage - 1)}
+                    else {navigate(-1)}
+                }}
+            />
 
             <h1 className="my-3 my-sm-4">Checkout</h1>
 

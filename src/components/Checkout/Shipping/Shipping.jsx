@@ -9,10 +9,13 @@ import store_selected from '../../../assets/images/shipping_store_white.svg';
 import HomeDeliveryOptions from "./Home_Delivery_Options";
 import PickupDeliveryOptions from "./Pickup_Delivery_Options";
 import StoreDeliveryOptions from "./Store_Delivery_Options";
+import { useAuth } from "../../../hooks/useAuth"
 
 
 export default function Shipping({onNext}){
     const [selected, setSelected] = useState(null);
+
+    const User = useAuth()
 
 
     return (
@@ -58,9 +61,11 @@ export default function Shipping({onNext}){
             </div>
 
             {selected !== null &&
-                (<div className="d-flex justify-content-end mt-3">
-                    <div className={`primary-button`} onClick={onNext}><p>Continuar</p></div>
-                </div>)
+                selected !== 3 && // porque o store delivery está em coming soon
+                    selected !== 2 && // porque o store delivery está em coming soon
+                        (<div className="d-flex justify-content-end mt-3">
+                            <div className={`primary-button`} onClick={onNext}><p>Continuar</p></div>
+                        </div>)
             }
 
         </div>

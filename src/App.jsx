@@ -63,6 +63,10 @@ function AppContent() {
 
         
       </Routes>
+      {location.pathname !== '/login' && location.pathname !== '/register' && (
+        <Footer />
+      )}
     </>
+
   );
 }

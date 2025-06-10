@@ -1,0 +1,5 @@
+.verticalLine {
+    width: 2px;
+    background-color: var(--preto);
+    align-self: stretch; /* if inside flex container */
+}

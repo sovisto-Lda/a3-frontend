@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Category_Card from '../components/Products/Category_Card';
+import Product_Card from '../components/Product_Cards/Product_Card';
 
 const ProductsPage = () => {
     const [products, setProducts] = useState([]);
@@ -8,6 +9,8 @@ const ProductsPage = () => {
     const [page, setPage] = useState(1);
     const [limit] = useState(6); 
     const [totalPages, setTotalPages] = useState(1);
+
+    const [allCategories, setAllCategories] = useState([]);
 
     const [filters, setFilters] = useState({
         filter: {
@@ -88,6 +91,20 @@ const ProductsPage = () => {
         }
       };
 
+    // useEffect para ir buscar as categorias à db
+    useEffect(() => {
+      fetch("http://localhost:5000/categories")
+      .then(res => res.json())
+      .then(data => {
+        //Cria uma lista apenas com 5 categorias
+        const firstFive = data.slice(0, 5);
+        setAllCategories(firstFive);
+      })
+      .catch(err => {
+        console.error("Failed to get categories: ", err);
+      });
+    }, []);
+
 
   let categories = ["Aves", "Domésticos", "Mamíferos Selvagens", "Insetos e Aracnídeos", "Répteis"];
 
@@ -96,11 +113,13 @@ const ProductsPage = () => {
       <h1>Categorias</h1>
       <div className="container-fluid">
         <div className="row">
-          <Category_Card />
-          <Category_Card />
-          <Category_Card />
-          <Category_Card />
-          <Category_Card />
+          {allCategories.map((cat, index) => (
+            <Category_Card
+              key={index}
+              title={cat.name}
+              src={cat.image}
+            />
+          ))}
         </div>
       </div>
       <div className="d-flex">
@@ -134,6 +153,21 @@ const ProductsPage = () => {
 
         {/* Main Content */}
         <div className="p-3 flex-grow-1">
+          <div className="container-fluid">
+            <div className="row">
+              {allCategories.map((cat, index) => (
+                <div className="col-12 col-sm-12 col-md-6 col-lg-4 mb-4" key={index}>
+                  <Product_Card
+                    key={index}
+                    name={cat.name}
+                    image={cat.image}
+                    price={5.99}
+                    ratingPerc={80}
+                  />
+                </div>
+                ))}
+            </div>
+          </div>
           <h1>Products in the database:</h1>
           {loading ? (
             <div className="spinner-border text-primary" role="status" />

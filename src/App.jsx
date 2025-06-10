@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-route
 import Home from './pages/Home.jsx';
 import Users from './pages/Users.jsx'
 import Products from './pages/Products.jsx'
+import AboutUs from './pages/AboutUs.jsx'
 import ProductPage from './pages/Product.jsx'
 import Header from './components/Header/Header.jsx';
 import Register from './pages/Register.jsx';
@@ -13,6 +14,9 @@ import { jwtDecode } from 'jwt-decode';
 import PDHome from './pages/PDHome.jsx';
 import Favorites from './pages/Favorites.jsx';
 import Settings from './pages/Settings.jsx';
+import ShoppingCart from './pages/ShoppingCart.jsx';
+import ProtectedRoute from './components/ProtectedRoute.jsx';
+import Checkout from './pages/Checkout.jsx';
 
 export default function App() {
   return (
@@ -49,6 +53,7 @@ function AppContent() {
         <Route path="/" element={<Home />} />
         <Route path="/users" element={<Users />} />
         <Route path="/products" element={<Products />} />
+        <Route path="/about-us" element={<AboutUs />} />
         <Route path="/product/:code" element={<ProductPage />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
@@ -56,6 +61,11 @@ function AppContent() {
         <Route path="/account/favorites" element={<Favorites />} />
         <Route path="/account/settings" element={<Settings />} />
         <Route path="/partnerdashboard" element={<PDHome />} />
+
+        <Route path='/cart' element={<ProtectedRoute> <ShoppingCart /> </ProtectedRoute>} />
+        <Route path='/checkout' element={<ProtectedRoute> <Checkout /> </ProtectedRoute>} />
+
+        
       </Routes>
     </>
   );

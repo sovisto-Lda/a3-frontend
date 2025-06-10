@@ -1,0 +1,55 @@
+.box {
+    background-color: var(--primaria);
+}
+
+
+.form {
+    color: white !important;
+    margin: 0px 96px;
+    margin-bottom: 16px;
+}
+
+.form h3 {
+    color: white !important;
+}
+
+.infoCard {
+    color: white;
+    background-color: var(--primaria);
+    border-radius: 3px;
+    width: fit-content;
+    padding: 0px 16px;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    gap: 8px
+
+}
+
+.infoCardsWrapper {
+    position: absolute;
+    bottom: -28px;
+    display: flex;
+    width: 100%;
+    padding: 0px 96px;
+    justify-content: space-between;
+    gap: 8px
+}
+
+@media (max-width: 576px) {
+    .infoCardsWrapper {
+        margin: 0px 0px !important;
+        padding: 0px 32px;
+        position: relative;
+        flex-direction: column;
+        gap: 16px
+    }
+
+    .infoCard {
+        padding: 0px;
+    }
+
+    .form {
+        margin: 0px 32px
+    }
+}

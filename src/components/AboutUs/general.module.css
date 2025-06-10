@@ -1,0 +1,21 @@
+.wrapper {
+    margin: 0px 64px !important;
+}
+
+.fullWidthImage {
+    width: calc(100% + 64px);
+    transform: translateX(-32px);
+    background-size: cover;
+    position: relative;
+    align-content: center
+}
+
+@media (max-width: 576px) {
+    .wrapper {
+        margin: 0px 0px !important
+    }
+
+    .fullWidthImage {
+        min-height: 200px;
+    }
+}

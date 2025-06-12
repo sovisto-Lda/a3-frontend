@@ -5,3 +5,8 @@
     margin-bottom: 80px;
     padding: 0px 32px;
 }
+
+.noMargin {
+    margin-top: 0;
+    margin-bottom: 0;
+}

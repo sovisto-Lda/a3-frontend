@@ -5,8 +5,10 @@ import TextArea from '../../Inputs/TextArea'
 import phone from '../../../assets/images/phone.svg'
 import email from '../../../assets/images/email.svg'
 import location from '../../../assets/images/location.svg'
+import { useNavigate } from 'react-router-dom'
 
 export default function ContactForm() {
+    const naviage = useNavigate()
 
     return (
 
@@ -66,9 +68,9 @@ export default function ContactForm() {
 
                 <button
                     className={`success-button mt-2`}
-                    type="submit"
+                    // type="submit"
                     style={{ height: '38px' }}
-                    onClick={()=> {}}
+                    onClick={()=> {naviage('/submit')}}
                 >
                     <p className={styles.continue_button_text}>Submeter</p>
                 </button>                

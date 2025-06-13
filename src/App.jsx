@@ -20,6 +20,7 @@ import Checkout from './pages/Checkout.jsx';
 import Order from './pages/Order.jsx';
 import ComingSoon from './pages/ComingSoon.jsx';
 import Orders from './pages/Orders.jsx';
+import Submit from './pages/Submit.jsx';
 
 
 export default function App() {
@@ -75,6 +76,7 @@ function AppContent() {
             
             
             <Route path='/comingsoon' element={<ComingSoon />} />
+            <Route path='/submit' element={<Submit />} />
 
           </Routes>
       </main>

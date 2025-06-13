@@ -4,6 +4,7 @@ import Product_Card from '../components/Product_Cards/Product_Card';
 import { useSearchParams } from 'react-router-dom';
 import Custom_order_CTA from '../components/misc/Custom_Order_CTA/Custom_Order_CTA.jsx';
 import Filter_Side_Bar from "../components/Products/Filter_Side_Bar.jsx";  
+import PageNavigation from "../components/Products/PageNavigation.jsx";
 
 
 const ProductsPage = () => {
@@ -20,6 +21,8 @@ const ProductsPage = () => {
 
     const [searchParams] = useSearchParams();
     const searchTerm = searchParams.get('search') || '';
+    const defaultCategory = searchParams.get('category');
+
 
     const stockOptions = [
         { id: "InStock", label: "Em Stock", value: "in_Stock" },
@@ -142,16 +145,26 @@ const ProductsPage = () => {
     // useEffect para ir buscar as categorias à db
     useEffect(() => {
       fetch("http://localhost:5000/categories")
-      .then(res => res.json())
-      .then(data => {
-        //Cria uma lista apenas com 5 categorias
-        const firstFive = data.slice(0, 5);
-        setAllCategories(firstFive);
-      })
-      .catch(err => {
-        console.error("Failed to get categories: ", err);
-      });
-    }, []);
+        .then(res => res.json())
+        .then(data => {
+          const firstFive = data.slice(0, 5);
+          setAllCategories(firstFive);
+
+          // Apply default filter only once
+          if (defaultCategory) {
+            setFilters((prev) => ({
+              ...prev,
+              filter: {
+                ...prev.filter,
+                categories: [defaultCategory],
+              },
+            }));
+          }
+        })
+        .catch(err => {
+          console.error("Failed to get categories: ", err);
+        });
+  }, []);
 
 
   let categories = ["Aves", "Domésticos", "Mamíferos Selvagens", "Insetos e Aracnídeos", "Répteis"];
@@ -162,8 +175,8 @@ const ProductsPage = () => {
       <div className = "d-flex" style={{
           backgroundColor: "#ECECEC",
           padding: "16px",
-          marginLeft: "-50px",
-          marginRight: "-50px"
+          width: "calc(100% + 64px)",
+          transform: "translateX(-32px)"
         }}>
         <Custom_order_CTA noMargin />
       </div>
@@ -206,6 +219,7 @@ const ProductsPage = () => {
             stockOptions={stockOptions}
             priceOptions={priceOptions}
             handleCheckboxChange={handleCheckboxChange}
+            filters={filters}
           />
         </div>
 
@@ -248,25 +262,12 @@ const ProductsPage = () => {
                 )
               )}
             </div>
-            
+
             {/* Paginação colada ao fim dos produtos */}
-            <div className="d-flex justify-content-center align-items-center mt-4 gap-2">
-              <button
-                className="btn btn-outline-primary"
-                onClick={() => handlePageChange(page - 1)}
-                disabled={page === 1 || loading}
-              >
-                &laquo; Prev
-              </button>
-              <span className="px-3">Page {page} of {totalPages}</span>
-              <button
-                className="btn btn-outline-primary"
-                onClick={() => handlePageChange(page + 1)}
-                disabled={page === totalPages || loading}
-              >
-                Next &raquo;
-              </button>
+            <div className='d-flex justify-content-center py-3 '>
+              <PageNavigation page={page} totalPages={totalPages} handlePageChange={handlePageChange}/>
             </div>
+            
           </div>
         </div>
       </div>

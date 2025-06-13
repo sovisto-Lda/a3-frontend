@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function Filter_Side_Bar({ allCategories, stockOptions, priceOptions, handleCheckboxChange, onClose }) {
+export default function Filter_Side_Bar({ allCategories, stockOptions, priceOptions, handleCheckboxChange, onClose, filters=undefined }) {
   return (
     <div className="bg-light px-3" style={{ width: "245px", minHeight: "100vh" }}>
 
@@ -16,6 +16,7 @@ export default function Filter_Side_Bar({ allCategories, stockOptions, priceOpti
               value={cat.name}
               id={`category${cat.name}`}
               onChange={handleCheckboxChange}
+              checked={filters.filter.categories.includes(cat.name)}
             />
             <label className="form-check-label" htmlFor={`category${cat.name}`}>
               {cat.name}

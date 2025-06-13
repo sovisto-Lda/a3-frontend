@@ -39,27 +39,20 @@ export default function Bestsellers() {
         <div className='d-flex flex-column gap-4'>
             <h2>Mais vendidos</h2>
 
-            { // display the featured cards only after top image is loaded, to avoid flicker
-            bestsellerProducts && // display the featured cards only after getting the featured products
-            ( 
-                <div
-                    className="d-flex flex-column flex-sm-row justify-content-between"
-                    style={{ 
-                        gap: '32px', //gap between cards
-                        // backgroundColor: 'cyan',
-                    }}
-                >
-                    {bestsellerProducts.map((product, index) => (
-                        <Product_Card
+                <div className="row">
+                    {bestsellerProducts && bestsellerProducts.map((product, index) => (
+                    <div className={`col-12 col-sm-${12 / bestsellerProducts.length * 2} col-md-6 col-lg-${12 / bestsellerProducts.length} mb-4`} key={index}>
+                            <Product_Card
                             key={index}
                             name={product.name}
                             image={product.images[0]}
                             price={product.price}
-                            ratingPerc={product.avg_rating > 0 ? (1 / product.avg_rating) : 0}
-                        />
+                            ratingPerc={product.avg_rating * 20}
+                            />
+                        </div>
                     ))}
                 </div>
-            )}
+            
         </div>
     )
 }

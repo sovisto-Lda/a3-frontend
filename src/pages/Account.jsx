@@ -202,11 +202,6 @@ export default function Account() {
                 </div>
             </section>
 
-            <button className="primary-button" onClick={() => {
-                localStorage.removeItem('token');
-                navigate('/login');
-            }}>Sair
-            </button>
 
         </div>
     );

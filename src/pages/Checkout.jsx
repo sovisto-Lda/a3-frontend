@@ -9,53 +9,95 @@ import PaymentMethod from "../components/Checkout/Payment_Method/Payment_Method"
 import Review from "../components/Checkout/Review/Review";
 
 export default function Checkout() {
-    const { orderId } = useParams();
-    const [stage, setStage] = useState(1);
-    const { token } = useAuth();
+    const { stage: stageParam, orderId } = useParams();
+    const [stage, setStage] = useState(Number(stageParam) || 1);
+    const { token, user } = useAuth();
+    const navigate = useNavigate();
 
-    // Estado para guardar info de cada etapa
-    const [clientInfo, setClientInfo] = useState({});
+
+    const [clientInfo, setClientInfo] = useState({
+        name: "",
+        email: "",
+        phone_number: "",
+        fatura: false,
+        billing_address: null
+    });
+
+    // Atualiza clientInfo quando user mudar
+    useEffect(() => {
+        if (user) {
+            setClientInfo(ci => ({
+                ...ci,
+                name: user.name || "",
+                email: user.email || "",
+                phone_number: user.phone_number || "",
+                billing_address: user.billing_address?.[0] || null
+            }));
+        }
+    }, [user]);
+
+
     const [shippingInfo, setShippingInfo] = useState({});
     const [paymentInfo, setPaymentInfo] = useState({});
     const [orderData, setOrderData] = useState(null);
 
-    const navigate = useNavigate();
+    const confirmPayment = async () => {
+        if (!orderId || !token) return;
+        try {
+            const response = await fetch(`http://localhost:5000/orders/${orderId}/payment-confirmed`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                }
+            });
+            if (!response.ok) throw new Error("Failed to change order state");
+
+            const data = await response.json();
+
+            console.log("Order payment confirmed", data);
+        } catch (error) {
+            console.error("Error changing order state:", error);
+        }
+    }
+
+    const fetchOrderInfo = async () => {
+        if (!orderId || !token) return;
+        try {
+            const response = await fetch(`http://localhost:5000/orders/${orderId}`, {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            });
+            if (!response.ok) throw new Error("Failed to fetch order info");
+            const data = await response.json();
+            setOrderData(data);
+        } catch (error) {
+            console.error("Error fetching order info:", error);
+        }
+    };
+
+    
+
+
+
+    // Sync stage state with URL param
+    useEffect(() => {
+        if (Number(stageParam) !== stage) {
+            setStage(Number(stageParam) || 1);
+        }
+        // eslint-disable-next-line
+    }, [stageParam]);
 
     useEffect(() => {
-        const fetchOrderInfo = async () => {
-            if (!orderId || !token) return;
-            try {
-                const response = await fetch(`http://localhost:5000/orders/${orderId}`, {
-                    headers: {
-                        'Authorization': `Bearer ${token}`
-                    }
-                });
-                if (!response.ok) throw new Error("Failed to fetch order info");
-                const data = await response.json();
-                setOrderData(data);
-            } catch (error) {
-                console.error("Error fetching order info:", error);
-            }
-        };
-
-        // COnfirm payment and change order state to "Payment"
-        const confirmPayment = async () => {
-            if (!orderId || !token) return;
-            try {
-                const response = await fetch(`http://localhost:5000/orders/${orderId}/payment-confirmed`, {
-                    method: 'PUT',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${token}`
-                    }
-                });
-                if (!response.ok) throw new Error("Failed to change order state");
-                const data = await response.json();
-                console.log("Order payment confirmed", data);
-            } catch (error) {
-                console.error("Error changing order state:", error);
-            }
+        if (Number(stageParam) !== stage) {
+            navigate(`/checkout/${stage}/${orderId}`, { replace: true });
         }
+        // eslint-disable-next-line
+    }, [stage]);
+
+    useEffect(() => {
+        // COnfirm payment and change order state to "Payment"
         if (stage === 4) {
             fetchOrderInfo();
             // Confirm payment when reaching the last stage
@@ -67,10 +109,10 @@ export default function Checkout() {
 
     return (
         <div>
-            <Return_Button 
+            <Return_Button
                 returnAction={() => {
-                    if (stage !== 1) {setStage(stage - 1)}
-                    else {navigate(-1)}
+                    if (stage !== 1) { setStage(stage - 1) }
+                    else { navigate(-1) }
                 }}
             />
 
@@ -81,8 +123,10 @@ export default function Checkout() {
             <div className="w-100 d-flex justify-content-center mt-5">
                 {stage === 1 && (
                     <InfoClient
-                        onNext={() => setStage(2)}
+                        clientInfo={clientInfo}
                         setClientInfo={setClientInfo}
+                        onNext={() => setStage(2)}
+                    
                     />
                 )}
 
@@ -92,6 +136,8 @@ export default function Checkout() {
                         setShippingInfo={setShippingInfo}
                         orderId={orderId}
                         token={token}
+                        clientInfo={clientInfo}
+                        setClientInfo={setClientInfo}
                     />
                 )}
 
@@ -110,6 +156,7 @@ export default function Checkout() {
                         onNext={() => {
                             navigate(`/orders/${orderId}`);
                         }}
+                        fetchOrderInfo={fetchOrderInfo}
                     />
                 )}
             </div>

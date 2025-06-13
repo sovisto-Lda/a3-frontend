@@ -85,7 +85,7 @@ export default function Summary() {
 
             const order = await res.json();
             // Redireciona para checkout ou página de sucesso
-            navigate(`/checkout/${order._id}`);
+            navigate(`/checkout/1/${order._id}`);
         } catch (error) {
             alert(error.message);
         }

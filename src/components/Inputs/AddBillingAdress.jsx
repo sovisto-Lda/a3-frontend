@@ -1,11 +1,12 @@
 import React from 'react';
 import InputGroup from './InputGroup';
 import { useAuth } from '../../hooks/useAuth';
+import { useState } from 'react';
 
 const AddBillingAddress = ({ onClose }) => {
     const { token } = useAuth();
 
-    const [formData, setFormData] = React.useState({
+    const [formData, setFormData] = useState({
         NIF: '',
         phone_number: '',
         street_line: '',
@@ -34,7 +35,6 @@ const AddBillingAddress = ({ onClose }) => {
 
             const data = await res.json();
             if (res.ok) {
-                alert('Billing address successfully added!');
                 if (typeof onClose === 'function') onClose();
             } else {
                 alert(data.error || 'Error adding address.');
@@ -135,7 +135,6 @@ const AddBillingAddress = ({ onClose }) => {
                         className='success-button'
                         onClick={async () => {
                             await handleSubmit();
-                            window.location.reload();
                         }}
                     >
                         Adicionar

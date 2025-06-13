@@ -4,6 +4,8 @@ import { useNavigate } from 'react-router-dom';
 
 
 export default function Custom_Order_CTA({ noMargin = false }) {
+    const navigate = useNavigate()
+
     return (
         <div className={`d-flex flex-column flex-sm-row justify-content-center align-items-center gap-3 ${styles.wrapper} ${noMargin ? styles.noMargin : ''}`}
         >

@@ -1,11 +1,12 @@
 import React from 'react';
 import InputGroup from './InputGroup';
 import { useAuth } from '../../hooks/useAuth';
+import { useState } from 'react';
 
-const AddShippingAddress = () => {
+const AddShippingAddress = ({onClose}) => {
     const { token } = useAuth();
     
-    const [formData, setFormData] = React.useState({
+    const [formData, setFormData] = useState({
         phone_number: '',
         street_line: '',
         floor: '',
@@ -33,7 +34,7 @@ const AddShippingAddress = () => {
 
             const data = await res.json();
             if (res.ok) {
-                alert('Shipping address successfully added!');
+                if (typeof onClose === 'function') onClose();
             } else {
                 alert(data.error || 'Error adding shipping address.');
             }
@@ -42,11 +43,12 @@ const AddShippingAddress = () => {
             alert('Error connecting to the server.');
         }
     };
+    
 
     return (
         <div>
             <div className="row mb-2">
-                <div className="col-md-6">
+                <div className="col-lg-9">
                     <InputGroup
                         id="name"
                         label="Nome"
@@ -55,7 +57,7 @@ const AddShippingAddress = () => {
                         value={formData.name}
                         onChange={handleChange} />
                 </div>
-                <div className="col-md-3">
+                <div className="col-lg-3">
                     <InputGroup
                         id="phone_number"
                         label="Telefone"
@@ -66,7 +68,7 @@ const AddShippingAddress = () => {
                 </div>
             </div>
             <div className="row mb-2">
-                <div className="col-md-9">
+                <div className="col-lg-12">
                     <InputGroup
                         id="street_line"
                         label="Morada"
@@ -78,16 +80,16 @@ const AddShippingAddress = () => {
                 
             </div>
              <div className="row mb-2">
-                <div className="col-md-3">
+                <div className="col-lg-6">
                     <InputGroup
                         id="floor"
-                        label="Andar (Opcional)"
+                        label="Andar"
                         type="text"
                         placeholder="Andar"
                         value={formData.floor}
                         onChange={handleChange} />
                 </div>
-                <div className="col-md-3">
+                <div className="col-lg-6">
                     <InputGroup
                         id="postal_code"
                         label="Código Postal"
@@ -99,7 +101,7 @@ const AddShippingAddress = () => {
                 
             </div>
             <div className="class row">
-                <div className="col-md-3">
+                <div className="col-lg-6">
                     <InputGroup
                         id="city"
                         label="Cidade"
@@ -108,7 +110,7 @@ const AddShippingAddress = () => {
                         value={formData.city}
                         onChange={handleChange} />
                 </div>
-                 <div className="col-md-3">
+                 <div className="col-lg-6">
                     <InputGroup
                         id="country"
                         label="País"
@@ -124,7 +126,6 @@ const AddShippingAddress = () => {
                         className='success-button'
                         onClick={async () => {
                             await handleSubmit();
-                            window.location.reload();
                         } }
                     >
                         Adicionar

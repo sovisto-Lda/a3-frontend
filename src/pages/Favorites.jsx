@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import FeaturedCard from "../components/Product_Cards/featured_card";
+import Product_Card from "../components/Product_Cards/Product_Card";
 
 export default function Favorites() {
     const [favorites, setFavorites] = useState([]);
@@ -25,9 +25,15 @@ export default function Favorites() {
                     {favorites.length === 0 ? (
                         <p>Não tem produtos favoritos.</p>
                     ) : (
-                        favorites.map(product => (
-                            <div key={product._id} className="col-md-4 mb-4">
-                                <FeaturedCard fullProduct={product} />
+                        favorites.map((product, index )=> (
+                            <div key={product._id} className="col-md-3 mb-4">
+                                <Product_Card
+                                    key={index}
+                                    name={product.name}
+                                    image={product.images[0]}
+                                    price={product.price}
+                                    ratingPerc={product.avg_rating > 0 ? (1 / product.avg_rating) : 0}
+                                />
                             </div>
                         ))
                     )}

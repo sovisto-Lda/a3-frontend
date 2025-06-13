@@ -33,24 +33,6 @@ export default function Product_Card({ code, id, image, name, price, ratingPerc,
               {name}
             </h6>
             <p className="medium" style={{fontSize: "16px"}}>{price.toFixed(2)}€</p>
-
-      {/* Info */}
-      <div className="d-flex flex-column mt-2">
-        <Stars perc={ratingPerc} showCount={false} height="18px" />
-
-        <div className="d-flex justify-content-between align-items-end mt-2 flex-wrap">
-          {/* Nome e preço */}
-          <div className="d-flex flex-column flex-grow-1" style={{ minWidth: 0 }}>
-            <h6
-              className="fw-bold mb-1 text-truncate"
-              style={{ fontSize: "1rem" }}
-              title={name}
-            >
-              {name}
-            </h6>
-            <p className="medium mb-0" style={{ fontSize: "0.95rem" }}>
-              {price.toFixed(2)}€
-            </p>
           </div>
           <div className="d-flex align-items-center gap-3" style={{height: "fit-content",}}>
             
@@ -58,19 +40,6 @@ export default function Product_Card({ code, id, image, name, price, ratingPerc,
 
             <button className="primary-button" style={{height: "fit-content"}} onClick={() => {navigate(`/product/${code}`)}}>
 
-          {/* Ações */}
-          <div className="d-flex align-items-center gap-2 mt-2 mt-sm-0">
-            <img
-              className="icon-button"
-              src={Add_Favourite}
-              alt="Add to favourites"
-              height="28px"
-            />
-            <button
-              className="primary-button"
-              style={{ fontSize: "0.85rem", padding: "4px 8px" }}
-              onClick={() => {}}
-            >
               Detalhes
             </button>
           </div>

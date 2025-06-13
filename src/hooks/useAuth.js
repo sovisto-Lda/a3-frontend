@@ -12,7 +12,7 @@ export function useAuth() {
     useEffect(() => {
         const storedToken = localStorage.getItem('token');
         if (!storedToken) {
-            navigate('/login');
+            // navigate('/login');
             return;
         }
 

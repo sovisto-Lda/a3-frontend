@@ -3,6 +3,8 @@ import Category_Card from '../components/Products/Category_Card';
 import Product_Card from '../components/Product_Cards/Product_Card';
 import { useSearchParams } from 'react-router-dom';
 import Custom_order_CTA from '../components/misc/Custom_Order_CTA/Custom_Order_CTA.jsx';
+import Filter_Side_Bar from "../components/Products/Filter_Side_Bar.jsx";  
+
 
 const ProductsPage = () => {
     const [products, setProducts] = useState([]);
@@ -11,6 +13,7 @@ const ProductsPage = () => {
     const [page, setPage] = useState(1);
     const [limit] = useState(6); 
     const [totalPages, setTotalPages] = useState(1);
+    const [showMobileFilters, setShowMobileFilters] = useState(false);
 
     const [allCategories, setAllCategories] = useState([]);
 
@@ -184,77 +187,46 @@ const ProductsPage = () => {
           Explore todos os produtos
         </h1>
       </div>
-      <div className="d-flex">
-        <div className="d-flex" style={{minWidth: "0"}}>
-        <div className="d-flex flex-column bg-light px-3 me-4 flex-shrink-0" style={{ width: "245px" }}>
+      {/* Botão mobile fixo acima dos produtos */}
+      <div className="d-md-none text-end mb-2">
+        <button
+          className="primary-button w-100"
+          onClick={() => setShowMobileFilters(true)}
+        >
+          Filtros
+        </button>
+      </div>
 
-          {/* Categories Filter */}
-          <div className="mb-4 w-100">
-            <h6>Categoria</h6>
-            <hr style={{backgroundColor: "black", height: "1.5px", border: "none", opacity: "1" }} />
-            
-            {allCategories.map((cat, index) => (
-              <div className="form-check" key={`div${cat.name}`}>
-                <input
-                  className="form-check-input"
-                  type="checkbox"
-                  value={cat.name}
-                  id={`category${cat.name}`}
-                  onChange={handleCheckboxChange}
-                />
-                <label className="form-check-label" htmlFor={`category${cat.name}`}>
-                  {cat.name}
-                </label>
-              </div>
-            ))}
-            </div>
-            {/* Stock */}
-              <div className="mb-4 w-100">
-                <h6>Stock</h6>
-                <hr style={{backgroundColor: "black", height: "1.5px", border: "none", opacity: "1" }} />
-
-              {stockOptions.map((opt) => (
-                <div className="form-check" key={opt.id}>
-                  <input
-                    className="form-check-input"
-                    type="checkbox"
-                    id={`stock${opt.id}`}
-                    value={opt.value}
-                    onChange={handleCheckboxChange}
-                  />
-                  <label className="form-check-label" htmlFor={`stock${opt.id}`}>
-                    {opt.label}
-                  </label>
-                </div>
-              ))}
-              </div>
-
-            {/* Preço */}
-            <div className="mb-4 w-100">
-              <h6>Preço</h6>
-              <hr style={{backgroundColor: "black", height: "1.5px", border: "none", opacity: "1" }} />
-              {priceOptions.map((opt) => (
-                <div className="form-check" key={opt.id}>
-                  <input
-                    className="form-check-input"
-                    type="checkbox"
-                    id={`price${opt.id}`}
-                    value={opt.value}
-                    onChange={handleCheckboxChange}
-                  />
-                  <label className="form-check-label" htmlFor={`price${opt.id}`}>
-                    {opt.label}
-                  </label>
-                </div>
-              ))}
-
-            </div>
-
-          
+      {/* Layout principal */}
+      <div className="d-flex" style={{ minWidth: 0 }}>
+        {/* Sidebar desktop */}
+        <div className="d-none d-md-flex flex-shrink-0">
+          <Filter_Side_Bar
+            allCategories={allCategories}
+            stockOptions={stockOptions}
+            priceOptions={priceOptions}
+            handleCheckboxChange={handleCheckboxChange}
+          />
         </div>
 
-        {/* Main Content */}
-        <div className="ms-4 flex-grow-1">
+        {/* Sidebar mobile */}
+        {showMobileFilters && (
+          <div
+            className="position-fixed top-0 start-0 bg-white shadow"
+            style={{ width: "245px", zIndex: 1050, height: "100vh" }}
+          >
+            <Filter_Side_Bar
+              allCategories={allCategories}
+              stockOptions={stockOptions}
+              priceOptions={priceOptions}
+              handleCheckboxChange={handleCheckboxChange}
+              onClose={() => setShowMobileFilters(false)}
+            />
+          </div>
+        )}
+
+        {/* Conteúdo principal */}
+        <div className="flex-grow-1 ms-3">
           <div className="container-fluid px-0">
             <div className="row">
               {loading ? (
@@ -276,27 +248,27 @@ const ProductsPage = () => {
                 )
               )}
             </div>
-          </div>
-
-        <div className="d-flex justify-content-center align-items-center mt-4 gap-2">
-            <button
+            
+            {/* Paginação colada ao fim dos produtos */}
+            <div className="d-flex justify-content-center align-items-center mt-4 gap-2">
+              <button
                 className="btn btn-outline-primary"
                 onClick={() => handlePageChange(page - 1)}
                 disabled={page === 1 || loading}
-            >
-            &laquo; Prev
-            </button>
-            <span className="px-3">Page {page} of {totalPages}</span>
-            <button
+              >
+                &laquo; Prev
+              </button>
+              <span className="px-3">Page {page} of {totalPages}</span>
+              <button
                 className="btn btn-outline-primary"
                 onClick={() => handlePageChange(page + 1)}
                 disabled={page === totalPages || loading}
-            >
-            Next &raquo;
-            </button>
+              >
+                Next &raquo;
+              </button>
+            </div>
+          </div>
         </div>
-        </div>
-      </div>
       </div>
     </main>
   );

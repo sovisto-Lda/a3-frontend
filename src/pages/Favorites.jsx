@@ -1,6 +1,4 @@
 import { useEffect, useState } from "react";
-import FeaturedCard from "../components/Product_Cards/featured_card";
-import ProductCard from "../components/Shopping_Cart/Shopping_Cart_Main/Product_Card/Product_Card";
 import Product_Card from "../components/Product_Cards/Product_Card";
 
 export default function Favorites() {
@@ -28,7 +26,7 @@ export default function Favorites() {
                         <p>Não tem produtos favoritos.</p>
                     ) : (
                         favorites.map((product, index )=> (
-                            <div key={product._id} className="col-md-4 mb-4">
+                            <div key={product._id} className="col-md-3 mb-4">
                                 <Product_Card
                                     key={index}
                                     name={product.name}

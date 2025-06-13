@@ -19,6 +19,7 @@ import ProtectedRoute from './components/ProtectedRoute.jsx';
 import Checkout from './pages/Checkout.jsx';
 import Order from './pages/Order.jsx';
 import ComingSoon from './pages/ComingSoon.jsx';
+import AllOrders from './pages/AllOrders.jsx';
 
 export default function App() {
   return (
@@ -63,6 +64,7 @@ function AppContent() {
             <Route path="/register" element={<Register />} />
             <Route path="/account" element={<Account />} />
             <Route path="/account/favorites" element={<Favorites />} />
+            <Route path="/account/all-orders" element={<AllOrders />} />
             <Route path="/account/settings" element={<Settings />} />
             <Route path="/partnerdashboard" element={<PDHome />} />
 

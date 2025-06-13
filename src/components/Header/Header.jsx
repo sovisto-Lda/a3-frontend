@@ -44,11 +44,11 @@ export default function Header(userState) {
                 <NavBarGroup
                   title="Animais"
                   items={[
-                    { label: "Aves", href: "" },
-                    { label: "Domésticos", href: "" },
-                    { label: "Mamíferos Selvagens", href: "" },
-                    { label: "Insetos e Aracnídeos", href: "" },
-                    { label: "Répteis", href: "" },
+                    { label: "Insetos e Aracnídeos", href: "/products?category=Insetos%20e%20Aracnídeos" },
+                    { label: "Répteis", href: "/products?category=Répteis" },
+                    { label: "Gatos", href: "/products?category=Gatos" },
+                    { label: "Animais Selvagens", href: "/products?category=Animais%20Selvagens" },
+                    { label: "Aquáticos", href: "/products?category=Aquáticos" },
                   ]}
                 />
 

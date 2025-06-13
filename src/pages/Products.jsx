@@ -20,6 +20,8 @@ const ProductsPage = () => {
 
     const [searchParams] = useSearchParams();
     const searchTerm = searchParams.get('search') || '';
+    const defaultCategory = searchParams.get('category');
+
 
     const stockOptions = [
         { id: "InStock", label: "Em Stock", value: "in_Stock" },
@@ -142,16 +144,26 @@ const ProductsPage = () => {
     // useEffect para ir buscar as categorias à db
     useEffect(() => {
       fetch("http://localhost:5000/categories")
-      .then(res => res.json())
-      .then(data => {
-        //Cria uma lista apenas com 5 categorias
-        const firstFive = data.slice(0, 5);
-        setAllCategories(firstFive);
-      })
-      .catch(err => {
-        console.error("Failed to get categories: ", err);
-      });
-    }, []);
+        .then(res => res.json())
+        .then(data => {
+          const firstFive = data.slice(0, 5);
+          setAllCategories(firstFive);
+
+          // Apply default filter only once
+          if (defaultCategory) {
+            setFilters((prev) => ({
+              ...prev,
+              filter: {
+                ...prev.filter,
+                categories: [defaultCategory],
+              },
+            }));
+          }
+        })
+        .catch(err => {
+          console.error("Failed to get categories: ", err);
+        });
+  }, []);
 
 
   let categories = ["Aves", "Domésticos", "Mamíferos Selvagens", "Insetos e Aracnídeos", "Répteis"];
@@ -206,6 +218,7 @@ const ProductsPage = () => {
             stockOptions={stockOptions}
             priceOptions={priceOptions}
             handleCheckboxChange={handleCheckboxChange}
+            filters={filters}
           />
         </div>
 

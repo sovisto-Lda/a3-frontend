@@ -7,4 +7,18 @@
   font-size: 12px;
   padding: 16px 32px;
   margin-top: 96px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+
+.powered {
+  font-size: 10px;
+  color: var(--cinzento);
+}
+
+.powered a {
+  color: var(--preto) !important;
 }

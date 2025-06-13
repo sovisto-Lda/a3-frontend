@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import Category_Card from '../components/Products/Category_Card';
 import Product_Card from '../components/Product_Cards/Product_Card';
+import { useSearchParams } from 'react-router-dom';
+
 
 const ProductsPage = () => {
     const [products, setProducts] = useState([]);
@@ -11,6 +13,10 @@ const ProductsPage = () => {
     const [totalPages, setTotalPages] = useState(1);
 
     const [allCategories, setAllCategories] = useState([]);
+
+
+    const [searchParams] = useSearchParams();
+    const searchTerm = searchParams.get('search') || '';
 
     const [filters, setFilters] = useState({
         filter: {
@@ -29,7 +35,9 @@ const ProductsPage = () => {
     const fetchProducts = async (filtersToUse = null) => {
         setLoading(true);
 
-        const endpoint = filtersToUse ? `http://localhost:5000/products/filtered/${page}` : "http://localhost:5000/products";
+        const params = new URLSearchParams(window.location.search);
+        const search = params.get("search");
+        const endpoint = `http://localhost:5000/products/${page}${search ? `?search=${encodeURIComponent(search)}` : ''}`;
         const options = filtersToUse
             ? {
                 method: "POST",
@@ -68,7 +76,7 @@ const ProductsPage = () => {
           console.log(filters)
           fetchProducts(filters);
         }
-    }, [filters, page]);
+    }, [filters, page, searchTerm]);
 
     const handleCheckboxChange = (e) => {
         const { id, checked, value } = e.target;

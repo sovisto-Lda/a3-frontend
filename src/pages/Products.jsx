@@ -6,7 +6,6 @@ import Custom_order_CTA from '../components/misc/Custom_Order_CTA/Custom_Order_C
 import Filter_Side_Bar from "../components/Products/Filter_Side_Bar.jsx";  
 import PageNavigation from "../components/Products/PageNavigation.jsx";
 
-
 const ProductsPage = () => {
     const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(1);
@@ -201,7 +200,7 @@ const ProductsPage = () => {
         </h1>
       </div>
       {/* Botão mobile fixo acima dos produtos */}
-      <div className="d-md-none text-end mb-2">
+      <div className="d-md-none text-end mb-4">
         <button
           className="primary-button w-100"
           onClick={() => setShowMobileFilters(true)}
@@ -213,7 +212,7 @@ const ProductsPage = () => {
       {/* Layout principal */}
       <div className="d-flex" style={{ minWidth: 0 }}>
         {/* Sidebar desktop */}
-        <div className="d-none d-md-flex flex-shrink-0">
+        <div className="d-none d-md-flex flex-shrink-0 me-5">
           <Filter_Side_Bar
             allCategories={allCategories}
             stockOptions={stockOptions}
@@ -226,8 +225,12 @@ const ProductsPage = () => {
         {/* Sidebar mobile */}
         {showMobileFilters && (
           <div
-            className="position-fixed top-0 start-0 bg-white shadow"
-            style={{ width: "245px", zIndex: 1050, height: "100vh" }}
+            className="position-fixed top-0 start-0 bg-white shadow d-flex flex-column"
+            style={{
+              width: "245px",
+              height: "100vh",
+              zIndex: 2000, // garantir que está sobre o resto
+            }}
           >
             <Filter_Side_Bar
               allCategories={allCategories}
@@ -235,12 +238,13 @@ const ProductsPage = () => {
               priceOptions={priceOptions}
               handleCheckboxChange={handleCheckboxChange}
               onClose={() => setShowMobileFilters(false)}
+              filters={filters}
             />
           </div>
         )}
 
         {/* Conteúdo principal */}
-        <div className="flex-grow-1 ms-3">
+        <div className="flex-grow-1">
           <div className="container-fluid px-0">
             <div className="row">
               {loading ? (
@@ -248,8 +252,10 @@ const ProductsPage = () => {
               ) : (
                 Array.isArray(products) && products.length > 0 ? (
                   products.map((product) => (
-                    <div key={product._id} className="col-12 col-sm-12 col-md-6 col-lg-4 mb-4">
+                    <div key={product._id} className="col-12 col-md-6 col-lg-4 mb-4">
                       <Product_Card
+                        code={product.code}
+                        id={product._id}
                         name={product.name}
                         image={product.images[0]}
                         price={product.price}

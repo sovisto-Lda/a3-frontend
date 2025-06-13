@@ -3,7 +3,7 @@ import { useAuth } from "../../hooks/useAuth";
 import add_favourite from '../../assets/images/add_favourites_icon.svg'
 import remove_favourite from '../../assets/images/favourited_icon.svg'
 
-export default function Favorite_Button({productId}) {
+export default function Favorite_Button({productId, height=undefined}) {
     const [isFavorite, setIsFavorite] = useState(false);
     const {token} = useAuth();
 
@@ -101,6 +101,7 @@ export default function Favorite_Button({productId}) {
         <img 
             src={isFavorite ? remove_favourite : add_favourite} 
             alt=""
+            style={{height: height ? `${height}px` : '', cursor: 'pointer'}}
             onClick={isFavorite ? removeFromFavorites : addToFavorites}
         />
 

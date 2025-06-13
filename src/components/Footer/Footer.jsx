@@ -3,7 +3,7 @@ import aaalda from '../../assets/images/aaalda_logo.png'
 
 export default function Footer() {
   return (
-    <footer className={styles.footer}>
+    <footer className={`d-flex flex-column flex-sm-row align-items-start align-items-sm-center ${styles.footer}`}>
       <p>
         © 2025 Todos os direitos reservados a
         <a href='https://aalda.com'>

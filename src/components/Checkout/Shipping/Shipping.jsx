@@ -11,7 +11,7 @@ import PickupDeliveryOptions from "./Pickup_Delivery_Options";
 import StoreDeliveryOptions from "./Store_Delivery_Options";
 import { useAuth } from "../../../hooks/useAuth"
 
-export default function Shipping({ onNext, setShippingInfo, orderId, token }) {
+export default function Shipping({ onNext, setShippingInfo, orderId, token, clientInfo, setClientInfo }) {
     const [selected, setSelected] = useState(null);
     const [selectedAddress, setSelectedAddress] = useState(null);
     console.log("Selected Address:", selectedAddress);
@@ -21,6 +21,7 @@ export default function Shipping({ onNext, setShippingInfo, orderId, token }) {
         2: "Pick-Up Point",
         3: "Reserva em Loja"
     };
+
     
 
     const handleContinue = async () => {
@@ -57,6 +58,8 @@ export default function Shipping({ onNext, setShippingInfo, orderId, token }) {
         }
         onNext();
     };
+
+
 
     return (
         <div className="d-flex flex-column gap-3 col-10">
@@ -99,6 +102,8 @@ export default function Shipping({ onNext, setShippingInfo, orderId, token }) {
                     <HomeDeliveryOptions
                         selectedAddress={selectedAddress}
                         setSelectedAddress={setSelectedAddress}
+                        clientInfo = {clientInfo}
+                        setClientInfo={setClientInfo}
                     />
                 )}
                 {selected === 2 && <PickupDeliveryOptions />}

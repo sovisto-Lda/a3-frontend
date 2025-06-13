@@ -30,7 +30,6 @@ export default function ProductsList() {
         })
         .then(data => {
             console.log('Data fetched:')
-            console.log(data);
             setShoppingCartProducts(data);
         })
         .catch(error => {

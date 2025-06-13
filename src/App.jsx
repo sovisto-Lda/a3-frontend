@@ -64,7 +64,7 @@ function AppContent() {
         <Route path="/partnerdashboard" element={<PDHome />} />
 
         <Route path='/cart' element={<ProtectedRoute> <ShoppingCart /> </ProtectedRoute>} />
-        <Route path='/checkout/:orderId' element={<ProtectedRoute> <Checkout /> </ProtectedRoute>} />
+        <Route path='/checkout/:stage/:orderId' element={<ProtectedRoute> <Checkout /> </ProtectedRoute>} />
 
         <Route path='/orders/:id' element={<ProtectedRoute> <Order /> </ProtectedRoute>} />
 

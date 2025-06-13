@@ -1,12 +1,23 @@
 .wrapper {
     width: calc(100% + 64px);
-    margin-left: -32px;
-    margin-top: 80px;
-    margin-bottom: 80px;
-    padding: 0px 32px;
+    /* margin-left: -32px; */
+    margin-top: 60px;
+    margin-bottom: 60px;
+    padding: 16px 32px;
+    transform: translateX(-32px)
 }
 
 .noMargin {
     margin-top: 0;
     margin-bottom: 0;
+}
+
+.bg {
+    background-color: #ECECEC;
+}
+
+@media (max-width: 768px) {
+    .text {
+        font-size: 24px !important;
+    }
 }

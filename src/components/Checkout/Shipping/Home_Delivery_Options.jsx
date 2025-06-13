@@ -1,9 +1,66 @@
 import { useEffect, useState } from "react";
 import { useAuth } from "../../../hooks/useAuth";
 import AddressCard from "../../Cards/AddressCard";
+import AddShippingAdress from "../../Inputs/AddShippingAdress";
+
 
 export default function HomeDeliveryOptions({ selectedAddress, setSelectedAddress }) {
-    const { token, user} = useAuth();
+    const { token, user } = useAuth();
+    const [newAddress, setNewAddress] = useState(false);
+    const [reloadAddresses, setReloadAddresses] = useState(false);
+
+
+    // Effect to initialize selectedAddress with the first shipping address if not already set
+    useEffect(() => {
+        if (
+            user &&
+            Array.isArray(user.shipping_address) &&
+            user.shipping_address.length > 0 &&
+            !selectedAddress
+        ) {
+            setSelectedAddress(user.shipping_address[0]);
+        }
+    }, [user, selectedAddress, setSelectedAddress, reloadAddresses]);
+
+    const handleAddressAdded = () => {
+        setNewAddress(false);
+        setReloadAddresses(prev => !prev);
+    };
+
+
+    // Fetch shipping addresses from the backend
+    const fetchAddresses = async () => {
+            if (!token) return;
+
+            try {
+                const response = await fetch('http://localhost:5000/account/shipping-address', {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+
+                if (!response.ok) {
+                    throw new Error("Failed to fetch shipping addresses");
+                }
+
+                const data = await response.json();
+                if (Array.isArray(data)) {
+                    setSelectedAddress(data[0] || null);
+                    if (user) {
+                        user.shipping_address = data;
+                    }
+                } else {
+                    console.error("Unexpected data format:", data);
+                }
+            } catch (error) {
+                console.error("Error fetching shipping addresses:", error);
+            }
+        };
+
+
+    useEffect(() => {
+        fetchAddresses();
+    }, [reloadAddresses]);
 
     return (
         <div className="d-flex flex-column gap-4 mt-5">
@@ -13,8 +70,8 @@ export default function HomeDeliveryOptions({ selectedAddress, setSelectedAddres
                 <div>
                     {user.shipping_address.map((address, index) => (
                         <AddressCard
-                            key={index}
-                            type="billing"
+                            key={address._id || index}
+                            type="shipping"
                             street_line={address.street_line}
                             nome={address.name}
                             floor={address.floor}
@@ -26,7 +83,7 @@ export default function HomeDeliveryOptions({ selectedAddress, setSelectedAddres
                             onDelete={() => {}}
                             allowEdit={false}
                             allowSelect={true}
-                            checked={selectedAddress === address}
+                            checked={selectedAddress && selectedAddress._id === address._id}
                             onChange={() => setSelectedAddress(address)}
                         />
                     ))}
@@ -37,36 +94,30 @@ export default function HomeDeliveryOptions({ selectedAddress, setSelectedAddres
                 </div>
             )}
 
+            <div>
+                {!newAddress ? (
+                    <button className="primary-button" onClick={() => setNewAddress(true)}>
+                        Adicionar Endereço de Entrega
+                    </button>
+                ) : (
+                    <div>
 
-            {/* {user && Array.isArray(user.shipping_address) && user.shipping_address.length > 0  }
-            {user.shipping_address.length === 0 && <p>Não existem endereços de entrega guardados.</p>}
-            {addresses.map((address, idx) => (
-                <div key={idx}>
-                    <div className="row align-items-center">
-                        <div className="col-md-1 gap-2 d-flex justify-content-left mb-4">
-                            <input
-                                className="form-check-input custom-checkbox"
-                                style={{
-                                    width: '32px',
-                                    height: '32px',
-                                    border: '3px solid black'
-                                }}
-                                type="checkbox"
-                                checked={selectedAddress === address}
-                                onChange={() => setSelectedAddress(address)}
-                            />
+                        <div className="mt-3">
+                            <AddShippingAdress onClose={handleAddressAdded} />
                         </div>
-                        <div className="col">
-                            <AddressCard 
-                            allowSelect={true} 
-                            {...address } 
-                            checked={selectedAddress === address} 
-                            onChange={() => setSelectedAddress(address)}
- />
+                        <div className="d-flex justify-content-end">
+                            <button className="primary-button" onClick={() => setNewAddress(false)}>
+                                Cancelar
+                            </button>
                         </div>
                     </div>
-                </div> */}
-            {/* ))} */}
+                )}
+            </div>
+
+            
+
+
+            
         </div>
     );
 }

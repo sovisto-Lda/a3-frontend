@@ -30,6 +30,7 @@ export default function Favorites() {
                                 <Product_Card
                                     key={index}
                                     code={product.code}
+                                    id={product._id}
                                     name={product.name}
                                     image={product.images[0]}
                                     price={product.price}

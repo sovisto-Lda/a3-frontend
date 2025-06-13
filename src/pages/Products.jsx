@@ -250,6 +250,7 @@ const ProductsPage = () => {
                     <div key={product._id} className="col-12 col-sm-12 col-md-6 col-lg-4 mb-4">
                       <Product_Card
                         code={product.code}
+                        id={product._id}
                         name={product.name}
                         image={product.images[0]}
                         price={product.price}

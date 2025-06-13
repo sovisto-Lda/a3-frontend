@@ -47,7 +47,7 @@ export default function Bestsellers() {
                             name={product.name}
                             image={product.images[0]}
                             price={product.price}
-                            ratingPerc={product.avg_rating / 5}
+                            ratingPerc={product.avg_rating * 20}
                             />
                         </div>
                     ))}

@@ -4,6 +4,7 @@ import Product_Card from '../components/Product_Cards/Product_Card';
 import { useSearchParams } from 'react-router-dom';
 import Custom_order_CTA from '../components/misc/Custom_Order_CTA/Custom_Order_CTA.jsx';
 import Filter_Side_Bar from "../components/Products/Filter_Side_Bar.jsx";  
+import PageNavigation from "../components/Products/PageNavigation.jsx";
 
 
 const ProductsPage = () => {
@@ -174,8 +175,8 @@ const ProductsPage = () => {
       <div className = "d-flex" style={{
           backgroundColor: "#ECECEC",
           padding: "16px",
-          marginLeft: "-50px",
-          marginRight: "-50px"
+          width: "calc(100% + 64px)",
+          transform: "translateX(-32px)"
         }}>
         <Custom_order_CTA noMargin />
       </div>
@@ -261,25 +262,12 @@ const ProductsPage = () => {
                 )
               )}
             </div>
-            
+
             {/* Paginação colada ao fim dos produtos */}
-            <div className="d-flex justify-content-center align-items-center mt-4 gap-2">
-              <button
-                className="btn btn-outline-primary"
-                onClick={() => handlePageChange(page - 1)}
-                disabled={page === 1 || loading}
-              >
-                &laquo; Prev
-              </button>
-              <span className="px-3">Page {page} of {totalPages}</span>
-              <button
-                className="btn btn-outline-primary"
-                onClick={() => handlePageChange(page + 1)}
-                disabled={page === totalPages || loading}
-              >
-                Next &raquo;
-              </button>
+            <div className='d-flex justify-content-center py-3 '>
+              <PageNavigation page={page} totalPages={totalPages} handlePageChange={handlePageChange}/>
             </div>
+            
           </div>
         </div>
       </div>

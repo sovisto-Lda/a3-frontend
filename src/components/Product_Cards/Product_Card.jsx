@@ -2,10 +2,16 @@ import Stars from '../ProductPage/Stars.jsx';
 import './Product_Card.module.css';
 import Add_Favourite from '../../assets/images/add_favourites_icon.svg';
 import { FaHeart } from "react-icons/fa";
+import styles from './Product_Card.module.css'
+import { useNavigate } from 'react-router-dom';
 
-export default function Product_Card({ image, name, price, ratingPerc, numRatings }) {
+export default function Product_Card({ code, image, name, price, ratingPerc, numRatings }) {
+  const navigate = useNavigate()
+
   return (
-    <div className="d-flex flex-column w-100">
+    <div className={`d-flex flex-column w-100 ${styles.wrapper}`}
+      onClick={() => {navigate(`/product/${code}`)}}
+    >
       <div style={{ aspectRatio: '1.25', overflow: 'hidden'}}>
         <img
           src={image}

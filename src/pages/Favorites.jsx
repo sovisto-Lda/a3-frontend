@@ -29,6 +29,7 @@ export default function Favorites() {
                             <div key={product._id} className="col-md-3 mb-4">
                                 <Product_Card
                                     key={index}
+                                    code={product.code}
                                     name={product.name}
                                     image={product.images[0]}
                                     price={product.price}

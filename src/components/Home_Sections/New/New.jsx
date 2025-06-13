@@ -46,6 +46,7 @@ export default function New() {
                     <div className={`col-12 col-sm-${12 / newProducts.length * 2} col-md-6 col-lg-${12 / newProducts.length} mb-4`} key={index}>
                         <Product_Card
                         key={index}
+                        code={product.code}
                         name={product.name}
                         image={product.images[0]}
                         price={product.price}

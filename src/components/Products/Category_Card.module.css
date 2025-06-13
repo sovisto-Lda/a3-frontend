@@ -1,0 +1,8 @@
+.wrapper {
+    cursor: pointer;
+    transition: all 0.25s ease-out;
+}
+
+.wrapper:hover {
+    transform: translateY(-10px);
+}

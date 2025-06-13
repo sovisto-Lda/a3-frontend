@@ -1,9 +1,16 @@
+import { useEffect } from "react";
 import DividerLine from "../../misc/Divider_Line";
 
-export default function Review({ order_data, onNext }) {
+export default function Review({ order_data, onNext, fetchOrderInfo }) {
     if (!order_data) {
         return <div>Loading...</div>;
     }
+
+
+    useEffect(() => {
+        // Fetch the order data consistently
+        fetchOrderInfo();
+    }, [fetchOrderInfo]);
 
     // Calcular total de artigos e preço total
     const totalItems = order_data.products?.reduce((acc, item) => acc + item.quantity, 0) || 0;

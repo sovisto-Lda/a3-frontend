@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Category_Card from '../components/Products/Category_Card';
 import Product_Card from '../components/Product_Cards/Product_Card';
 import { useSearchParams } from 'react-router-dom';
-
+import Custom_order_CTA from '../components/misc/Custom_Order_CTA/Custom_Order_CTA.jsx';
 
 const ProductsPage = () => {
     const [products, setProducts] = useState([]);
@@ -118,17 +118,34 @@ const ProductsPage = () => {
 
   return (
     <main>
-      <h1>Categorias</h1>
-      <div className="container-fluid">
-        <div className="row">
-          {allCategories.map((cat, index) => (
+      {/* Botão de produto personalizado */}
+      <div className = "d-flex" style={{
+          backgroundColor: "#ECECEC",
+          padding: "16px",
+          marginLeft: "-50px",
+          marginRight: "-50px"
+        }}>
+        <Custom_order_CTA noMargin />
+      </div>
+      <h1 className = "mt-4 mb-3">Categorias</h1>
+      <div className="container-fluid px-0" style = {{marginBottom: "80px"}}>
+        <div className="row justify-content-between gap-3">
+        {allCategories.map((cat, index) => (
+          <div className="col-lg col-md-2 col-sm-12" key={index}>
+          
             <Category_Card
-              key={index}
-              title={cat.name}
-              src={cat.image}
+              name={cat.name}
+              image={cat.image}
             />
-          ))}
+          
         </div>
+        ))}
+        </div>
+      </div>
+      <div className="mb-5">
+        <h1>
+          Explore todos os produtos
+        </h1>
       </div>
       <div className="d-flex">
         <aside className="bg-light p-3">
@@ -160,8 +177,8 @@ const ProductsPage = () => {
         </aside>
 
         {/* Main Content */}
-        <div className="p-3 flex-grow-1">
-          <div className="container-fluid">
+        <div className="ms-4 flex-grow-1">
+          <div className="container-fluid px-0">
             <div className="row">
               {allCategories.map((cat, index) => (
                 <div className="col-12 col-sm-12 col-md-6 col-lg-4 mb-4" key={index}>

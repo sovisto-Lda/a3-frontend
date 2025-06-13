@@ -30,17 +30,15 @@ export default function Order() {
     const { orderId } = useParams();
     const { token } = useAuth();
 
+
     const fetchOrderInfo = async () => {
         if (!orderId || !token) return;
         try {
             const response = await fetch(`http://localhost:5000/orders/${orderId}`, {
-                headers: {
-                    Authorization: `Bearer ${token}`
-                },
+                headers: { Authorization: `Bearer ${token}` }
             });
-            if (!response.ok) throw new Error("Failed to fetch order data");
-
             const data = await response.json();
+            if (!response.ok) throw new Error("Failed to fetch order data");
             setOrderData(data);
         } catch (error) {
             console.error("Error fetching order data:", error);
@@ -48,31 +46,43 @@ export default function Order() {
     };
 
     useEffect(() => {
-        fetchOrderInfo();
-    }, [orderId]);
+        if (token && orderId) {
+            fetchOrderInfo();
+        }
+    }, [token, orderId]);
+
+    console.log(orderData)
 
     return (
-        <div className="mt-4 ">
+        <div className="mt-3 ">
             <div className="row align-items-center mb-5">
-                <div className="col-md-3 mb-2">
+                <div className="col-md-6 mb-2">
                     <Return_Button
-                        text={`Pedido Nº ${orderId}`}
+                        text={
+                          <>
+                            Pedido Nº {orderId} - <span style={{ color: orderData ? getStateInfo(orderData.state).color : "inherit" }}>
+                              {orderData ? getStateInfo(orderData.state).label : ""}
+                            </span>
+                          </>
+                        }
                         returnAction={() => window.history.back()}
                     />
                 </div>
-                <div className="col-xl-3 mb-2">
-                    <p style={
-                        orderData
-                            ? { color: getStateInfo(orderData.state).color }
-                            : {}
-                    }>
-                        {orderData
-                            ? getStateInfo(orderData.state).label
-                            : ""}
+
+                {/* <div className="col-xxl-3 mb-4 d-flex align-items-center">
+                   <p
+                    className="mb-0"
+                    style={{
+                        ...(orderData ? { color: getStateInfo(orderData.state).color } : {}),
+                        lineHeight: "1",
+                        paddingTop: "14px"  // ajusta conforme necessário
+                    }}
+                    >
+                    {orderData ? getStateInfo(orderData.state).label : ""}
                     </p>
 
-                </div>
-                <div className="col-md-6 d-flex justify-content-end">
+                </div> */}
+                <div className="col-md-6 d-flex justify-content-md-end justify-content-start mt-3 mt-md-0">
                     <button className="primary-button">
                         Transferir fatura
                     </button>
@@ -80,14 +90,13 @@ export default function Order() {
             </div>
 
             <div className="row justify-content-center">
-
-                <Review
-                    order_data={orderData}
-                    onNext={() => { }}
-                    fetchOrderInfo={fetchOrderInfo}
-                    page="order"
-                    size= "12"
-                />
+                    <Review
+                        order_data={orderData}
+                        onNext={() => { }}
+                        fetchOrderInfo={fetchOrderInfo}
+                        page="order"
+                        size="12"
+                    />
             </div>
         </div>
     )

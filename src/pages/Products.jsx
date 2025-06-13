@@ -18,6 +18,17 @@ const ProductsPage = () => {
     const [searchParams] = useSearchParams();
     const searchTerm = searchParams.get('search') || '';
 
+    const stockOptions = [
+        { id: "InStock", label: "Em Stock", value: "in_Stock" },
+      //{ id: "OutOfStock", label: "Fora de Stock", value: "out_of_stock" },
+    ];
+
+    const priceOptions = [
+        {id: "0-3", label: "0 - 3€", value: "0-3"},
+        {id: "3-6", label: "3 - 6€", value: "3-6"},
+        {id: "6-", label: "Mais de 6€", value: "15-"}
+    ]
+
     const [filters, setFilters] = useState({
         filter: {
           categories: [],
@@ -80,6 +91,32 @@ const ProductsPage = () => {
 
     const handleCheckboxChange = (e) => {
         const { id, checked, value } = e.target;
+
+        if (id.startsWith("stock")) {
+          setFilters((prev) => ({
+            ...prev,
+            filter: { ...prev.filter, stock: checked ? 1 : undefined }
+          }));
+        }
+
+        if (id.startsWith("price")) {
+          let [min, max] = value.split("-").map(Number);
+          if (checked) {
+            setFilters((prev) => ({
+              ...prev,
+              filter: {
+                ...prev.filter,
+                priceMin: min,
+                priceMax: isNaN(max) ? undefined : max
+              }
+            }));
+          } else {
+            setFilters((prev) => ({
+              ...prev,
+              filter: { ...prev.filter, priceMin: undefined, priceMax: undefined }
+            }));
+          }
+        }
 
         if (id.startsWith("category")) {
             setFilters((prev) => {
@@ -148,67 +185,98 @@ const ProductsPage = () => {
         </h1>
       </div>
       <div className="d-flex">
-        <aside className="bg-light p-3">
-          <h5 className="mb-3">Filters</h5>
+        <div className="d-flex" style={{minWidth: "0"}}>
+        <div className="d-flex flex-column bg-light px-3 me-4 flex-shrink-0" style={{ width: "245px" }}>
 
           {/* Categories Filter */}
-          <div className="mb-4">
-            <h6>Categories</h6>
+          <div className="mb-4 w-100">
+            <h6>Categoria</h6>
+            <hr style={{backgroundColor: "black", height: "1.5px", border: "none", opacity: "1" }} />
             
-            {categories.map((item, index) => (
+            {allCategories.map((cat, index) => (
+              <div className="form-check" key={`div${cat.name}`}>
+                <input
+                  className="form-check-input"
+                  type="checkbox"
+                  value={cat.name}
+                  id={`category${cat.name}`}
+                  onChange={handleCheckboxChange}
+                />
+                <label className="form-check-label" htmlFor={`category${cat.name}`}>
+                  {cat.name}
+                </label>
+              </div>
+            ))}
+            </div>
+            {/* Stock */}
+              <div className="mb-4 w-100">
+                <h6>Stock</h6>
+                <hr style={{backgroundColor: "black", height: "1.5px", border: "none", opacity: "1" }} />
 
-                <div className="form-check" key={`div${item}`}>
-                    <input
-                        key={`input${item}`}
-                        className="form-check-input"
-                        type="checkbox"
-                        value={item}
-                        id={`category${item}`}
-                        onChange={handleCheckboxChange}
-                    />
-                    <label className="form-check-label" htmlFor={`category${item}`} key={`label${item}`}>
-                        {item}
-                    </label>
-                </div>    
-            ))}             
-          </div>
+              {stockOptions.map((opt) => (
+                <div className="form-check" key={opt.id}>
+                  <input
+                    className="form-check-input"
+                    type="checkbox"
+                    id={`stock${opt.id}`}
+                    value={opt.value}
+                    onChange={handleCheckboxChange}
+                  />
+                  <label className="form-check-label" htmlFor={`stock${opt.id}`}>
+                    {opt.label}
+                  </label>
+                </div>
+              ))}
+              </div>
+
+            {/* Preço */}
+            <div className="mb-4 w-100">
+              <h6>Preço</h6>
+              <hr style={{backgroundColor: "black", height: "1.5px", border: "none", opacity: "1" }} />
+              {priceOptions.map((opt) => (
+                <div className="form-check" key={opt.id}>
+                  <input
+                    className="form-check-input"
+                    type="checkbox"
+                    id={`price${opt.id}`}
+                    value={opt.value}
+                    onChange={handleCheckboxChange}
+                  />
+                  <label className="form-check-label" htmlFor={`price${opt.id}`}>
+                    {opt.label}
+                  </label>
+                </div>
+              ))}
+
+            </div>
 
           
-        </aside>
+        </div>
 
         {/* Main Content */}
         <div className="ms-4 flex-grow-1">
           <div className="container-fluid px-0">
             <div className="row">
-              {allCategories.map((cat, index) => (
-                <div className="col-12 col-sm-12 col-md-6 col-lg-4 mb-4" key={index}>
-                  <Product_Card
-                    key={index}
-                    name={cat.name}
-                    image={cat.image}
-                    price={5.99}
-                    ratingPerc={80}
-                  />
-                </div>
-                ))}
-            </div>
-          </div>
-          <h1>Products in the database:</h1>
-          {loading ? (
-            <div className="spinner-border text-primary" role="status" />
-          ) : (
-            Array.isArray(products) && products.length > 0 ? (
-                products.map((product) => (
-                    <div key={product._id} className="border p-2 mb-2">
-                      <p>{product.name}</p>
-                      <p>{product.category}</p>
+              {loading ? (
+                <div className="spinner-border text-primary" role="status" />
+              ) : (
+                Array.isArray(products) && products.length > 0 ? (
+                  products.map((product) => (
+                    <div key={product._id} className="col-12 col-sm-12 col-md-6 col-lg-4 mb-4">
+                      <Product_Card
+                        name={product.name}
+                        image={product.images[0]}
+                        price={product.price}
+                        ratingPerc={product.ratingPerc}
+                      />
                     </div>
                   ))
-            ) : (
-                <p>No products found.</p>
-            )
-            
-          )}
+                ) : (
+                  <p>No products found.</p>
+                )
+              )}
+            </div>
+          </div>
 
         <div className="d-flex justify-content-center align-items-center mt-4 gap-2">
             <button
@@ -228,6 +296,7 @@ const ProductsPage = () => {
             </button>
         </div>
         </div>
+      </div>
       </div>
     </main>
   );

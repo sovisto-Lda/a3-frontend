@@ -21,7 +21,7 @@ import { useNavigate } from 'react-router-dom';
         </button>
         <ul className='dropdown-menu' aria-labelledby='dropdownProfileIcon'>
         <li><a className={`dropdown-item ${header_styles.profile_dropdown}`} href="" onClick={()=> navigate('/account')}>O meu Perfil</a></li>
-        <li><a className={`dropdown-item ${header_styles.profile_dropdown}`} href="" onClick={()=> navigate('/orders')}>As minhas Encomendas</a></li>
+        <li><a className={`dropdown-item ${header_styles.profile_dropdown}`} href="" onClick={()=> navigate('/account/all-orders')}>As minhas Encomendas</a></li>
         <li><a className={`dropdown-item ${header_styles.profile_dropdown}`} href="" onClick={()=> navigate('/account/settings')}>Definições da Conta</a></li>
         <li><a className={`dropdown-item ${header_styles.profile_dropdown}`} href="" onClick={handleLogout}>Terminar Sessão</a></li>
         </ul>

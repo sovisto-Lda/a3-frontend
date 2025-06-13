@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import DividerLine from "../../misc/Divider_Line";
 
-export default function Review({ order_data, onNext, fetchOrderInfo }) {
+export default function Review({ order_data, onNext, fetchOrderInfo, page = "checkout", size = 10 }) {
     if (!order_data) {
         return <div>Loading...</div>;
     }
@@ -21,7 +21,7 @@ export default function Review({ order_data, onNext, fetchOrderInfo }) {
             : 3.99; // Ajusta conforme necessário
 
     return (
-        <div className="d-flex flex-column col-10">
+        <div className={`d-flex flex-column col-${size}`}>
 
             <div>
                 <h2>Resumo</h2>
@@ -35,7 +35,7 @@ export default function Review({ order_data, onNext, fetchOrderInfo }) {
             </div>
 
             {/* items list */}
-            <div className="d-flex flex-column gap-2" style={{color: 'var(--cinzento)'}}>
+            <div className="d-flex flex-column gap-2" style={{ color: 'var(--cinzento)' }}>
                 {order_data.products?.map((item, idx) => (
                     <div className="d-flex justify-content-between" key={idx}>
                         <p>{item.product?.name || `Produto ${idx + 1}`}</p>
@@ -48,13 +48,13 @@ export default function Review({ order_data, onNext, fetchOrderInfo }) {
             <div className="d-flex justify-content-between py-2">
                 <p>Envio</p>
                 <p>{shippingPrice.toFixed(2)}€</p>
-            </div>            
+            </div>
 
             {/* total */}
             <div className="d-flex justify-content-between py-4">
                 <p>Total, com taxas aplicadas</p>
                 <p>{(order_data.total_price + shippingPrice).toFixed(2)}€</p>
-            </div>            
+            </div>
 
             <DividerLine />
 
@@ -93,10 +93,10 @@ export default function Review({ order_data, onNext, fetchOrderInfo }) {
                     {/* payment */}
                     <div className="d-flex flex-column gap-2 w-100">
                         <h2>Método de Pagamento</h2>
-                        
+
                         <div className="d-flex align-items-center gap-3">
                             <p className="mb-0">{order_data.payment_method || "—"}</p>
-                            
+
                         </div>
                     </div>
 
@@ -111,15 +111,15 @@ export default function Review({ order_data, onNext, fetchOrderInfo }) {
                     </div>
                 </div>
             </div>
-
-            <button
+            {page === "checkout" && (<button
                 className={`success-button w-100 mt-5`}
                 type="button"
                 style={{ height: '38px' }}
                 onClick={onNext}
             >
                 <p>Confirmar Compra</p>
-            </button>
+            </button>)}
+
 
         </div>
     )

@@ -9,7 +9,6 @@ import stars from '../../assets/images/stars.svg';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 import add_favourite from '../../assets/images/add_favourites_icon.svg'
 
-
 export default function ProductMain({productCode}) {
     const [loading, setLoading] = useState(false)
 
@@ -105,7 +104,12 @@ export default function ProductMain({productCode}) {
                     {/* description and details */}
                     <DetailsAndDescription 
                         description={product.description} 
-                        details={`Dimensões: ${product.measurements.dimensions[0]}cm / ${product.measurements.dimensions[1]}cm / ${product.measurements.dimensions[2]}cm. Peso: ${product.measurements.weight}g `}/>
+                        details={
+                        product.measurements?.dimensions && product.measurements?.weight
+                            ? `Dimensões: ${product.measurements.dimensions[0]}cm / ${product.measurements.dimensions[1]}cm / ${product.measurements.dimensions[2]}cm. Peso: ${product.measurements.weight}g`
+                            : "Indisponível"
+                        }
+                        />
 
                 </div>
 

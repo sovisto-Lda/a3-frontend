@@ -1,11 +1,14 @@
 import styles from './featured_card.module.css';
 import React, { useEffect, useState, useRef } from "react";
+import { useNavigate } from 'react-router-dom';
 
 
 export default function FeaturedCard({ fullProduct, product_id, y_offset }) {
     const [product, setProduct] = useState(fullProduct);
     const [loading, setLoading] = useState(1);
     const cardRef = useRef(null);
+
+    const navigate = useNavigate()
 
     return (
         <div 
@@ -25,7 +28,13 @@ export default function FeaturedCard({ fullProduct, product_id, y_offset }) {
             </div>
 
             <div className={`d-flex justify-content-end`}>
-                <div className={`primary-button ${styles.primary_button}`}>Comprar Agora!</div>
+                <div 
+                className={`primary-button ${styles.primary_button}`}
+                onClick={() => {console.log(`/product/${fullProduct.code}`); navigate(`/product/${fullProduct.code}`)}}
+                
+                >
+                    Comprar Agora!
+                </div>
             </div>
         </div>
     )

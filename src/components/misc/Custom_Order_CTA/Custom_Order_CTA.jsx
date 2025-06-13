@@ -1,4 +1,7 @@
 import styles from './Custom_Order_CTA.module.css'
+import { useNavigate } from 'react-router-dom';
+
+
 
 export default function Custom_Order_CTA({ noMargin = false }) {
     return (
@@ -6,7 +9,9 @@ export default function Custom_Order_CTA({ noMargin = false }) {
         >
             <h1 className='m-0'>Não encontra o que procura?</h1>
     
-            <div className='primary-button'><h1>Personalize o seu produto</h1></div>
+            <button className='primary-button' onClick={()=> {navigate('/comingsoon')}}>
+                <h1>Personalize o seu produto</h1>
+            </button>
         </div>
     )
 

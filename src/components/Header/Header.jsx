@@ -58,16 +58,16 @@ export default function Header(userState) {
                 <NavBarGroup
                   title="Material de Impressão"
                   items={[
-                    { label: "Acessórios", href: "" },
-                    { label: "Filamentos", href: "" },
-                    { label: "Impressoras", href: "" },
+                    { label: "Acessórios", href: "/comingsoon" },
+                    { label: "Filamentos", href: "/comingsoon" },
+                    { label: "Impressoras", href: "/comingsoon" },
                   ]}
                 />
 
                 <NavBarGroup
                   title="Pedido Personalizado"
                   items={[
-                    { label: "Fazer um pedido personalizado", href: "" },
+                    { label: "Fazer um pedido personalizado", href: "/comingsoon" },
                   ]}
                 />
 
@@ -138,27 +138,30 @@ export default function Header(userState) {
         className={`col-auto ${header_styles.headerButton} ${location === '/' ? `${header_styles.selectedButton}` : ''}`}
         onClick={() => navigate('/')}
       >
-          Página Inicial
+        Página Inicial
+      </button>
+
+      <div className={`col-auto ${header_styles.hoverWrapper}`}>
+        <button 
+          className={`${header_styles.headerButton} ${header_styles.headerButtonProdutos} ${location.startsWith('/products') ? `${header_styles.selectedButton}` : ''}`}
+          onClick={() => navigate('/products')}
+          ref={productsButtonRef}
+          onMouseEnter={handleHoverIn}
+          onMouseLeave={handleHoverOut}
+        >
+          Produtos
         </button>
 
-        <div className={`col-auto ${header_styles.hoverWrapper}`}>
-          <button 
-            className={`${header_styles.headerButton} ${header_styles.headerButtonProdutos}`}
-            onClick={() => navigate('/products')}
-            ref={productsButtonRef}
-            onMouseEnter={handleHoverIn}
-            onMouseLeave={handleHoverOut}
-          >
-            Produtos
-          </button>
-
-        </div>
+      </div>
 
         <button 
-          className={`col-auto ${header_styles.headerButton}`}  
+          className={`col-auto ${header_styles.headerButton} ${location.startsWith('/about-us') ? `${header_styles.selectedButton}` : ''}`}  
           onClick={() => navigate('/about-us')}
-        >Sobre Nós</button>
-      </div>
+        >
+          Sobre Nós
+        </button>
+
+    </div>
 
     </header>
   );

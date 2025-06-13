@@ -18,6 +18,7 @@ import ShoppingCart from './pages/ShoppingCart.jsx';
 import ProtectedRoute from './components/ProtectedRoute.jsx';
 import Checkout from './pages/Checkout.jsx';
 import Order from './pages/Order.jsx';
+import ComingSoon from './pages/ComingSoon.jsx';
 
 export default function App() {
   return (
@@ -50,28 +51,37 @@ function AppContent() {
       {location.pathname !== '/login' && location.pathname !== '/register' && (
         <Header userLogged={user} />
       )}
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/users" element={<Users />} />
-        <Route path="/products" element={<Products />} />
-        <Route path="/about-us" element={<AboutUs />} />
-        <Route path="/product/:code" element={<ProductPage />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/account" element={<Account />} />
-        <Route path="/account/favorites" element={<Favorites />} />
-        <Route path="/account/settings" element={<Settings />} />
-        <Route path="/partnerdashboard" element={<PDHome />} />
+      
+      <main style={{minHeight: "100vh"}}>
+        <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/users" element={<Users />} />
+            <Route path="/products" element={<Products />} />
+            <Route path="/about-us" element={<AboutUs />} />
+            <Route path="/product/:code" element={<ProductPage />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/account" element={<Account />} />
+            <Route path="/account/favorites" element={<Favorites />} />
+            <Route path="/account/settings" element={<Settings />} />
+            <Route path="/partnerdashboard" element={<PDHome />} />
 
-        <Route path='/cart' element={<ProtectedRoute> <ShoppingCart /> </ProtectedRoute>} />
-        <Route path='/checkout/:orderId' element={<ProtectedRoute> <Checkout /> </ProtectedRoute>} />
+            <Route path='/cart' element={<ProtectedRoute> <ShoppingCart /> </ProtectedRoute>} />
+            <Route path='/checkout/:orderId' element={<ProtectedRoute> <Checkout /> </ProtectedRoute>} />
 
-        <Route path='/orders/:id' element={<ProtectedRoute> <Order /> </ProtectedRoute>} />
+            <Route path='/orders/:id' element={<ProtectedRoute> <Order /> </ProtectedRoute>} />
+            
+            
+            <Route path='/comingsoon' element={<ComingSoon />} />
 
-      </Routes>
+          </Routes>
+      </main>
+      
       {location.pathname !== '/login' && location.pathname !== '/register' && (
         <Footer />
       )}
+
+
     </>
 
   );

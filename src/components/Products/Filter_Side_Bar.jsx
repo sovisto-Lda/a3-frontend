@@ -2,7 +2,7 @@ import React from 'react';
 
 export default function Filter_Side_Bar({ allCategories, stockOptions, priceOptions, handleCheckboxChange, onClose, filters=undefined }) {
   return (
-    <div className="px-3" style={{ width: "245px", minHeight: "100vh" }}>
+    <div className="pe-3" style={{ width: "245px", minHeight: "100vh" }}>
 
       {/* Categoria */}
       <div className="mt-2 mb-4 w-100">

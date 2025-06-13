@@ -92,7 +92,7 @@ const ProductsPage = () => {
           console.log(filters)
           fetchProducts(filters);
         }
-    }, [filters, page, searchTerm]);
+    }, [filters, page, searchTerm, defaultCategory]);
 
     const handleCheckboxChange = (e) => {
         const { id, checked, value } = e.target;
@@ -163,7 +163,7 @@ const ProductsPage = () => {
         .catch(err => {
           console.error("Failed to get categories: ", err);
         });
-  }, []);
+  }, [defaultCategory]);
 
 
   let categories = ["Aves", "Domésticos", "Mamíferos Selvagens", "Insetos e Aracnídeos", "Répteis"];
@@ -171,14 +171,9 @@ const ProductsPage = () => {
   return (
     <main>
       {/* Botão de produto personalizado */}
-      <div className = "d-flex" style={{
-          backgroundColor: "#ECECEC",
-          padding: "16px",
-          width: "calc(100% + 64px)",
-          transform: "translateX(-32px)"
-        }}>
-        <Custom_order_CTA noMargin />
-      </div>
+
+      <Custom_order_CTA noMargin={true} bg={true}/>
+
       <h1 className = "mt-4 mb-3">Categorias</h1>
       <div className="container-fluid px-0" style = {{marginBottom: "80px"}}>
         <div className="row justify-content-between gap-3">
@@ -244,8 +239,7 @@ const ProductsPage = () => {
         )}
 
         {/* Conteúdo principal */}
-        <div className="flex-grow-1">
-          <div className="container-fluid px-0">
+        <div className="d-flex flex-column w-100">
             <div className="row">
               {loading ? (
                 <div className="spinner-border text-primary" role="status" />
@@ -275,7 +269,6 @@ const ProductsPage = () => {
             </div>
             
           </div>
-        </div>
       </div>
     </main>
   );

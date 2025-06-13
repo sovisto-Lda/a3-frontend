@@ -172,11 +172,6 @@ export default function ProductMain({productCode}) {
 
 
                 <div className='d-flex gap-3'>
-                    {/* <img 
-                        src={isFavorite ? remove_favourite : add_favourite} 
-                        alt=""
-                        onClick={isFavorite ? removeFromFavorites : addToFavorites}
-                    /> */}
                     <Favorite_Button productId= {product._id} />
                     <div className={`primary-button ${styles.buy_button}`}
                     onClick={addToCart}

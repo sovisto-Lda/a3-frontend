@@ -6,7 +6,6 @@ import Custom_order_CTA from '../components/misc/Custom_Order_CTA/Custom_Order_C
 import Filter_Side_Bar from "../components/Products/Filter_Side_Bar.jsx";  
 import PageNavigation from "../components/Products/PageNavigation.jsx";
 
-
 const ProductsPage = () => {
     const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(1);
@@ -255,6 +254,8 @@ const ProductsPage = () => {
                   products.map((product) => (
                     <div key={product._id} className="col-12 col-md-6 col-lg-4 mb-4">
                       <Product_Card
+                        code={product.code}
+                        id={product._id}
                         name={product.name}
                         image={product.images[0]}
                         price={product.price}

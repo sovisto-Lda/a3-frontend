@@ -22,6 +22,7 @@ export default function FeaturedCard({ fullProduct, product_id, y_offset }) {
                 backgroundPosition: 'center',
                 backgroundRepeat: 'no-repeat'
             }}
+            onClick={() => {console.log(`/product/${fullProduct.code}`); navigate(`/product/${fullProduct.code}`)}}
         >
             <div className="row d-flex align-items-start">
                 <h2 className={styles.h2}>{product.name ?? ""}</h2>
@@ -29,9 +30,7 @@ export default function FeaturedCard({ fullProduct, product_id, y_offset }) {
 
             <div className={`d-flex justify-content-end`}>
                 <div 
-                className={`primary-button ${styles.primary_button}`}
-                onClick={() => {console.log(`/product/${fullProduct.code}`); navigate(`/product/${fullProduct.code}`)}}
-                
+                className={`primary-button ${styles.primary_button}`}               
                 >
                     Comprar Agora!
                 </div>

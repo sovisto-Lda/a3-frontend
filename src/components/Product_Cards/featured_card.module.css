@@ -5,6 +5,12 @@
     /* max-width: 300px; */
     border-radius: 4px;
     padding: 12px 16px 12px 16px;
+    cursor: pointer;
+    transition: all 0.25s ease-out;
+}
+
+.featured_card_wrapper:hover {
+    transform: translateY(-10px);
 }
 
 .h2{

@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import styles from './Order_Card.module.css';
 
 function getStatusClass(status) {
@@ -17,7 +18,9 @@ function getStatusClass(status) {
   return "";
 }
 
-export default function OrderCard({ number, status, price, date, onInfo }) {
+export default function OrderCard({ id, number, status, price, date, onInfo }) {
+  const navigate = useNavigate();
+
   return (
     <div className={`card mb-3 ${styles.cardContainer}`}>
       <div className="card-body d-flex justify-content-between align-items-center p-3">
@@ -27,7 +30,7 @@ export default function OrderCard({ number, status, price, date, onInfo }) {
           <div className={styles.price}>{price}€</div>
           <div className={styles.date}>{date}</div>
         </div>
-        <button className="btn btn-dark" onClick={onInfo}>
+        <button className="btn btn-dark" onClick={() => navigate(`/orders/${id}`)}>
           Ver Informações
         </button>
       </div>

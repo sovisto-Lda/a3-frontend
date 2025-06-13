@@ -44,6 +44,8 @@ export default function Bestsellers() {
                     <div className={`col-12 col-sm-${12 / bestsellerProducts.length * 2} col-md-6 col-lg-${12 / bestsellerProducts.length} mb-4`} key={index}>
                             <Product_Card
                             key={index}
+                            code={product.code}
+                            id={product._id}
                             name={product.name}
                             image={product.images[0]}
                             price={product.price}

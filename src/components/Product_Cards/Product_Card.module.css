@@ -1,0 +1,10 @@
+.wrapper {
+    border-radius: 4px;
+    transition: all 0.2s ease;
+    cursor: pointer
+}
+
+.wrapper:hover {
+    /* background-color: var(--cinzento-muito-claro); */
+    transform: scale(1.035);
+}

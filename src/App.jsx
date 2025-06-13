@@ -20,6 +20,8 @@ import Checkout from './pages/Checkout.jsx';
 import Order from './pages/Order.jsx';
 import ComingSoon from './pages/ComingSoon.jsx';
 import AllOrders from './pages/AllOrders.jsx';
+import Orders from './pages/Orders.jsx';
+
 
 export default function App() {
   return (
@@ -70,8 +72,8 @@ function AppContent() {
 
         <Route path='/cart' element={<ProtectedRoute> <ShoppingCart /> </ProtectedRoute>} />
         <Route path='/checkout/:stage/:orderId' element={<ProtectedRoute> <Checkout /> </ProtectedRoute>} />
-
-            <Route path='/orders/:id' element={<ProtectedRoute> <Order /> </ProtectedRoute>} />
+        <Route path='/orders' element = {<ProtectedRoute> <Orders /> </ProtectedRoute>} />
+            <Route path='/orders/:orderId' element={<ProtectedRoute> <Order /> </ProtectedRoute>} />
             
             
             <Route path='/comingsoon' element={<ComingSoon />} />

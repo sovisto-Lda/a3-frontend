@@ -4,10 +4,10 @@ import logo from '../../assets/images/A3Projects_logo_new_vertical.svg';
 import search_icon from '../../assets/images/search_icon.svg';
 import shopping_cart_icon from '../../assets/images/shopping_cart_icon.svg';
 import favourites from '../../assets/images/favourites_icon.svg';
-import account_icon from '../../assets/images/account_circle_icon.svg';
 import NavBarGroup from './NavBarGroup.jsx'
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useRef, useEffect } from 'react';
+import Dropdown from './Dropdown.jsx';
 
 
 
@@ -31,10 +31,7 @@ export default function Header(userState) {
     popupRef.current.style.opacity = '0';
 
   }
-  const handleLogout = () => {
-        localStorage.removeItem('token');
-        navigate('/login');
-    };
+  
 
 
   return (
@@ -95,20 +92,8 @@ export default function Header(userState) {
             <button className={`col-auto icon-button`} onClick={()=> navigate('/account/favorites')}>
               <img src={favourites} alt="Ícone de favoritos" />
             </button>
-            <div className='dropdown'>
-              <button className={`col-auto icon-button dropdown-toggle hidden-arrow`} 
-                type='button'
-                id='dropdownProfileIcon'
-                data-bs-toggle='dropdown'
-                aria-expanded='false'>
-                <img src={account_icon} alt="Ícone de conta" />
-              </button>
-              <ul className='dropdown-menu' aria-labelledby='dropdownProfileIcon'>
-                <li><a className={`dropdown-item ${header_styles.profile_dropdown}`} href="" onClick={()=> navigate('/account')}>O meu Perfil</a></li>
-                <li><a className={`dropdown-item ${header_styles.profile_dropdown}`} href="" onClick={()=> navigate('/account/settings')}>Definições da Conta</a></li>
-                <li><a className={`dropdown-item ${header_styles.profile_dropdown}`} href="" onClick={handleLogout}>Terminar Sessão</a></li>
-              </ul>
-            </div>
+            <Dropdown/>
+           
           </div>
         )
         : (

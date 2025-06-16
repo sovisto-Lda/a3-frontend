@@ -220,9 +220,9 @@ const ProductsPage = () => {
         {/* Sidebar mobile */}
         {showMobileFilters && (
           <div
-            className="position-fixed top-0 start-0 bg-white shadow d-flex flex-column"
+            className="position-fixed p-3 top-0 start-0 bg-white shadow d-flex flex-column"
             style={{
-              width: "245px",
+              width: "100vw",
               height: "100vh",
               zIndex: 2000, // garantir que está sobre o resto
             }}

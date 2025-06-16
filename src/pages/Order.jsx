@@ -25,8 +25,6 @@ function getStateInfo(state) {
 }
 
 export default function Order() {
-    const navigate = useNavigate();
-
     const [orderData, setOrderData] = useState(null);
     const { orderId } = useParams();
     const { token } = useAuth();

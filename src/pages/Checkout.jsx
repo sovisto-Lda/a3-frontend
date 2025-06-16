@@ -118,7 +118,7 @@ export default function Checkout() {
 
             <h1 className="my-3 my-sm-4">Checkout</h1>
 
-            <ProgressBar stage={stage} />
+            <ProgressBar stage={stage} setStage={setStage} />
 
             <div className="w-100 d-flex justify-content-center mt-5">
                 {stage === 1 && (

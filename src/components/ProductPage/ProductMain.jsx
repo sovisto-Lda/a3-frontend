@@ -7,7 +7,10 @@ import ColorsSelector from './ColorsSelector'
 import React, { useEffect, useState, useRef } from "react";
 import stars from '../../assets/images/stars.svg';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
-import add_favourite from '../../assets/images/add_favourites_icon.svg'
+import Favorite_Button from '../misc/Favourite_Button';
+import { useAuth } from '../../hooks/useAuth';
+import { useNavigate } from 'react-router-dom';
+
 
 export default function ProductMain({productCode}) {
     const [loading, setLoading] = useState(false)
@@ -17,6 +20,10 @@ export default function ProductMain({productCode}) {
     const [selectedColor, setSelectedColor] = useState(null)
 
     const [product, setProduct] = useState(null)
+
+    const { token } = useAuth()
+
+    const navigate = useNavigate();
 
 
     const fetchProduct = async () => {
@@ -40,10 +47,9 @@ export default function ProductMain({productCode}) {
             setLoading(false)
         })
         .catch(error => {
-            console.error('Ocorreu um erro:', error);
+            console.error('An error occurred:', error);
         });
     };
-
 
     useEffect(() => {
         fetchProduct()
@@ -53,6 +59,57 @@ export default function ProductMain({productCode}) {
     useEffect(() => {
         console.log(selectedColor)
     }, [selectedColor])
+
+    useEffect(() => {
+        if (token && product?._id) {
+            fetch(`http://localhost:5000/account/info`, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                }
+            })
+            .then(res => res.json())
+            .then(data => {
+                const favIds = data?.favorites?.map(f => f.toString());
+                setIsFavorite(favIds?.includes(product._id));
+            });
+        }
+    }, [product, token])
+
+    const addToCart = async () => {
+        try {
+            const endpoint = "http://localhost:5000/shopping-cart";
+
+            if (!token) {
+                alert("No session. Log in again");
+                navigate('/login')
+                return;
+            }
+
+            const response = await fetch(endpoint, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${token}`,
+                },
+                body: JSON.stringify({
+                    product: product._id,
+                    quantity: quantity,
+                }),
+            });
+
+            const result = await response.json();
+
+            if (!response.ok) {
+                throw new Error(result.message || "Error adding product to the cart.");
+            }
+
+            console.log("Product added to the cart successfully!");
+        } catch (error) {
+            console.error("Error adding to the shopping cart:", error);
+        }
+    };
+
+    
 
     return (
         product !== null && (
@@ -115,8 +172,10 @@ export default function ProductMain({productCode}) {
 
 
                 <div className='d-flex gap-3'>
-                    <img src={add_favourite} alt="" />
-                    <div className={`primary-button ${styles.buy_button}`}><p className={`${styles.buy_button_text}`}>Adicionar ao Carrinho</p></div>
+                    <Favorite_Button productId= {product._id} />
+                    <div className={`primary-button ${styles.buy_button}`}
+                    onClick={addToCart}
+                    ><p className={`${styles.buy_button_text}`}>Adicionar ao Carrinho</p></div>
                 </div>
                 
             </div>

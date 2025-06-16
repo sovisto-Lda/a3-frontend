@@ -20,6 +20,8 @@ import Checkout from './pages/Checkout.jsx';
 import Order from './pages/Order.jsx';
 import ComingSoon from './pages/ComingSoon.jsx';
 import Orders from './pages/Orders.jsx';
+import Submit from './pages/Submit.jsx';
+
 
 export default function App() {
   return (
@@ -67,13 +69,14 @@ function AppContent() {
             <Route path="/account/settings" element={<Settings />} />
             <Route path="/partnerdashboard" element={<PDHome />} />
 
-        <Route path='/cart' element={<ProtectedRoute> <ShoppingCart /> </ProtectedRoute>} />
-        <Route path='/checkout/:stage/:orderId' element={<ProtectedRoute> <Checkout /> </ProtectedRoute>} />
-        <Route path='/orders' element = {<ProtectedRoute> <Orders /> </ProtectedRoute>} />
+            <Route path='/cart' element={<ProtectedRoute> <ShoppingCart /> </ProtectedRoute>} />
+            <Route path='/checkout/:stage/:orderId' element={<ProtectedRoute> <Checkout /> </ProtectedRoute>} />
+            <Route path='/orders' element = {<ProtectedRoute> <Orders /> </ProtectedRoute>} />
             <Route path='/orders/:orderId' element={<ProtectedRoute> <Order /> </ProtectedRoute>} />
             
             
             <Route path='/comingsoon' element={<ComingSoon />} />
+            <Route path='/submit' element={<Submit />} />
 
           </Routes>
       </main>

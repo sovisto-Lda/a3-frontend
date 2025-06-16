@@ -6,7 +6,6 @@ import Custom_order_CTA from '../components/misc/Custom_Order_CTA/Custom_Order_C
 import Filter_Side_Bar from "../components/Products/Filter_Side_Bar.jsx";  
 import PageNavigation from "../components/Products/PageNavigation.jsx";
 
-
 const ProductsPage = () => {
     const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(1);
@@ -93,7 +92,7 @@ const ProductsPage = () => {
           console.log(filters)
           fetchProducts(filters);
         }
-    }, [filters, page, searchTerm]);
+    }, [filters, page, searchTerm, defaultCategory]);
 
     const handleCheckboxChange = (e) => {
         const { id, checked, value } = e.target;
@@ -164,7 +163,7 @@ const ProductsPage = () => {
         .catch(err => {
           console.error("Failed to get categories: ", err);
         });
-  }, []);
+  }, [defaultCategory]);
 
 
   let categories = ["Aves", "Domésticos", "Mamíferos Selvagens", "Insetos e Aracnídeos", "Répteis"];
@@ -172,14 +171,9 @@ const ProductsPage = () => {
   return (
     <main>
       {/* Botão de produto personalizado */}
-      <div className = "d-flex" style={{
-          backgroundColor: "#ECECEC",
-          padding: "16px",
-          width: "calc(100% + 64px)",
-          transform: "translateX(-32px)"
-        }}>
-        <Custom_order_CTA noMargin />
-      </div>
+
+      <Custom_order_CTA noMargin={true} bg={true}/>
+
       <h1 className = "mt-4 mb-3">Categorias</h1>
       <div className="container-fluid px-0" style = {{marginBottom: "80px"}}>
         <div className="row justify-content-between gap-3">
@@ -201,7 +195,7 @@ const ProductsPage = () => {
         </h1>
       </div>
       {/* Botão mobile fixo acima dos produtos */}
-      <div className="d-md-none text-end mb-2">
+      <div className="d-md-none text-end mb-4">
         <button
           className="primary-button w-100"
           onClick={() => setShowMobileFilters(true)}
@@ -213,7 +207,7 @@ const ProductsPage = () => {
       {/* Layout principal */}
       <div className="d-flex" style={{ minWidth: 0 }}>
         {/* Sidebar desktop */}
-        <div className="d-none d-md-flex flex-shrink-0">
+        <div className="d-none d-md-flex flex-shrink-0 me-5">
           <Filter_Side_Bar
             allCategories={allCategories}
             stockOptions={stockOptions}
@@ -226,8 +220,12 @@ const ProductsPage = () => {
         {/* Sidebar mobile */}
         {showMobileFilters && (
           <div
-            className="position-fixed top-0 start-0 bg-white shadow"
-            style={{ width: "245px", zIndex: 1050, height: "100vh" }}
+            className="position-fixed top-0 start-0 bg-white shadow d-flex flex-column"
+            style={{
+              width: "245px",
+              height: "100vh",
+              zIndex: 2000, // garantir que está sobre o resto
+            }}
           >
             <Filter_Side_Bar
               allCategories={allCategories}
@@ -235,21 +233,23 @@ const ProductsPage = () => {
               priceOptions={priceOptions}
               handleCheckboxChange={handleCheckboxChange}
               onClose={() => setShowMobileFilters(false)}
+              filters={filters}
             />
           </div>
         )}
 
         {/* Conteúdo principal */}
-        <div className="flex-grow-1 ms-3">
-          <div className="container-fluid px-0">
+        <div className="d-flex flex-column w-100">
             <div className="row">
               {loading ? (
                 <div className="spinner-border text-primary" role="status" />
               ) : (
                 Array.isArray(products) && products.length > 0 ? (
                   products.map((product) => (
-                    <div key={product._id} className="col-12 col-sm-12 col-md-6 col-lg-4 mb-4">
+                    <div key={product._id} className="col-12 col-md-6 col-lg-4 mb-4">
                       <Product_Card
+                        code={product.code}
+                        id={product._id}
                         name={product.name}
                         image={product.images[0]}
                         price={product.price}
@@ -269,7 +269,6 @@ const ProductsPage = () => {
             </div>
             
           </div>
-        </div>
       </div>
     </main>
   );

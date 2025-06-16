@@ -1,0 +1,35 @@
+.cardContainer {
+  background: #ECECEC !important;
+  border: none !important;
+  border-radius: 4px;
+  padding: 0;
+}
+
+.orderNumber {
+  color: #B2B2B2 !important;
+  font-weight: 600;
+  font-size: 18px;
+}
+
+.status {
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.statusProcessamento{
+    color: #FFCC01;
+}
+
+.statusPendente{
+    color: #06B300;
+}
+
+.statusCancelada{
+    color: #CC1501;
+}
+
+.price {
+  font-weight: 500;
+  font-size: 15px;
+}
+

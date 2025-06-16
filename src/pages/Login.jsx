@@ -46,7 +46,7 @@ export default function Login() {
             if (response.ok) {
                 localStorage.setItem('token', data.token);
 
-                navigate('/account'); // Redirect to homepage
+                navigate('/'); // Redirect to homepage
             } else {
                 // Lógica para erro de login
                 console.error('Erro ao fazer login:', data);

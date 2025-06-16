@@ -14,7 +14,7 @@ import { useAuth } from "../../../hooks/useAuth"
 export default function Shipping({ onNext, setShippingInfo, orderId, token, clientInfo, setClientInfo }) {
     const [selected, setSelected] = useState(null);
     const [selectedAddress, setSelectedAddress] = useState(null);
-    console.log("Selected Address:", selectedAddress);
+    // console.log("Selected Address:", selectedAddress);
 
     const shippingMethodMap = {
         1: "Home Delivery",

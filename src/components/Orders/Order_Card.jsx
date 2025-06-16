@@ -3,16 +3,17 @@ import styles from './Order_Card.module.css';
 
 function getStatusClass(status) {
   if (
-    status === "Pagamento Confirmado" ||
-    status === "Em Processamento" ||
-    status === "Enviado"
+    status === "Payment Confirmed" ||
+    status === "Processing" ||
+    status === "Shipped" ||
+    status === "Pending Payment"
   ) {
     return styles.statusProcessamento;
   }
-  if (status === "Entregue") {
+  if (status === "Completed") {
     return styles.statusPendente;
   }
-  if (status === "Cancelado") {
+  if (status === "Cancelled") {
     return styles.statusCancelada;
   }
   return "";

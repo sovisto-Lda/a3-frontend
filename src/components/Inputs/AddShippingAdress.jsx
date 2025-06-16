@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import InputGroup from './InputGroup';
 import { useAuth } from '../../hooks/useAuth';
 import { useState } from 'react';
 
-const AddShippingAddress = ({onClose}) => {
+const AddShippingAddress = ({onClose, reload=false}) => {
     const { token } = useAuth();
     
     const [formData, setFormData] = useState({
@@ -35,6 +35,7 @@ const AddShippingAddress = ({onClose}) => {
             const data = await res.json();
             if (res.ok) {
                 if (typeof onClose === 'function') onClose();
+                if (reload) window.location.reload();
             } else {
                 alert(data.error || 'Error adding shipping address.');
             }
@@ -43,7 +44,6 @@ const AddShippingAddress = ({onClose}) => {
             alert('Error connecting to the server.');
         }
     };
-    
 
     return (
         <div>

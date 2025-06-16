@@ -3,7 +3,7 @@ import InputGroup from './InputGroup';
 import { useAuth } from '../../hooks/useAuth';
 import { useState } from 'react';
 
-const AddBillingAddress = ({ onClose }) => {
+const AddBillingAddress = ({ onClose, reload=false }) => {
     const { token } = useAuth();
 
     const [formData, setFormData] = useState({
@@ -70,6 +70,8 @@ const AddBillingAddress = ({ onClose }) => {
                     country: '',
                     name: ''
                 });
+                if (reload) window.location.reload();
+
             } else {
                 alert(data.error || 'Error adding address.');
             }

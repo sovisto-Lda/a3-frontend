@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Review from "../components/Checkout/Review/Review";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
 import Return_Button from "../components/misc/Return_Button";
 
@@ -29,6 +29,7 @@ export default function Order() {
     const [orderData, setOrderData] = useState(null);
     const { orderId } = useParams();
     const { token } = useAuth();
+    const navigate = useNavigate();
 
 
     const fetchOrderInfo = async () => {
@@ -65,7 +66,7 @@ export default function Order() {
                             </span>
                           </>
                         }
-                        returnAction={() => window.history.back()}
+                        returnAction={() => navigate('/')}
                     />
                 </div>
 

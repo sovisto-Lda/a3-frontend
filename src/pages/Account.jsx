@@ -146,7 +146,7 @@ export default function Account() {
                         <p>Ainda não tem nenhum endereço de faturação.</p>
                     )}
                 </div>
-                {showBillingForm && <AddBillingAddress />}
+                {showBillingForm && <AddBillingAddress onClose={() => setShowBillingForm(false)} />}
                 <div className="row mb-3">
                     <div className="col d-flex justify-content-end">
                         <button className="primary-button" onClick={() => setShowBillingForm(!showBillingForm)}>

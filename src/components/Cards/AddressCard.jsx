@@ -3,7 +3,7 @@ import editIcon from '../../assets/images/edit_icon.svg';
 import deleteIcon from '../../assets/images/delete_icon.svg';
 
 const AddressCard = ({
-    type, street_line, nome, floor, city, postal_code, country, phone_number, NIF,
+    type, street_line, name, floor, city, postal_code, country, phone_number, NIF,
     onDelete, allowEdit = true, allowSelect = false, checked = false, onChange
 }) => (
     <div className="address-card mb-5 p-4 shadow-sm d-flex align-items-center gap-4 w-100">
@@ -26,7 +26,7 @@ const AddressCard = ({
             <div className="">
 
                 <h2>
-                    {nome}
+                    {name}
                 </h2>
 
                 {type === 'billing' && NIF && (

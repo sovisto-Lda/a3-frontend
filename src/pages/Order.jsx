@@ -65,7 +65,7 @@ export default function Order() {
                             </span>
                           </>
                         }
-                        returnAction={() => navigate('/')}
+                        returnAction={() => navigate('/orders')}
                     />
                 </div>
 

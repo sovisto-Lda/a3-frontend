@@ -6,7 +6,7 @@ export default function Footer() {
     <footer className={`d-flex flex-column flex-sm-row align-items-start align-items-sm-center ${styles.footer}`}>
       <p>
         © 2025 Todos os direitos reservados a
-        <a href='https://aalda.com'>
+        <a target='_blank' href='https://aaalda.com'>
           <img src={aaalda} alt="" style={{width: '35px'}}/>
         </a>
       </p>

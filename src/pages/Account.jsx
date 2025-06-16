@@ -137,14 +137,7 @@ export default function Account() {
                             <div className="col-md-12" key={index}>
                                 <AddressCard
                                     type="billing"
-                                    street_line={address.street_line}
-                                    nome={address.name}
-                                    floor={address.floor}
-                                    city={address.city}
-                                    postal_code={address.postal_code}
-                                    country={address.country}
-                                    phone_number={address.phone_number}
-                                    NIF={address.NIF}
+                                    {...address}
                                     onDelete={() => handleDeleteBillingAddress(index)}
                                 />
                             </div>
@@ -177,13 +170,7 @@ export default function Account() {
                                 <AddressCard
                                     key={index}
                                     type="shipping"
-                                    street_line={address.street_line}
-                                    nome={address.name}
-                                    floor={address.floor}
-                                    city={address.city}
-                                    postal_code={address.postal_code}
-                                    country={address.country}
-                                    phone_number={address.phone_number}
+                                    {...address}
                                     onDelete={() => handleDeleteShippingAddress(index)}
                                 />
                             ))

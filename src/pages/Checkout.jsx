@@ -86,14 +86,12 @@ export default function Checkout() {
         if (Number(stageParam) !== stage) {
             setStage(Number(stageParam) || 1);
         }
-        // eslint-disable-next-line
     }, [stageParam]);
 
     useEffect(() => {
         if (Number(stageParam) !== stage) {
             navigate(`/checkout/${stage}/${orderId}`, { replace: true });
         }
-        // eslint-disable-next-line
     }, [stage]);
 
     useEffect(() => {
@@ -107,6 +105,9 @@ export default function Checkout() {
         }
     }, [stage, orderId, token]);
 
+    useEffect(()=> {
+        fetchOrderInfo()
+    })
     return (
         <div>
             <Return_Button
@@ -118,7 +119,7 @@ export default function Checkout() {
 
             <h1 className="my-3 my-sm-4">Checkout</h1>
 
-            <ProgressBar stage={stage} />
+            <ProgressBar stage={stage} setStage={setStage} />
 
             <div className="w-100 d-flex justify-content-center mt-5">
                 {stage === 1 && (

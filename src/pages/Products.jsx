@@ -53,7 +53,7 @@ const ProductsPage = () => {
 
         const params = new URLSearchParams(window.location.search);
         const search = params.get("search");
-        const endpoint = `http://localhost:5000/products/${page}${search ? `?search=${encodeURIComponent(search)}` : ''}`;
+        const endpoint = `http://localhost:5000/products/${page}/${9}${search ? `?search=${encodeURIComponent(search)}` : ''}`;
         const options = filtersToUse
             ? {
                 method: "POST",

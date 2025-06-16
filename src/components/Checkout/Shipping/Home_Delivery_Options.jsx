@@ -72,14 +72,7 @@ export default function HomeDeliveryOptions({ selectedAddress, setSelectedAddres
                         <AddressCard
                             key={address._id || index}
                             type="shipping"
-                            street_line={address.street_line}
-                            nome={address.name}
-                            floor={address.floor}
-                            city={address.city}
-                            postal_code={address.postal_code}
-                            country={address.country}
-                            phone_number={address.phone_number}
-                            NIF={address.NIF}
+                            {...address}
                             onDelete={() => {}}
                             allowEdit={false}
                             allowSelect={true}

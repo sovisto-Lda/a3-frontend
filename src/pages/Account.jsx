@@ -23,9 +23,10 @@ export default function Account() {
             .then(data => setUserData(data))
             .catch(err => console.error("Fetch error", err));
     }, [token]);
+    
     console.log(token)
     if (!userData) return <p>Loading...</p>;
-
+    
     // Função para remover endereço de faturação pelo índice, enviando um DELETE ao backend com o _id
     const handleDeleteBillingAddress = async (indexToDelete) => {
         const addressToDelete = userData.billing_address[indexToDelete];
@@ -146,7 +147,7 @@ export default function Account() {
                         <p>Ainda não tem nenhum endereço de faturação.</p>
                     )}
                 </div>
-                {showBillingForm && <AddBillingAddress onClose={() => setShowBillingForm(false)} />}
+                {showBillingForm && <AddBillingAddress reload={true} onClose={() => setShowBillingForm(false)} />}
                 <div className="row mb-3">
                     <div className="col d-flex justify-content-end">
                         <button className="primary-button" onClick={() => setShowBillingForm(!showBillingForm)}>
@@ -179,7 +180,7 @@ export default function Account() {
                         )}                       
                     </div>
                 </div>
-                {showAddressForm && <AddShippingAddress/>}
+                {showAddressForm && <AddShippingAddress reload={true} />}
                 <div className="row">
                     <div className="col d-flex justify-content-end">
                         <button className="primary-button" onClick={() => setShowAddressForm(!showAddressForm)}>

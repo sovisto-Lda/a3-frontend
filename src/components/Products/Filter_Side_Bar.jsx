@@ -2,10 +2,10 @@ import React from 'react';
 
 export default function Filter_Side_Bar({ allCategories, stockOptions, priceOptions, handleCheckboxChange, onClose, filters=undefined }) {
   return (
-    <div className="pe-3" style={{ width: "245px", minHeight: "100vh" }}>
+    <div className="p-3" style={{ width: "245px", minHeight: "100vh" }}>
 
       {/* Categoria */}
-      <div className="mt-2 mb-4 w-100">
+      <div className="mb-4 w-100">
         <h6 className>Categoria</h6>
         <hr style={{ backgroundColor: "black", height: "1.5px", border: "none", opacity: "1" }} />
         {allCategories.map((cat) => (

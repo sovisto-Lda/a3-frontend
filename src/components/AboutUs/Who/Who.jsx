@@ -12,7 +12,7 @@ export default function Who() {
             </div>
 
             <div className='w-100'>
-                <img src="http://localhost:5000/images/theMan.png" alt="" style={{width: "100%"}} />
+                <img src={`${import.meta.env.VITE_API_URL}/images/theMan.png`} alt="" style={{width: "100%"}} />
             </div>
 
         </div>

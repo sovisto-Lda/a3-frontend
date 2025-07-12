@@ -9,7 +9,7 @@ const UsersPage = () => {
     const fetchUsers = async () => {
         setLoading(true)
 
-        await fetch('http://localhost:5000/users')
+        await fetch(`${import.meta.env.VITE_API_URL}/users`)
         .then(response => {
             if (!response.ok){
                 throw new Error("Error fetching users");

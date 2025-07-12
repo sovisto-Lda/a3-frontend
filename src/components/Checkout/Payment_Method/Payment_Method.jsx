@@ -21,7 +21,7 @@ export default function PaymentMethod({ onNext, orderId, token }) {
             return;
         }
         try {
-            const res = await fetch(`http://localhost:5000/orders/${orderId}/payment-method`, {
+            const res = await fetch(`${import.meta.env.VITE_API_URL}/orders/${orderId}/payment-method`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',

@@ -13,7 +13,7 @@ export default function ProductsList() {
     const { token, decodedUser } = useAuth();
 
     const fetchShoppingCart = async () => {
-        const endpoint = `http://localhost:5000/shopping-cart`;
+        const endpoint = `${import.meta.env.VITE_API_URL}/shopping-cart`;
         
         await fetch(endpoint, {
             method: 'GET',

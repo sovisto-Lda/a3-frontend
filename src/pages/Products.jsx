@@ -53,7 +53,7 @@ const ProductsPage = () => {
 
         const params = new URLSearchParams(window.location.search);
         const search = params.get("search");
-        const endpoint = `http://localhost:5000/products/${page}${search ? `?search=${encodeURIComponent(search)}` : ''}`;
+        const endpoint = `${import.meta.env.VITE_API_URL}/products/${page}${search ? `?search=${encodeURIComponent(search)}` : ''}`;
         const options = filtersToUse
             ? {
                 method: "POST",
@@ -143,7 +143,7 @@ const ProductsPage = () => {
 
     // useEffect para ir buscar as categorias à db
     useEffect(() => {
-      fetch("http://localhost:5000/categories")
+      fetch(`${import.meta.env.VITE_API_URL}/categories`)
         .then(res => res.json())
         .then(data => {
           const firstFive = data.slice(0, 5);

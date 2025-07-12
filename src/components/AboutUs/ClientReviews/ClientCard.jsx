@@ -12,7 +12,7 @@ export default function ClientReviewCard() {
 
                 <div>
                     <div className='d-flex align-items-center gap-3'>
-                        <img src="http://localhost:5000/images/cursedMomo.jpg" alt="" 
+                        <img src="${import.meta.env.VITE_API_URL}/images/cursedMomo.jpg" alt="" 
                             style={{
                                 width: "48px",
                                 borderRadius: "50%"

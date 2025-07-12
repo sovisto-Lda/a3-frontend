@@ -10,7 +10,7 @@ export default function Favorite_Button({productId, height=undefined}) {
 
     const fetchFavourites = async () => {
         try {
-            const response = await fetch("http://localhost:5000/account/favorites", {
+            const response = await fetch(`${import.meta.env.VITE_API_URL}/account/favorites`, {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",
@@ -50,7 +50,7 @@ export default function Favorite_Button({productId, height=undefined}) {
         }
 
         try {
-            const response = await fetch("http://localhost:5000/account/favorites", {
+            const response = await fetch(`${import.meta.env.VITE_API_URL}/account/favorites`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -77,7 +77,7 @@ export default function Favorite_Button({productId, height=undefined}) {
         }
 
         try {
-            const response = await fetch(`http://localhost:5000/account/favorites`, {
+            const response = await fetch(`${import.meta.env.VITE_API_URL}/account/favorites`, {
                 method: "DELETE",
                 headers: {
                     "Content-Type": "application/json",

@@ -88,7 +88,7 @@ export default function Hero() {
     // fetch featured products
     const fetchFeaturedProducts = async () => {
         //setLoading(true);
-        const endpoint = `http://localhost:5000/products/featured`;
+        const endpoint = `${import.meta.env.VITE_API_URL}/products/featured`;
 
         await fetch(endpoint)
         .then(response => {
@@ -120,7 +120,7 @@ export default function Hero() {
         <div> 
           <div className={styles.imgDiv}>
             <img ref={imgRef}
-                src="http://localhost:5000/images/squirrel_bg.png" 
+                src={`${import.meta.env.VITE_API_URL}/images/squirrel_bg.png`} 
                 alt="" 
                 className={`${styles.img}`}
             />

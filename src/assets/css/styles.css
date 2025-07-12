@@ -289,7 +289,7 @@ p {
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-image: url('http://localhost:5000/images/squirrel_bg.png');
+  background-image: url('http://srv905605.hstgr.cloud:5000/images/squirrel_bg.png');
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;

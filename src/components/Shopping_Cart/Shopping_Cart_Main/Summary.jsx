@@ -13,7 +13,7 @@ export default function Summary() {
     const { token, decodedUser } = useAuth();
 
     const fetchShoppingCart = async () => {
-        const endpoint = `http://localhost:5000/shopping-cart`;
+        const endpoint = `${import.meta.env.VITE_API_URL}/shopping-cart`;
 
         await fetch(endpoint, {
             method: 'GET',
@@ -62,7 +62,7 @@ export default function Summary() {
         }
 
         try {
-            const res = await fetch('http://localhost:5000/orders', {
+            const res = await fetch(`${import.meta.env.VITE_API_URL}/orders`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

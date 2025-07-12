@@ -28,7 +28,7 @@ export default function ProductMain({productCode}) {
 
     const fetchProduct = async () => {
         setLoading(true);
-        const endpoint = `http://localhost:5000/products/one/${productCode}`;
+        const endpoint = `${import.meta.env.VITE_API_URL}/products/one/${productCode}`;
 
         await fetch(endpoint)
         .then(response => {
@@ -62,7 +62,7 @@ export default function ProductMain({productCode}) {
 
     useEffect(() => {
         if (token && product?._id) {
-            fetch(`http://localhost:5000/account/info`, {
+            fetch(`${import.meta.env.VITE_API_URL}/account/info`, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 }
@@ -77,7 +77,7 @@ export default function ProductMain({productCode}) {
 
     const addToCart = async () => {
         try {
-            const endpoint = "http://localhost:5000/shopping-cart";
+            const endpoint = `${import.meta.env.VITE_API_URL}/shopping-cart`;
 
             if (!token) {
                 alert("No session. Log in again");

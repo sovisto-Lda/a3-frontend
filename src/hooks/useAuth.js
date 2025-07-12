@@ -21,7 +21,7 @@ export function useAuth() {
             setToken(storedToken);
             setDecodedUser(decoded);
 
-            fetch('http://localhost:5000/account', {
+            fetch(`${import.meta.env.VITE_API_URL}/account`, {
                 headers: { Authorization: `Bearer ${storedToken}` }
             })
                 .then(res => {

@@ -10,7 +10,7 @@ export default function AboutUsHero() {
         <div 
           className={general.fullWidthImage} 
           style={{
-            backgroundImage: 'url("http://localhost:5000/images/racoon_bg.jpg")',
+            backgroundImage: `url("${import.meta.env.VITE_API_URL}/images/racoon_bg.jpg")`,
             backgroundPosition: "center 70%",
             height: "30vw"
           

@@ -44,7 +44,7 @@ export default function Checkout() {
     const confirmPayment = async () => {
         if (!orderId || !token) return;
         try {
-            const response = await fetch(`http://localhost:5000/orders/${orderId}/payment-confirmed`, {
+            const response = await fetch(`${import.meta.env.VITE_API_URL}/orders/${orderId}/payment-confirmed`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
@@ -64,7 +64,7 @@ export default function Checkout() {
     const fetchOrderInfo = async () => {
         if (!orderId || !token) return;
         try {
-            const response = await fetch(`http://localhost:5000/orders/${orderId}`, {
+            const response = await fetch(`${import.meta.env.VITE_API_URL}/orders/${orderId}`, {
                 headers: {
                     'Authorization': `Bearer ${token}`
                 }

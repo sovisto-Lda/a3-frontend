@@ -28,7 +28,7 @@ export default function Shipping({ onNext, setShippingInfo, orderId, token, clie
         const methodString = shippingMethodMap[selected];
         
         try {
-            const res = await fetch(`http://localhost:5000/orders/${orderId}/shipping-address-method`, {
+            const res = await fetch(`${import.meta.env.VITE_API_URL}/orders/${orderId}/shipping-address-method`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',

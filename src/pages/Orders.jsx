@@ -11,7 +11,7 @@ export default function Orders() {
 
     const fetchOrders = async () => {
             try {
-                const res = await fetch("http://localhost:5000/orders", {
+                const res = await fetch(`${import.meta.env.VITE_API_URL}/orders`, {
                     headers: {
                         'Content-Type': 'application/json',
                         Authorization: `Bearer ${token}`,

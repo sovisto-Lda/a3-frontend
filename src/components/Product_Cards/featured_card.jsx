@@ -17,7 +17,7 @@ export default function FeaturedCard({ fullProduct, product_id, y_offset }) {
             style={{
                 //marginTop: offset_y,
                 marginTop: 0,
-                backgroundImage: `url(${product.images.at(0)})` || `url("http://localhost:5000/images/placeholder.gif")`,
+                backgroundImage: `url(${product.images.at(0)})` || `url(${import.meta.env.VITE_API_URL}/images/placeholder.gif")`,
                 backgroundSize: 'cover',
                 backgroundPosition: 'center',
                 backgroundRepeat: 'no-repeat'

@@ -8,7 +8,7 @@ export default function Bestsellers() {
     // fetch besteller products
     const fetchBestsellerProducts = async () => {
         //setLoading(true);
-        const endpoint = `http://localhost:5000/products/bestseller`;
+        const endpoint = `${import.meta.env.VITE_API_URL}/products/bestseller`;
 
         await fetch(endpoint)
         .then(response => {

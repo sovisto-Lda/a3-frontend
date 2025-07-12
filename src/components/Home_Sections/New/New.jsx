@@ -8,7 +8,7 @@ export default function New() {
     // fetch besteller products
     const fetchNewProducts = async () => {
         //setLoading(true);
-        const endpoint = `http://localhost:5000/products/new`;
+        const endpoint = `${import.meta.env.VITE_API_URL}/products/new`;
 
         await fetch(endpoint)
         .then(response => {

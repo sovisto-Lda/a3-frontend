@@ -16,7 +16,7 @@ export default function Account() {
     useEffect(() => {
         if (!token) return;
 
-        fetch('http://localhost:5000/account', {
+        fetch(`${import.meta.env.VITE_API_URL}/account`, {
             headers: { Authorization: `Bearer ${token}` }
         })
             .then(res => res.json())
@@ -30,7 +30,7 @@ export default function Account() {
     const handleDeleteBillingAddress = async (indexToDelete) => {
         const addressToDelete = userData.billing_address[indexToDelete];
         try {
-            const response = await fetch('http://localhost:5000/account/billing-address', {
+            const response = await fetch(`${import.meta.env.VITE_API_URL}/account/billing-address`, {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json',
@@ -52,7 +52,7 @@ export default function Account() {
     const handleDeleteShippingAddress = async (indexToDelete) => {
         const addressToDelete = userData.shipping_address[indexToDelete];
         try {
-            const response = await fetch('http://localhost:5000/account/shipping-address', {
+            const response = await fetch(`${import.meta.env.VITE_API_URL}/account/shipping-address`, {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json',

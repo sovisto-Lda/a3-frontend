@@ -33,7 +33,7 @@ export default function HomeDeliveryOptions({ selectedAddress, setSelectedAddres
             if (!token) return;
 
             try {
-                const response = await fetch('http://localhost:5000/account/shipping-address', {
+                const response = await fetch(`${import.meta.env.VITE_API_URL}/account/shipping-address`, {
                     headers: {
                         'Authorization': `Bearer ${token}`
                     }

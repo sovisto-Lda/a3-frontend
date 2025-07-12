@@ -6,7 +6,7 @@ export default function Favorites() {
 
     useEffect(() => {
         const token = localStorage.getItem('token');
-        fetch('http://localhost:5000/account/favorites', {
+        fetch(`${import.meta.env.VITE_API_URL}/account/favorites`, {
             headers: { Authorization: `Bearer ${token}` }
         })
             .then(res => res.json())

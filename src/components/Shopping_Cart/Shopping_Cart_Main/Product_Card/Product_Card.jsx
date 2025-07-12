@@ -9,7 +9,7 @@ export default function ProductCard({shoppingCartProduct}) {
         console.log('Delete product');
 
         // Implement delete functionality here
-        fetch(`http://localhost:5000/shopping-cart/${shoppingCartProduct.product}`, {
+        fetch(`${import.meta.env.VITE_API_URL}/shopping-cart/${shoppingCartProduct.product}`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',

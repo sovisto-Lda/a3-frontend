@@ -29,7 +29,7 @@ export default function InfoClient({ clientInfo, setClientInfo, onNext }) {
     // Effect to fetch billing addresses when component mounts or reloadAddresses changes
     useEffect(() => {
         if (!token) return;
-        fetch('http://localhost:5000/account/billing-address', {
+        fetch(`${import.meta.env.VITE_API_URL}/account/billing-address`, {
         headers: { Authorization: `Bearer ${token}` }
         })
         .then(res => res.json())
@@ -52,7 +52,7 @@ export default function InfoClient({ clientInfo, setClientInfo, onNext }) {
 
     // Function to save personal information
     const savePersonalInfo = async () => {
-        const res = await fetch(`http://localhost:5000/orders/${orderId}/personal-info`, {
+        const res = await fetch(`${import.meta.env.VITE_API_URL}/orders/${orderId}/personal-info`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
@@ -66,7 +66,7 @@ export default function InfoClient({ clientInfo, setClientInfo, onNext }) {
 
     // Function to save billing address
     const saveBillingAddress = async () => {
-        const res = await fetch(`http://localhost:5000/orders/${orderId}/billing-address`, {
+        const res = await fetch(`${import.meta.env.VITE_API_URL}/orders/${orderId}/billing-address`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',

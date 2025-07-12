@@ -3,7 +3,7 @@ import InputGroup from './InputGroup';
 import { useAuth } from '../../hooks/useAuth';
 import { useState } from 'react';
 
-const AddBillingAddress = ({ onClose }) => {
+const AddBillingAddress = ({ onClose, reload=false }) => {
     const { token } = useAuth();
 
     const [formData, setFormData] = useState({
@@ -22,7 +22,31 @@ const AddBillingAddress = ({ onClose }) => {
         setFormData(prev => ({ ...prev, [id]: value }));
     };
 
+    const validateForm = () => {
+        for (let key in formData) {
+            if (!formData[key]) {
+                alert(`O campo "${key}" é obrigatório.`);
+                return false;
+            }
+        }
+
+        const nineDigitRegex = /^\d{9}$/;
+
+        if (!nineDigitRegex.test(formData.NIF)) {
+            alert('O NIF deve ter exatamente 9 dígitos numéricos.');
+            return false;
+        }
+
+        if (!nineDigitRegex.test(formData.phone_number)) {
+            alert('O número de telefone deve ter exatamente 9 dígitos numéricos.');
+            return false;
+        }
+
+        return true;
+    };
+
     const handleSubmit = async () => {
+        if (!validateForm()) return;
         try {
             const res = await fetch(`${import.meta.env.VITE_API_URL}/account/billing-address`, {
                 method: 'POST',
@@ -36,6 +60,18 @@ const AddBillingAddress = ({ onClose }) => {
             const data = await res.json();
             if (res.ok) {
                 if (typeof onClose === 'function') onClose();
+                setFormData({
+                    NIF: '',
+                    phone_number: '',
+                    street_line: '',
+                    floor: '',
+                    postal_code: '',
+                    city: '',
+                    country: '',
+                    name: ''
+                });
+                if (reload) window.location.reload();
+
             } else {
                 alert(data.error || 'Error adding address.');
             }

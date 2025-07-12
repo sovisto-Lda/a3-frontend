@@ -46,7 +46,7 @@ export default function Login() {
             if (response.ok) {
                 localStorage.setItem('token', data.token);
 
-                navigate('/account'); // Redirect to homepage
+                navigate('/'); // Redirect to homepage
             } else {
                 // Lógica para erro de login
                 console.error('Erro ao fazer login:', data);
@@ -89,7 +89,7 @@ export default function Login() {
             <div className="row">
                 <div className="col-lg-7 col-md-9 col-sm-10 mx-auto">
                     <div className="card text-center p-4">
-                        <div className="card-body">
+                        <form onSubmit={handleSubmit} className="card-body">
                             <h2 className="card-title mb-3">Login</h2>
                             <p className="h5 mb-4">Entre na sua conta</p>
 
@@ -141,13 +141,13 @@ export default function Login() {
 
                             {/* Login Button */}
                             <div className="d-grid mb-4">
-                                <button className="primary-button" onClick={handleSubmit} disabled={isLoading}>
+                                <button className="primary-button" type="submit" disabled={isLoading}>
                                     {isLoading ? 'Carregando...' : 'Entrar'}
                                 </button>
                             </div>
 
                             <p>Ainda não tem conta? <a href="/register">Registe-se aqui</a></p>
-                        </div>
+                        </form>
                     </div>
                 </div>
             </div>

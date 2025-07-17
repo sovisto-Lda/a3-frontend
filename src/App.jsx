@@ -21,7 +21,7 @@ import Order from './pages/Order.jsx';
 import ComingSoon from './pages/ComingSoon.jsx';
 import Orders from './pages/Orders.jsx';
 import Submit from './pages/Submit.jsx';
-
+import CompletionPage from './pages/CompletionPage.jsx';
 
 export default function App() {
   return (
@@ -68,6 +68,8 @@ function AppContent() {
             <Route path="/account/favorites" element={<Favorites />} />
             <Route path="/account/settings" element={<Settings />} />
             <Route path="/partnerdashboard" element={<PDHome />} />
+
+            <Route path="/completion" element={<CompletionPage />} />
 
             <Route path='/cart' element={<ProtectedRoute> <ShoppingCart /> </ProtectedRoute>} />
             <Route path='/checkout/:stage/:orderId' element={<ProtectedRoute> <Checkout /> </ProtectedRoute>} />

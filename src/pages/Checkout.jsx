@@ -107,7 +107,8 @@ export default function Checkout() {
 
     useEffect(()=> {
         fetchOrderInfo()
-    })
+    }, [])
+
     return (
         <div>
             <Return_Button
